@@ -122,8 +122,12 @@ const LandingSection = () => {
       id={SECTION_LANDING}
       className={styles.landingSection}
     >
-      {renderLogoWindow()}
-      {renderLocaleSelector()}
+      <div className="cover"></div>
+      <video autoPlay muted loop className="video">
+        <source src="assets/LOGO SPIN FInal.mp4" type="video/mp4" />
+      </video>
+      {/* {renderLogoWindow()}
+      {renderLocaleSelector()} */}
     </Section>
   );
 };
