@@ -24,7 +24,7 @@ const IntroSection = () => {
           <div className="detail">{t('intro.description')}</div>
         </div>
         <div>
-          <Button variant="outlined" className="period">{t('intro.date')}</Button>
+          <Button variant="outlined" disabled className="period">{t('intro.date')}</Button>
           <Button variant="contained" href={`#${SECTION_SUBMISSION}`}>{t('intro.CTA')}</Button>
         </div>
       </div>
