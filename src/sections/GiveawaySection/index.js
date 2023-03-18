@@ -2,15 +2,9 @@ import getConfig from "next/config";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
-import { motion } from "framer-motion";
 
 import { useIsPreferPortraitMode } from "@/context/device";
-import {
-  VAR_ON_SCREEN,
-  TRANS_DELAY_INIT,
-  SECTION_GIVEAWAY,
-  CAMPAIGN_GIVEAWAY,
-} from "@/data/constants";
+import { SECTION_GIVEAWAY, CAMPAIGN_GIVEAWAY } from "@/data/constants";
 import { Section, SectionBanner, SectionLayout } from "@/components";
 import ShowcaseBox from "./components/ShowcaseBox";
 

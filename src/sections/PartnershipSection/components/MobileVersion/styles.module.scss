@@ -54,8 +54,8 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
     
           &.left {
             left: 0;
-            font-size: calc(2 * $grid-row-height-mobile / 2);
-            line-height: calc(2 * $grid-row-height-mobile / 2);
+            font-size: calc($grid-row-height-mobile / 2);
+            line-height: calc($grid-row-height-mobile / 2);
             padding-left: 0.5rem;
 
             &.top { top: calc($grid-row-height-mobile / 2); }
@@ -65,8 +65,8 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
           &.right {
             left: calc($grid-column-width-mobile * 7);
             bottom: calc($grid-row-height-mobile * 5);
-            font-size: calc($grid-column-width-mobile * 0.5);
-            line-height: calc($grid-column-width-mobile * 0.5);
+            font-size: calc($grid-column-width-mobile / 2);
+            line-height: calc($grid-column-width-mobile / 2);
             transform-origin: left bottom;
             transform: translateX(calc(0px - ($grid-column-width-mobile * 0.0625))) rotate(270deg);
           }

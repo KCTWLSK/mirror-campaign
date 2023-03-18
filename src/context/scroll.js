@@ -3,29 +3,20 @@ import { createContext, useRef, useState, useContext, useEffect } from "react";
 export const ScrollContext = createContext({});
 const { Provider } = ScrollContext;
 
-export const ScrollContextProvider = ({ children }) => {
+const ScrollProvider = ({ children }) => {
   const [scrollPos, setScrollPos] = useState();
 
   const ref = useRef();
-  console.log(scrollPos)
+
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100vw',
-        width: '100dvw',
-        height: '100vh',
-        height: '100dvh',
-        scrollSnapType: 'y mandatory',
-        overflowY: 'scroll',
-      }}
+    <main
       ref={ref}
       onScroll={() => setScrollPos(ref.current.scrollTop)}
     >
       <Provider value={{ scrollPos }}>
         {children}
       </Provider>
-    </div>
+    </main>
   );
 };
 
@@ -51,4 +42,4 @@ export const useScrollProgress = (target) => {
   return scrollProgress;
 };
 
-export default ScrollContextProvider;
+export default ScrollProvider;

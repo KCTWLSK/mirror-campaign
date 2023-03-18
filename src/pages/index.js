@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import getConfig from "next/config";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -35,19 +34,16 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <ScrollProvider>
-          <LandingSection />
-          <PartnershipSection />
-          <IntroSection />
-          <TransitionSection />
-          <GivewaySection />
-          <SignupSection />
-          <SubmissionSection />
-          <BehindTheScenesSection />
-          <Footer />
-        </ScrollProvider>
-      </main>
+      <ScrollProvider>
+        <LandingSection />
+        <PartnershipSection />
+        <IntroSection />
+        <GivewaySection />
+        <SignupSection />
+        <SubmissionSection />
+        <BehindTheScenesSection />
+        <Footer />
+      </ScrollProvider>
     </>
   )
 };

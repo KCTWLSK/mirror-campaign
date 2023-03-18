@@ -34,11 +34,6 @@
   margin: 0;
 }
 
-// html, body {
-//   scroll-snap-type: y mandatory;
-//   scroll-behavior: smooth;
-// }
-
 body {
   background-color: $primary-color-bg;
   font-family: 'Inter', Sans-Serif;
@@ -51,16 +46,13 @@ body {
 }
 
 main {
-  .snapContainer {
-    position: absolute;
-    width: 100vw;
-    width: 100dvw;
-    height: 100vh;
-    height: 100dvh;
-    min-height: 100vh;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-  }
+  position: relative;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 
 section {
