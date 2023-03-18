@@ -1,0 +1,23 @@
+$primary-color: #B3D356;
+$primary-color-bg: #000;
+$secondary-color: #D9D9D9;
+$secondary-color-bg: #101010;
+$specific-color: #464646;
+$specific-color-bg: #BABABA;
+
+$padding-vertical: 10vh;
+$padding-vertical: 10dvh;
+$padding-horizontal: 10vh;
+$padding-horizontal: 10dvh;
+
+$padding-vertical-mobile: 5vh;
+$padding-vertical-mobile: 5dvh;
+$padding-horizontal-mobile: 1.5rem;
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  secondaryColorBg : $secondary-color-bg;
+  specificColor: $specific-color;
+  specificColorBg: $specific-color-bg;
+}

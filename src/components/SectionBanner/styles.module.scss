@@ -1,0 +1,58 @@
+@import "@/styles/variables.scss";
+
+.sectionBanner {
+  :global {
+    position: absolute;
+    left: $padding-horizontal;
+    bottom: calc($padding-vertical - 2rem);
+    width: calc(100vw - 2 * $padding-horizontal);
+    line-height: 1rem;
+    display: flex;
+    align-items: center;
+
+    .runner {
+      width: 100%;
+  
+      .runnerItem {  
+        > span > span:first-child {
+          padding-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .sectionBanner, .topSectionBanner {
+    :global {
+      position: absolute;
+      left: $padding-horizontal-mobile;
+      width: calc(100vw - 2 * $padding-horizontal-mobile);
+      line-height: 1rem;
+      display: flex;
+      align-items: center;
+  
+      .runner {
+        width: 100%;
+    
+        .runnerItem span {  
+          // &:nth-child(odd) {
+          //   padding-right: 1rem;
+          // }
+    
+          // &:nth-child(even) {
+          //   padding-right: 8rem;
+          // }
+        }
+      }
+    }
+  }
+
+  .topSectionBanner {
+    top: calc($padding-vertical-mobile - 1rem);
+  }
+
+  .sectionBanner {
+    bottom: calc($padding-vertical-mobile - 1rem);
+  }
+}

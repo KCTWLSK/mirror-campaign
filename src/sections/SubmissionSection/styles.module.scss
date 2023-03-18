@@ -1,0 +1,78 @@
+@import "@/styles/variables.scss";
+
+$submission-label-size: min(30vw, 30vh);
+$submission-label-size: min(30dvw, 30dvh);
+
+.submissionSection {
+  padding: 0;
+
+  :global {
+    .transAnime {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $primary-color-bg;
+      z-index: 10;
+      display: flex;
+
+      &.first {
+        justify-content: flex-end;
+  
+        .bgImgWrapper {
+          width: 50%;
+          height: 100%;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &.second {
+        justify-content: center;
+        align-items: center;
+
+        .textContainer {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .textWrapper {
+            height: fit-content;
+            overflow-y: hidden;
+            display: flex;
+            text-align: center;
+
+            &.top {
+              align-items: flex-end;
+            }
+
+            &.bottom {
+              align-items: flex-start;
+
+              div {
+                margin-top: 2.5%;
+              }
+            }
+
+            div {
+              font-family: 'Bebas Neue', cursive;
+              font-size: $submission-label-size;
+              line-height: $submission-label-size;
+              font-weight: 500;
+              color: $primary-color-bg;
+              -webkit-text-stroke: 4px $secondary-color;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

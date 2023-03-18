@@ -1,0 +1,26 @@
+.runner {
+  width: 100%;
+  color: white;
+  font-family: 'digital-7', 'Inter', Sans-Serif;
+  font-weight: 400;
+
+  :global {
+    .runnerInnerContainer {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+  
+      .runnerItem {
+        width: 200%;
+        min-width: 200%;
+        display: flex;
+
+        > * {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+@import "@/styles/variables.scss";
+
+.footer {
+  height: 60vh;
+  height: 60dvh;
+  padding: $padding-vertical $padding-horizontal;
+  background-color: $primary-color-bg;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scroll-snap-align: end;
+
+  :global {
+    .row {
+      width: 100%;
+
+      &.top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: start;
+
+        .imgWrapper {
+          margin: 0.25rem 0;
+        }
+
+        h3 {
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      &.bottom {
+        flex-basis: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    
+        .searchBarContainer {
+          flex-basis: 33%;
+          display: flex;
+          flex-direction: column;
+          text-align: start;
+    
+          .MuiTextField-root {
+            margin-top: 0.25rem;
+  
+            .MuiInputBase-root {
+              height: 2rem;
+              color: white;
+              display: flex;
+    
+              a {
+                display: flex;
+                align-self: center;
+              }
+    
+              fieldset {
+                border-width: 2px;
+                border-radius: 0;
+                border-color: $secondary-color;
+              }
+
+              &.Mui-focused fieldset {
+                border-color: $primary-color;
+              }
+            }
+          }
+        }
+  
+        .snsItemsContainer {
+          width: 33%;
+          display: flex;
+          justify-content: flex-end;
+          :not(:last-child) {
+            margin-right: 2.5%;
+          }
+        }
+      }
+    }
+
+    .divider {
+      margin: 1rem 0;
+      width: 100%;
+      height: 2px;
+      min-height: 2px;
+      background-color: $secondary-color;
+    }
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    height: 75vh;
+    height: 75dvh;
+    padding: $padding-vertical-mobile $padding-horizontal-mobile;
+
+    :global {
+      .row {
+        &.top {
+          flex: 1;
+
+          .imgWrapper {
+            margin: 1rem 0;
+          }
+
+          h3 {
+            margin-bottom: 1rem;
+          }
+        }
+
+        &.bottom {
+          flex-basis: 33%;
+          flex-direction: column-reverse;
+          justify-content: space-between;
+  
+          .searchBarContainer {
+            width: 100%;
+          }
+  
+          .snsItemsContainer {
+            :not(:last-child) {
+              margin-right: 7.5%;
+            }
+          }
+        }
+      }
+
+      .divider {
+        margin: $padding-vertical-mobile 0;
+      }
+    }
+  }
+}

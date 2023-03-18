@@ -1,0 +1,55 @@
+@import "@/styles/variables.scss";
+
+.transitionAnimation {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: $primary-color;
+  overflow: hidden;
+  z-index: 10;
+  
+  > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+  }
+
+  :global {
+    .curtain {
+      background-color: $secondary-color-bg;
+      z-index: 20;
+    }
+
+    .cardWrapper {
+      transform-origin: bottom left;
+      animation-timing-function: ease-out;
+      background-color: $primary-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+      img {
+        height: 90%;
+        width: auto;
+      }
+    }
+
+    .captionContainer {
+      height: 400vh;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      color: $secondary-color-bg;
+      
+      > div {
+        height: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+    }
+  }  
+}

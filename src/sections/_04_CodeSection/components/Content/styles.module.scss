@@ -1,0 +1,77 @@
+@import "@/styles/variables.scss";
+
+.content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: $secondary-color-bg;
+
+  :global {
+    .rightColumnContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .carosuel {
+        height: 50%;
+        min-height: 0;
+        width: 100%;
+        margin-top: 5%;
+        margin-left: 1rem;
+        mask-image: linear-gradient(
+          90deg,
+          rgba(0,0,0,0),
+          rgba(0,0,0,1) 25%,
+          rgba(0,0,0,1) 75%,
+          rgba(0,0,0,0)
+        );
+      
+        .swiper-wrapper {
+          transition-timing-function: linear;
+      
+          .swiper-slide {
+            height: 100%;
+            width: auto;
+      
+            img {
+              height: 100%;
+              width: auto;
+            }
+          }
+        }
+      }
+
+      .buttonArea {
+        width: 90%;
+        margin-bottom: 1rem;
+
+        .title {
+          text-align: left;
+          margin-bottom: 1rem;
+        }
+
+        .firstRow {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+
+          .MuiButton-root {
+            width: 30%;
+            color: white;
+            border: $primary-color 2px solid;
+          }
+        }
+
+        .secondRow {
+          .MuiButton-root {
+            width: 100%;
+            color: $secondary-color-bg;
+            background-color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

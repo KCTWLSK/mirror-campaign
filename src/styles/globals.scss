@@ -1,0 +1,104 @@
+@import "./variables.scss";
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter') url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: local('Bebas Neue') url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'digital-7';
+  src: local('digital-7') url('/fonts/digital-7.regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'digital-7';
+  src: url('/fonts/DS-DIGIT.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+// html, body {
+//   scroll-snap-type: y mandatory;
+//   scroll-behavior: smooth;
+// }
+
+body {
+  background-color: $primary-color-bg;
+  font-family: 'Inter', Sans-Serif;
+  text-align: center;
+  color: white;
+  white-space: pre-line;
+  user-select: none;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+main {
+  .snapContainer {
+    position: absolute;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: $padding-vertical $padding-horizontal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  section {
+    padding: $padding-vertical-mobile $padding-horizontal-mobile;
+  }
+}

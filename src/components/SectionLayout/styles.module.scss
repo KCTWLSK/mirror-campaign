@@ -1,0 +1,81 @@
+@import "@/styles/variables.scss";
+
+.sectionLayout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  :global {
+    .titleRow {
+      flex-basis: 25%;
+      display: flex;
+      justify-content: space-between;
+  
+      * {
+        width: calc(50% - 0.5rem);
+        text-align: start;
+      }
+
+      .detail {
+        padding-top: 1rem;
+      }
+    }
+  
+    .contentRow {
+      flex-basis: 75%;
+      max-height: 75%;
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+
+      > div {
+        height: calc(100% - 1rem);
+        min-width: 0;
+        overflow: hidden;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 70%;
+        }
+      }
+
+      &.even {
+        justify-content: space-between;
+
+        > div {
+          width: calc(50% - 0.5rem);
+        }
+      }
+    }
+
+    @media (max-aspect-ratio: 1/1) {
+      .titleRow {
+        flex-basis: 32%;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        * {
+          width: 100%;
+        }
+      }
+
+      .contentRow {
+        flex: 1;
+        flex-direction: column;
+
+        &.even {
+          justify-content: space-evenly;
+
+          > div {
+            flex-basis: calc(50% - $padding-vertical-mobile * 0.5);
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
