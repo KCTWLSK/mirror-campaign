@@ -44,7 +44,7 @@ const TransitionSection = () => {
       <motion.div
         className="motionContainer"
         style={{
-          // position: scrollProgress ? 'fixed' : 'relative',
+          position: scrollProgress ? 'fixed' : 'relative',
           backgroundColor: scrollProgress < 0.25 ? '#000' : '#B3D356',
           zIndex: scrollProgress >= 0.225 && scrollProgress <= 0.5 ? 5 : 0,
         }}
