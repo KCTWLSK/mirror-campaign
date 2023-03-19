@@ -72,7 +72,6 @@
 
         &.instruction {
           text-align: left;
-          justify-content: space-between;
           color: $primary-color-bg;
 
           h4 {
@@ -83,61 +82,23 @@
             margin: 1rem 0;
           }
 
-          .accordionContainer {
+          .instructionContainer {
             flex-basis: 70%;
-            z-index: 3;
-            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
-            .accordionInnerContainer {
-              scrollbar-width: none;  /* Firefox */
-              &::-webkit-scrollbar { 
-                display: none;  /* Safari and Chrome */
-              }
+            .stepBlock {
+              display: flex;
+              flex-direction: column;
+              
   
-              .MuiAccordion-root {
-                background-color: transparent;
-                box-shadow: none;
-
-                &:before {
-                  display: none;
-                }
-  
-                .MuiAccordionSummary-root {
-                  padding: 0;
-                  min-height: auto;
-  
-                  .MuiAccordionSummary-content {
-                    margin: 0.25rem 0;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    .textBlock {
-                      display: flex;
-                      flex-direction: column;
-
-                      .label {
-                        width: fit-content;
-                        padding: 0 1.5rem;
-                        margin-bottom: 0.5rem;
-                        color: $primary-color;
-                        background-color: $primary-color-bg;
-                      }
-                    }
-                  }
-                }
-
-                .arrowWrapper {
-                  display: flex;
-                  align-items: center;
-                  transform: rotate(0);
-                  transition: 0.5s;
-                }
-
-                &.Mui-expanded .arrowWrapper {
-                  transform: rotate(180deg);
-                  transition: 0.5s;
-                }
+              .label {
+                width: fit-content;
+                padding: 0.25rem 1rem;
+                margin-bottom: 0.25rem;
+                color: $primary-color;
+                background-color: $primary-color-bg;
               }
             }
           }
@@ -160,9 +121,8 @@
           .bottomRow {
             flex-basis: 15%;
 
-            .MuiButton-root {
+            a {
               margin-top: 1rem;
-              font-weight: 600;
             }
           }
         }

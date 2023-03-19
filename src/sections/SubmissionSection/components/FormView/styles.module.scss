@@ -61,7 +61,7 @@
                 justify-content: space-between;
     
                 .field {
-                  flex-basis: calc(50% - 0.25rem);
+                  flex-basis: calc(50% - 0.5rem);
                 }
               }
     
@@ -117,14 +117,19 @@
                 display: flex;
                 flex-direction: column;
 
-                > div {
-                  flex-basis: 20%;
-                }
-
                 .row {
-                  flex-basis: 40%;
                   display: flex;
                   flex-direction: column;
+                }
+
+                @media (min-width: 720px) {
+                  .field {
+                    margin-bottom: 3rem;
+                    
+                    label {
+                      margin-bottom: 2rem;
+                    }
+                  }
                 }
               }
             }

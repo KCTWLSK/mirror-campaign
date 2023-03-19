@@ -1,11 +1,11 @@
 @import "@/styles/variables.scss";
 
 .footer {
-  height: 60vh;
-  height: 60dvh;
+  height: 75vh;
+  height: 75dvh;
   padding: $padding-vertical $padding-horizontal;
   background-color: $primary-color-bg;
-  color: white;
+  color: $primary-color;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,11 +43,11 @@
           text-align: start;
     
           .MuiTextField-root {
-            margin-top: 0.25rem;
+            margin-top: 0.5rem;
   
             .MuiInputBase-root {
               height: 2rem;
-              color: white;
+              color: $primary-color;
               display: flex;
     
               a {
@@ -58,7 +58,7 @@
               fieldset {
                 border-width: 2px;
                 border-radius: 0;
-                border-color: $secondary-color;
+                border-color: $primary-color;
               }
 
               &.Mui-focused fieldset {
@@ -70,10 +70,22 @@
   
         .snsItemsContainer {
           width: 33%;
+          height: 2rem;
           display: flex;
           justify-content: flex-end;
+
           :not(:last-child) {
             margin-right: 2.5%;
+          }
+
+          a {
+            height: 100%;
+            aspect-ratio: 1/1;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
           }
         }
       }
@@ -114,11 +126,34 @@
   
           .searchBarContainer {
             width: 100%;
+
+            @media (min-width: 720px) {
+              .MuiTextField-root {
+                margin-top: 1.5rem;
+
+                .MuiInputBase-root {
+                  height: 3rem;
+
+                  img {
+                    height: 2rem;
+                    width: 2rem;
+                  }
+                }
+              }
+            }
           }
-  
+
           .snsItemsContainer {
             :not(:last-child) {
               margin-right: 7.5%;
+            }
+
+            @media (min-width: 720px) {
+              height: 3rem;
+
+              :not(:last-child) {
+                margin-right: 5%;
+              }
             }
           }
         }

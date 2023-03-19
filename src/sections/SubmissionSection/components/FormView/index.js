@@ -1,10 +1,10 @@
 import getConfig from "next/config";
 import { useTranslation } from "next-i18next";
-import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 
+import { useIsPreferPortraitMode } from "@/context/device";
 import { CAMPAIGN_GIVEAWAY } from "@/data/constants";
-import { SectionBanner } from "@/components";
+import { Button, SectionBanner } from "@/components";
 
 import styles from "./styles.module.scss";
 
@@ -30,7 +30,6 @@ const FormView = ({ onSubmit }) => {
             <h1>{t('intro.header')}</h1>
             <div className="description">{t('intro.description')}</div>
           </div>
-          
           <div className="form">
             {/* <div className="poptin-embedded" data-id={poptinDataId} /> */}
             <div className="formFieldsContainer">
@@ -42,10 +41,7 @@ const FormView = ({ onSubmit }) => {
               {renderFormField('instagram')}
               {renderFormField('survey')}
             </div>
-            <Button
-              variant="contained"
-              onClick={onSubmit}
-            >
+            <Button fullWidth  onClick={onSubmit}>
               {t('form.CTA')}
             </Button>
           </div>

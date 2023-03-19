@@ -1,133 +1,83 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { SECTION_LANDING, TRANS_DELAY_INIT, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
+import { SECTION_LANDING } from "@/data/constants";
 import { Section } from "@/components";
 
 import styles from "./styles.module.scss";
 
-import logoKC from "@/../public/assets/logo_KC.png";
-import logoX from "@/../public/assets/logo_x.png";
-import logoMIRROR from "@/../public/assets/logo_MIRROR.png";
-import imgGlobe from "@/../public/assets/globe.png";
-
-const TRANS_DURATION_FAST = 0.25;
-const TRANS_DURATION = 0.5;
-
-const LOCALES_SELECTOR_TIMEOUT_MS = 2000;
-
 const LandingSection = () => {
   const { locale } = useRouter();
 
-  const [expandLocales, setExpandLocales] = useState();
-  const [disableClick, setDisableClick] = useState(true);
-
-  useEffect(() => {
-    if (!expandLocales) return;
-
-    const timeoutId = setTimeout(() => {
-      setExpandLocales(false);
-    }, LOCALES_SELECTOR_TIMEOUT_MS);
-
-    return () => clearTimeout(timeoutId);
-  }, [expandLocales, locale]);
-
-  const renderLogoWindow = ()=> (
-    <div className="logoWindow">
-      <motion.div
-        className="logoWrapper"
-        variants={{
-          [VAR_OFF_SCREEN]: { y: '33vh' },
-          [VAR_ON_SCREEN]: {
-            y: 0,
-            transition: {
-              delay: TRANS_DELAY_INIT,
-              duration: TRANS_DURATION,
-            },
-          },
-        }}
-      >
-        <Image
-          src={logoKC}
-          alt="KICKS CREW"
-          placeholder="blur"
-        />
-      </motion.div>
-      <div>
-        <Image className="logoX" src={logoX} alt="x" />
-      </div>
-      <motion.div
-        className="logoWrapper"
-        variants={{
-          [VAR_OFF_SCREEN]: { y: '-33vh' },
-          [VAR_ON_SCREEN]: {
-            y: 0,
-            transition: {
-              delay: TRANS_DELAY_INIT,
-              duration: TRANS_DURATION,
-            },
-          },
-        }}
-      >
-        <Image
-          src={logoMIRROR}
-          alt="MIRROR"
-          placeholder="blur"
-        />
-      </motion.div>
-    </div>
-  );
-
-  const renderLocaleSelector = () => {
-    const leftInitDef = { x: '50%', opacity: 0 };
-    const rightInitDef = { x: '-50%', opacity: 0 };
+  const renderLocaleButton = (label, localeValue) => {
+    const isSelected = locale === localeValue;
 
     return (
-      <motion.div
-        className="localeSelectorContainer"
-        onClick={() => setExpandLocales(true)}
-        onMouseLeave={() => setExpandLocales(false)}
-      >
-        <motion.div
-          className={`iconWrapper${locale === 'en' ? ' selected' : ''}`}
-          transformTemplate={({ x }) => `translateX(calc(${x} - 1rem))`}
-          initial={leftInitDef}
-          animate={expandLocales ? { x: 0, opacity: 1 } : leftInitDef}
-          transition={{ duration: TRANS_DURATION_FAST }}
-          onAnimationComplete={(def) => setDisableClick(def === leftInitDef)}
+      <Link href="/" locale={localeValue}>
+        <motion.button
+          className={`localeButton${isSelected ? ' selected' : ''}`}
+          animate={isSelected ? {} : {
+            opacity: 0.2,
+            transition: {
+              duration: 2,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            },
+          }}
+          whileHover={{ opacity: 1 }}
+          whileTap={isSelected ? false : {
+            opacity: [0.3, 0.5, 0.3, 0.5, 0.7, 1],
+            transition: {
+              duration: 1.5,
+            },
+          }}
+          disabled={isSelected}
         >
-          {disableClick ? 'EN' : <Link href="/" locale="en">EN</Link>}
-        </motion.div>
-        <div className="imgWrapper">
-          <Image src={imgGlobe} alt="locale selector" />
-        </div>
-          <motion.div
-            className={`iconWrapper${locale === 'zh-HK' ? ' selected' : ''}`}
-            transformTemplate={({ x }) => `translateX(calc(${x} + 1rem))`}
-            initial={rightInitDef}
-            animate={expandLocales ? { x:  0, opacity: 1 } : rightInitDef}
-            transition={{ duration: TRANS_DURATION_FAST }}
-          >
-            {disableClick ? '中文' : <Link href="/" locale="zh-HK">中文</Link>}
-          </motion.div>
-      </motion.div>
+          {label}
+        </motion.button>
+      </Link>
     );
   };
+
+  const renderArrow = (index) => (
+    <motion.div
+      className="arrow"
+      style={{ bottom: `${(2 - index) * 7.5}px` }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: [1, 0.67, 0.25, 0] }}
+      transition={{
+        duration: 2,
+        delay: index * 0.33,
+        ease: 'easeIn',
+        repeat: Infinity,
+      }}
+    >
+      <KeyboardArrowDownIcon />
+    </motion.div>
+  );
 
   return (
     <Section
       id={SECTION_LANDING}
       className={styles.landingSection}
     >
-      <div className="cover"></div>
-      <video autoPlay muted loop className="video">
+      <video
+        className="bgLogoVideo"
+        autoPlay muted loop playsInline
+      >
         <source src="assets/LOGO SPIN FInal.mp4" type="video/mp4" />
       </video>
-      {/* {renderLogoWindow()}
-      {renderLocaleSelector()} */}
+      <div className="foreground">
+        <div className="localeSelectorContainer">
+          {renderLocaleButton('EN', 'en')}
+          {renderLocaleButton('中文', 'zh-HK')}
+        </div>
+        {renderArrow(0)}
+        {renderArrow(1)}
+      </div>
     </Section>
   );
 };

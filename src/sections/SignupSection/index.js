@@ -1,17 +1,15 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
-import Button from "@mui/material/Button";
 
 import { useIsPreferPortraitMode } from "@/context/device";
 import {
   VAR_OFF_SCREEN, VAR_ON_SCREEN,
   TRANS_DELAY_INIT,
-  SECTION_SUBMISSION, SECTION_SIGNUP,
+  SECTION_SIGNUP,
   CAMPAIGN_GIVEAWAY,
 } from "@/data/constants";
-import { Section, SectionBanner } from "@/components";
-import Accordion from "./components/Accordion";
+import { Section, SectionBanner, Button } from "@/components";
 
 import styles from "./styles.module.scss";
 
@@ -60,34 +58,42 @@ const SignupSection = () => {
     </>
   );
 
-  const renderInstructionBlock = () => (
-    <motion.div
-      variants={{
-        [VAR_OFF_SCREEN]: { opacity: 0 },
-        [VAR_ON_SCREEN]: {
-          opacity: 1,
-          transition: {
-            duration: TRANS_DURATION,
-            delay: TRANS_DELAY_LONG,
-          },
-        }
-      }}
-      className="block instruction"
-    >
-      <div>
-        <h1>{t('signup.header')}</h1>
+  const renderInstructionBlock = () => {
+    const renderStepBlock = (index) => (
+      <div className="stepBlock">
+        <div className="label">{t(`signup.step${index}.label`)}</div>
+        <h3>{t(`signup.step${index}.header`)}</h3>
+        <div>{t(`signup.step${index}.description`)}</div>
       </div>
-      <div className="description">{t('signup.description')}</div>
-      <div className="accordionContainer">
-        <div className="accordionInnerContainer">
-          <Accordion name="step1" />
-          <Accordion name="step2" />
-          <Accordion name="step3" />
-          <Accordion name="step4" />
+    );
+    
+    return (
+      <motion.div
+        variants={{
+          [VAR_OFF_SCREEN]: { opacity: 0 },
+          [VAR_ON_SCREEN]: {
+            opacity: 1,
+            transition: {
+              duration: TRANS_DURATION,
+              delay: TRANS_DELAY_LONG,
+            },
+          }
+        }}
+        className="block instruction"
+      >
+        <div>
+          <h1>{t('signup.header')}</h1>
         </div>
-      </div>
-    </motion.div>
-  );
+        <div className="description">{t('signup.description')}</div>
+        <div className="instructionContainer">
+          {renderStepBlock(1)}
+          {renderStepBlock(2)}
+          {renderStepBlock(3)}
+          {renderStepBlock(4)}
+        </div>
+      </motion.div>
+    );
+  };
 
   const renderIgDemoView = () => (
     <motion.div
@@ -128,7 +134,7 @@ const SignupSection = () => {
       </div>
       <div className="bottomRow">
         <div>{t('signup.prompt')}</div>
-        <Button variant="contained" href={`#${SECTION_SUBMISSION}`}>{t('signup.CTA')}</Button>
+        <Button fullWidth>{t('signup.CTA')}</Button>
       </div>
     </motion.div>
   );

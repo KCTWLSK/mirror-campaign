@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .introSection {
   flex-direction: row;
@@ -15,6 +16,7 @@
       text-align: start;
 
       &.content {
+        position: relative;
         align-items: flex-start;
 
         > div {
@@ -27,18 +29,13 @@
           margin: 2rem 0;
         }
     
-        .MuiButton-root {
-          width: 50%;
-          line-height: 2rem;
-          text-align: center;
-          margin-bottom: 1rem;
-        }
-    
         .period {
-          color: $primary-color;
-          border: 1px solid $primary-color;
-          border-radius: 0;
-          cursor: default;
+          width: 50%;
+          line-height: 3rem;
+          text-align: center;
+          border-top: 1px solid $secondary-color;
+          border-bottom: 1px solid $secondary-color;
+          margin-bottom: 1rem;
         }
       }
 
@@ -72,8 +69,13 @@
 
         &.content {
           justify-content: space-between;
-          .MuiButton-root {
+
+          .period {
             width: 100%;
+
+            @media (min-width: 720px) {
+              line-height: 4rem;
+            }
           }
         }
 

@@ -127,7 +127,7 @@ const GivewaySection = () => {
         autoplay={{ delay: SWIPER_FLIP_DELAY, disableOnInteraction: false }}
         speed={SWIPER_FLIP_SPEED}
         loop
-        allowTouchMove={false}
+        grabCursor
       >
         {MIRROR.map((name) => (
           <SwiperSlide key={`mirror_slide_${name}`}>

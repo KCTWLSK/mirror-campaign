@@ -1,10 +1,13 @@
-import { Fragment, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
-import { SECTION_PARTNERSHIP, TRANS_DELAY_INIT, TRANS_DURATION, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
+import { useIsPreferPortraitMode } from "@/context/device";
+// import { useScrollProgress } from "@/context/scroll";
+import { SECTION_HERO, TRANS_DELAY_INIT, TRANS_DURATION, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
 import { Section, Runner } from "@/components";
+import MobileVersion from "./components/MobileVersion";
 
 import styles from "./styles.module.scss";
 
@@ -14,10 +17,14 @@ import imgMirrorGroupB from "@/../public/assets/mirror_group_b.png";
 import imgMirrorGroupC from "@/../public/assets/mirror_group_c.png";
 
 const TRANS_DURATION_FAST = 1.25;
-const TRANS_DELAY_LONG = TRANS_DELAY_INIT + TRANS_DURATION - 1;
+const TRANS_DELAY_LONG = TRANS_DELAY_INIT + TRANS_DURATION - 1.5;
 
-const PartnetshipSection = () => {
+const HeroSection = () => {
+  const isPreferPortraitMode = useIsPreferPortraitMode();
   const { t } = useTranslation('common');
+
+  const ref = useRef();
+  // const { status, progress } = useScrollProgress(ref.current);
 
   const [isInMainView, setIsInMainView] = useState(false);
 
@@ -60,12 +67,10 @@ const PartnetshipSection = () => {
         duration={80}
         direction={position === 'top' ? 'left' : 'right'}
       >
-        {new Array(2).fill(0).map((_, index) => (
-          <span key={index}>
-            <span>{t('runner.header')}</span>
-            <span>{t('partnership.runner.body')}</span>
-          </span>
-        ))}
+        <>
+          <span>{t('runner.header')}</span>
+          <span>{t('partnership.runner.body')}</span>
+        </>
       </Runner>
     </motion.div>
   );
@@ -73,16 +78,16 @@ const PartnetshipSection = () => {
   const renderMirrorGroups = () => {
     const animeDef = [
       [
-        { right: '8%' },
-        { right: '3%', transition: { duration: TRANS_DURATION, delay: 0.5 } },
+        { left: '-2.5%', top: '60%' },
+        { left: 0, top: '57.5%' },
       ],
       [
-        { left: '6.5%' },
-        { left: '1.5%', transition: { duration: TRANS_DURATION, delay: 0.75 } },
+        { left: '50%', top: '35%' },
+        { left: '47.5%', top: '40%' },
       ],
       [
-        { right: '6.5%' },
-        { right: '1.5%', transition: { duration: TRANS_DURATION, delay: 1 } },
+        { right: '2.5%', top: '60%' },
+        { right: 0, top: '57.5%' },
       ],
     ];
 
@@ -94,31 +99,47 @@ const PartnetshipSection = () => {
       [VAR_ON_SCREEN]: (custom) => ({
         opacity: 1,
         ...animeDef[custom][1],
+        transition: {
+          duration: TRANS_DURATION,
+          delay: TRANS_DELAY_LONG,
+        },
       }),
     };
 
     return (
       <>
         <motion.div
-          className="imgWrapper groupB"
+          className="imgWrapper groupA"
           variants={variants}
           custom={0}
         >
-          <Image src={imgMirrorGroupB} alt="MIRROR group B" placeholder="blur" />
+          <Image
+            src={imgMirrorGroupA}
+            alt="MIRROR group A"
+            placeholder="blur"
+          />
         </motion.div>
         <motion.div
-          className="imgWrapper groupA"
+          className="imgWrapper groupB"
           variants={variants}
           custom={1}
         >
-          <Image src={imgMirrorGroupA} alt="MIRROR group A" placeholder="blur" />
+          <Image
+            src={imgMirrorGroupB}
+            alt="MIRROR group B"
+            placeholder="blur"
+          />
         </motion.div>
         <motion.div
           className="imgWrapper groupC"
           variants={variants}
           custom={2}
         >
-          <Image src={imgMirrorGroupC} alt="MIRROR group C" placeholder="blur" />
+          <Image
+            src={imgMirrorGroupC}
+            alt="MIRROR group C"
+            placeholder="blur"
+          />
         </motion.div>
       </>
     );
@@ -131,6 +152,7 @@ const PartnetshipSection = () => {
         <span className="slogan">
           {`${t('partnership.slogan1')} ${t('partnership.slogan2')}`}
         </span>
+        <Image src={logoCoBrand} alt="KICKS CREW x MIRROR" placeholder="blur" />
       </div>
       <div className="bottomRow">
         <span className="slogan elevated">
@@ -180,10 +202,13 @@ const PartnetshipSection = () => {
     </div>
   );
 
-  return (
+  return isPreferPortraitMode
+    ? <MobileVersion />
+    : (
     <Section
-      id={SECTION_PARTNERSHIP}
-      className={styles.partnershipSection}
+      id={SECTION_HERO}
+      className={styles.heroSection}
+      ref={ref}
     >
       {renderRunner('top')}
       {isInMainView ? null : renderFloatingSlogan()}
@@ -193,4 +218,4 @@ const PartnetshipSection = () => {
   );
 };
 
-export default PartnetshipSection;
+export default HeroSection;

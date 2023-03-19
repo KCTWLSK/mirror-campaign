@@ -37,12 +37,12 @@
 body {
   background-color: $primary-color-bg;
   font-family: 'Inter', Sans-Serif;
+  font-size: 16px;
   text-align: center;
-  color: white;
+  color: $primary-color;
   white-space: pre-line;
   user-select: none;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 main {
@@ -53,6 +53,7 @@ main {
   height: 100dvh;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 section {
@@ -92,5 +93,11 @@ a {
 @media (max-aspect-ratio: 1/1) {
   section {
     padding: $padding-vertical-mobile $padding-horizontal-mobile;
+  }
+
+  @media (min-width: 720px) {
+    body {
+      font-size: 24px;
+    }
   }
 }

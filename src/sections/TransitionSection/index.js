@@ -9,7 +9,7 @@ import { Section } from "@/components";
 import styles from "./styles.module.scss";
 
 import animeBoxset from "@/../public/assets/giveaway_box.gif";
-import { ScrollContext, useScrollProgress } from "@/context/scroll";
+import { useScrollProgress } from "@/context/scroll";
 
 const TransitionSection = () => {
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);

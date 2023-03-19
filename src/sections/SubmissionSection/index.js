@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
@@ -10,15 +9,11 @@ import { FormView, ResultView } from "./components";
 
 import styles from "./styles.module.scss";
 
-import outroBgImg from "@/../public/assets/ig_demo_bg.png";
-
-const TRANS_DURATION_FAST = 0.75;
 const TRANS_DURATION = 1;
 const TRANS_DELAY_LONG = 1.75;
 
 const PHASE_INIT = 'PHASE_INIT';
 const PHASE_SUBMITTED = 'PHASE_SUBMITTED';
-const PHASE_TRANSITION = 'PHASE_TRANSITION';
 const PHASE_FINAL = 'PHASE_FINAL';
 
 const SubmissionSection = () => {
@@ -27,28 +22,9 @@ const SubmissionSection = () => {
 
   const [currentPhase, setCurrentPhase] = useState(PHASE_INIT);
 
-  const renderSubmittedAnimation = () => (
-    <motion.div
-      className="transAnime first"
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: [0, 0.5, 1, 1, 1],
-        y: ['0%', '0%', '0%', '50%', '100%'],
-        transition: {
-          duration: TRANS_DURATION_FAST,
-        },
-      }}
-      onAnimationComplete={() => setCurrentPhase(PHASE_TRANSITION)}
-    >
-      <div className="bgImgWrapper">
-        <Image src={outroBgImg} alt="outro background" placeholder="blur" />
-      </div>
-    </motion.div>
-  );
-
-  const renderTransitionAnimation = () => {
+  const renderSubmittedAnimation = () => {
     const transformTemplate = ({ y }) => `translateY(${y}) scaleX(0.7)`;
-    const outroAnimateDef = {
+    const mainAnimationDef = {
       x: '-100%',
       transition: {
         duration: TRANS_DURATION,
@@ -59,9 +35,9 @@ const SubmissionSection = () => {
     return (
       <motion.div
         className="transAnime second"
-        animate={outroAnimateDef}
+        animate={mainAnimationDef}
         onAnimationComplete={(def) => {
-          if (def !== outroAnimateDef) return;
+          if (def !== mainAnimationDef) return;
           setCurrentPhase(PHASE_FINAL);
         }}
       >
@@ -103,18 +79,10 @@ const SubmissionSection = () => {
       className={styles.submissionSection}
     >
       {currentPhase === PHASE_INIT
-        ? <FormView
-          onSubmit={() =>
-            setCurrentPhase(
-              isPreferPortraitMode
-                ? PHASE_TRANSITION : PHASE_SUBMITTED
-          )}
-        />
-        : currentPhase === PHASE_SUBMITTED
-        ? renderSubmittedAnimation()
+        ? <FormView onSubmit={() => setCurrentPhase(PHASE_SUBMITTED)} />
         : (
           <>
-            {currentPhase === PHASE_TRANSITION ? renderTransitionAnimation() : null}
+            {currentPhase === PHASE_SUBMITTED ? renderSubmittedAnimation() : null}
             <ResultView
               duration={TRANS_DURATION}
               delay={TRANS_DELAY_LONG}

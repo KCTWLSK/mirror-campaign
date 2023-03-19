@@ -1,15 +1,24 @@
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import getConfig from "next/config";
-
-import { useIsPreferPortraitMode } from "@/context/device";
 
 import styles from "./styles.module.scss";
 
 const Runner = ({ children, classNames, duration, direction = 'left' }) => {
   const { publicRuntimeConfig: { runnerDuration } } = getConfig();
-  const isPreferPortraitMode = useIsPreferPortraitMode();
-  
+
+  const [itemCount, setItemCount] = useState();
+  const containerRef = useRef();
+  const measurerRef = useRef();
+
   duration ??= runnerDuration;
+
+  useEffect(() => {
+    const { width: containerWidth } = containerRef.current.getBoundingClientRect();
+    const { width: itemWidth } = measurerRef.current.getBoundingClientRect();
+
+    setItemCount(Math.floor(containerWidth / itemWidth));
+  }, []);
 
   const renderItems = (copy) => {
     const offset = copy ? 0 : 100;
@@ -18,7 +27,7 @@ const Runner = ({ children, classNames, duration, direction = 'left' }) => {
 
     return (
       <motion.p
-        className="runnerItem"
+        className="itemContainer"
         initial={direction === 'left' ? rightmostDef : leftmostDef}
         animate={direction === 'left' ? leftmostDef : rightmostDef}
         transition={{
@@ -27,9 +36,23 @@ const Runner = ({ children, classNames, duration, direction = 'left' }) => {
           repeat: Infinity,
           ease: 'linear',
         }}
+        ref={containerRef}
       >
-        {children}
-        {isPreferPortraitMode ? null : children}
+        {itemCount ? new Array(itemCount).fill(0).map((_, index) => (
+          <span
+            className="runnerItem"
+            key={index}
+          >
+            {children}
+          </span>
+        )) : (
+          <span
+            className="measurerWrapper"
+            ref={measurerRef}
+          >
+            {children}
+          </span>
+        )}
       </motion.p>
     );
   };
@@ -38,7 +61,7 @@ const Runner = ({ children, classNames, duration, direction = 'left' }) => {
     <div className={`${styles.runner}${classNames ? ` ${classNames}` : ''}`}>
       <div className="runnerInnerContainer">
         {renderItems()}
-        {renderItems(true)}
+        {itemCount ? renderItems(true) : null}
       </div>
     </div>
   );

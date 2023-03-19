@@ -51,6 +51,7 @@
           .swiper-wrapper .swiper-slide img {
             height: var(--wallpaper-height);
             width: auto;
+            border: 2px solid $primary-color-bg;
           }
         }
       }

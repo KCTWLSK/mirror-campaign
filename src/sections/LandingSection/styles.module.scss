@@ -1,116 +1,102 @@
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .landingSection {
-  justify-content: center;
-
   :global {
-    .video {
+    .bgLogoVideo {
       position: absolute;
       top: 0;
       left: 50%;
       width: 80%;
       height: auto;
-      transform: translate(-50%, calc(-50% + 50vh));
+      transform: translate(-50%, calc(-50% + 45vh));
       z-index: -1;
-    }
 
-    .cover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+      @media (max-aspect-ratio: 1/1) {
+        transform: translate(-50%, calc(-50% + 50vh));
 
-    .logoWindow {
-      height: 40%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-
-      > * {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      img {
-        height: 100%;
-        width: auto;
-      }
-
-      .logoWrapper {
-        flex: 1;
-        height: 125%;
-      }
-
-      .logoX {
-        height: 16.25%;
-        width: auto;
-      }
-    }
-
-    .localeSelectorContainer {
-      position: absolute;
-      left: 50%;
-      bottom: 16.67%;
-      transform: translate(-50%, -50%);
-      width: 20%;
-      height: 5vh;
-      display: flex;
-      justify-content: center;
-      z-index: 2;
-
-      .imgWrapper {
-        height: 100%;
-        aspect-ratio: 1/1;
-        
-        img {
-          cursor: pointer;
-          height: 100%;
-          width: auto;
+        @media (min-width: 720px) {
+          transform: translate(-50%, calc(-50% + 45vh));
         }
       }
+    }
 
-      .iconWrapper {
-        height: 100%;
-        aspect-ratio: 1/1;
-        border: 1px solid $secondary-color;
-        border-radius: 50%;
+    .foreground {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .localeSelectorContainer {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 10%;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        &.selected {
-          color: $primary-color;
-          border-color: $primary-color;
+        @media (max-aspect-ratio: 1/1) {
+          bottom: $padding-vertical-mobile;
+
+          @media (max-width: 720px) {
+            height: 7.5%;
+          }
         }
 
         a {
+          position: relative;
+          width: fit-content;
+          height: 100%;
+          margin: 0 4px;
+
+          @media (max-aspect-ratio: 1/1) and (min-width: 720px) {
+            margin: 0 8px;
+
+            button {
+              font-size: 1.25rem;
+            }
+          }
+        }
+
+        .localeButton {
+          height: 100%;
+          aspect-ratio: 1/1;
+          color: $secondary-color;
+          cursor: pointer;
+          border: 3px solid $secondary-color;
+          border-radius: 50%;
+          background: none;
+          text-align: center;
+          @include metallic;
+
+          &.selected {
+            background-color: $secondary-color;
+            background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+            color: $primary-color-bg;
+            font-weight: 900;
+            cursor: default;
+          }
+        }
+      }
+
+      .arrow {
+        position: absolute;
+        margin-bottom: -$padding-vertical;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+
+        @media (max-aspect-ratio: 1/1) {
+          margin-bottom: -$padding-vertical-mobile;
+        }
+
+        svg {
           width: 100%;
           height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
         }
-      }
-    }
-
-    @media (max-aspect-ratio: 1/1) {
-      .logoWindow {
-        height: auto;
-        width: 100%;
-  
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-  
-      .localeSelectorContainer {
-        bottom: 10%;
       }
     }
   }

@@ -12,15 +12,33 @@ const download = async (url, filename) => {
   };
 
   try {
-    if (navigator.canShare(data))
+    if (navigator.canShare?.(data))
       await navigator.share(data);
-  } catch (err) {
-    console.error(`Error: ${err}`)
-
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+    else if (window.showSaveFilePicker) {
+      const handle = await showSaveFilePicker({
+        suggestedName: filename,
+        types: [
+          {
+            description: "KICKS CREW x MIRROR wallpaper",
+            accept: {
+              "image/*": [".png", ".gif", ".jpeg", ".jpg"],
+            },
+          },
+        ],
+      });
+      const writable = await handle.createWritable();
+      if (writable) {
+        await writable.write(blob);
+        await writable.close();
+      }
+    } else {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    }
+  } catch (e) {
+    console.error('download error: ', e);
   }
 };
 

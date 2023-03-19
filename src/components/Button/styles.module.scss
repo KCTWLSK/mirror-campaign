@@ -1,0 +1,63 @@
+@import "@/styles/variables.scss";
+
+.button {
+  position: relative;
+  width: 50%;
+  text-align: center;
+  opacity: 1;
+  font-weight: 900;
+
+  a {
+    display: block;
+    width: 100%;
+    line-height: 3rem;
+    border: 3px solid $secondary-color;
+    background-color: $secondary-color;
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    color: $primary-color-bg;
+    -webkit-box-shadow: inset 0px 0px 4px 0px $secondary-color,
+      0px 0px 0.5em 0px $secondary-color;
+    -moz-box-shadow: inset 0px 0px 4px 0px $secondary-color,
+      0px 0px 0.5em 0px $secondary-color;
+    box-shadow: inset 0px 0px 4px 0px $secondary-color,
+      0px 0px 4px 0px $secondary-color;
+
+    @media (max-aspect-ratio: 1/1) and (min-width: 720px) {
+      line-height: 4rem;
+    }
+
+    &:after {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      z-index: -1;
+      background-color: $secondary-color;
+      border-radius: 50%;
+      box-shadow: 0 0 4px 0.4px $secondary-color;
+      transition: opacity 300ms linear;
+    }
+
+    &:hover {
+      color: $secondary-color-bg;
+      text-shadow: none;
+  
+      &:after {
+        opacity: 1;
+        filter: blur(8px);
+      }
+    }
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    width: 100%;
+
+    @media (min-width: 720px) {
+      line-height: 4rem;
+    }
+  }
+}

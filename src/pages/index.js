@@ -5,7 +5,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ScrollProvider from "@/context/scroll";
 import {
   LandingSection,
-  PartnershipSection,
+  HeroSection,
   IntroSection,
   TransitionSection,
   GivewaySection,
@@ -36,7 +36,7 @@ const Home = () => {
       </Head>
       <ScrollProvider>
         <LandingSection />
-        <PartnershipSection />
+        <HeroSection />
         <IntroSection />
         <GivewaySection />
         <SignupSection />

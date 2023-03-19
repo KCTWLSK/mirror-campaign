@@ -1,28 +1,26 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
-import Button from "@mui/material/Button";
 
 import {
   VAR_OFF_SCREEN, VAR_ON_SCREEN,
-  TRANS_DELAY_INIT,
-  SECTION_SUBMISSION, SECTION_SIGNUP,
+  SECTION_SIGNUP,
   CAMPAIGN_GIVEAWAY,
 } from "@/data/constants";
-import { Section, SectionBanner } from "@/components";
-import Accordion from "../Accordion";
+import { Section, Button, SectionBanner } from "@/components";
 
 import styles from "./styles.module.scss";
 
 import igDemoImg from "@/../public/assets/ig_demo.png";
 import igDemoBgImg from "@/../public/assets/ig_demo_bg.png";
-import groupImg from "@/../public/assets/mirror_group_cascaded.png";
 
 const TRANS_DURATION = 0.5;
 const TRANS_DELAY_LONG = 0.75;
 
 const SignupSection = () => {
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
+  const { locale } = useRouter();
 
   const renderBackground = () => (
     <div className="background">
@@ -41,6 +39,7 @@ const SignupSection = () => {
           scale: 1,
           rotate: 0,
           filter: new Array(8).fill(0).map((_, index, arr) => `blur(${(arr.length - 1) - index}px)`),
+          x: '50%',
           transition: {
             duration: TRANS_DURATION,
             delay: TRANS_DELAY_LONG,
@@ -53,30 +52,39 @@ const SignupSection = () => {
     </motion.div>
   );
 
-  const renderInstructionBlock = () => (
-    <div className="block instruction">
-      <h1>{t('signup.header')}</h1>
-      <div className="description">{t('signup.description')}</div>
-      <div className="accordionContainer">
-        <div className="accordionInnerContainer">
-          <Accordion name="step1" />
-          <Accordion name="step2" />
-          <Accordion name="step3" />
-          <Accordion name="step4" />
+  const renderInstructionBlock = () => {
+    const renderStepBlock = (index) => (
+      <div className="stepBlock">
+        <h3>
+          <span className="label">{`${index}.`}</span>
+          {t(`signup.step${index}.header`)}
+        </h3>
+        <div>{t(`signup.step${index}.description`)}</div>
+      </div>
+    );
+
+    return (
+      <div
+        className="instruction"
+        style={{
+          transform: `translateY(${locale === 'zh-HK' ? '-27.5%' : '-15%'})`,
+        }}
+      >
+        <h1>{t('signup.header')}</h1>
+        <div className="instructionContainer">
+          {renderStepBlock(1)}
+          {renderStepBlock(2)}
+          {renderStepBlock(3)}
+          {renderStepBlock(4)}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderPromptBlock = () => (
     <div className="block prompt">
       <h2>{t('signup.prompt')}</h2>
-      <div className="imgWrapper">
-        <Image src={groupImg} alt="MIRROR group" placeholder="blur" />
-      </div>
-      <Button variant="contained" href={`#${SECTION_SUBMISSION}`}>
-        {t('signup.CTA')}
-      </Button>
+      <Button>{t('signup.CTA')}</Button>
     </div>
   );
 
@@ -86,12 +94,14 @@ const SignupSection = () => {
       className={styles.signupSection}
       viewport={{ once: true, amount: (1 / 2) * 0.8 }}
     >
-      {renderBackground()}
       <div className="foreground">
-        {renderIgDemoView()}
-        {renderInstructionBlock()}
         {renderPromptBlock()}
+        <div className="block main">
+          {renderIgDemoView()}
+          {renderInstructionBlock()}
+        </div>
       </div>
+      {renderBackground()}
       <SectionBanner type={CAMPAIGN_GIVEAWAY} />
     </Section>
   );

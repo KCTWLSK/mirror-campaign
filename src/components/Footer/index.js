@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -27,24 +27,6 @@ const {
   const [keyword, setKeyword] = useState('');
 
   const ref = useRef();
-
-  // useEffect(() => {
-  //   const node = ref.current;
-  //   const observer = new IntersectionObserver(
-  //     ([{ intersectionRatio }]) => {
-  //       const html = document.documentElement;
-  //       const body = document.body;
-
-  //       const snapTypeValue = intersectionRatio === 1 ? 'none' : 'y mandatory';
-  //       html.style.setProperty('scroll-snap-type', snapTypeValue);
-  //       body.style.setProperty('scroll-snap-type', snapTypeValue);
-  //     },
-  //     { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] }
-  //   );
-
-  //   observer.observe(node);
-  //   return () => observer.disconnect();
-  // }, []);
 
   const renderSearchBar = () => {
     const url = `${kicksCrewUrl}/search?q=${keyword}`;

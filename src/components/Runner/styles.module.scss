@@ -1,6 +1,8 @@
+@import "@/styles/variables.scss";
+
 .runner {
   width: 100%;
-  color: white;
+  color: primary-color;
   font-family: 'digital-7', 'Inter', Sans-Serif;
   font-weight: 400;
 
@@ -12,12 +14,16 @@
       white-space: nowrap;
       overflow: hidden;
   
-      .runnerItem {
+      .itemContainer {
         width: 200%;
         min-width: 200%;
         display: flex;
 
-        > * {
+        .measurerWrapper {
+          visibility: hidden;
+        }
+
+        .runnerItem {
           flex: 1;
         }
       }

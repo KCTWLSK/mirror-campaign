@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
 
+
 const Section = forwardRef(({ children, ...props }, ref) => (
   <motion.section
     initial={VAR_OFF_SCREEN}

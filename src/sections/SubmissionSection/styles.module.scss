@@ -62,7 +62,7 @@ $submission-label-size: min(30dvw, 30dvh);
             }
 
             div {
-              font-family: 'Bebas Neue', cursive;
+              font-family: 'Bebas Neue', 'Inter', cursive, sans-serif;
               font-size: $submission-label-size;
               line-height: $submission-label-size;
               font-weight: 500;

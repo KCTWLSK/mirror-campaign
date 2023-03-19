@@ -11,14 +11,14 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Inter, Sans-Serif',
+    fontFamily: '"Inter", Sans-Serif',
     h1: {
       fontSize: '60px',
     },
   },
   palette: {
     primary: {
-      main: '#B3D356',
+      main: '#BCC6CC',
     },
     secondary: {
       main: '#D9D9D9',

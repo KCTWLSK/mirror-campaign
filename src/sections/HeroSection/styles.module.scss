@@ -2,6 +2,15 @@
 
 $grid-row-cnt: 8;
 $grid-col-cnt: 8;
+$grid-row-height: calc((100vh - 2 * $padding-vertical) / $grid-row-cnt);
+$grid-row-height: calc((100dvh - 2 * $padding-vertical) / $grid-row-cnt);
+$grid-column-width: calc((100vw - 2 * $padding-horizontal) / $grid-col-cnt);
+$grid-column-width: calc((100dvw - 2 * $padding-horizontal) / $grid-col-cnt);
+
+$main-view-row-cnt: 5;
+$main-view-row-height: calc((100vh - 2 * $padding-vertical) / $main-view-row-cnt);
+$main-view-row-height: calc((100dvh - 2 * $padding-vertical) / $main-view-row-cnt);
+
 $grid-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
 $grid-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
 $grid-column-width-mobile: calc((100vw - 2 * $padding-horizontal-mobile) / $grid-col-cnt);
@@ -11,19 +20,17 @@ $main-view-row-cnt-mobile: 12;
 $main-view-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
 $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
 
-.partnershipSection {
+.heroSection {
   :global {
     .runnerWrapper {
       position: absolute;
-      width: calc(100% - 2 * $padding-horizontal-mobile);
+      width: calc(100% - 2 * $padding-horizontal);
 
-      &.top { top: calc($padding-vertical-mobile - 1.5rem); }
-      &.bottom { bottom: calc($padding-vertical-mobile - 1.5rem); }
+      &.top { top: calc($padding-vertical - 2rem); }
+      &.bottom { bottom: calc($padding-vertical - 2rem); }
 
-      .runnerItem {
-        > span > span:first-child {
-          padding-right: 0.5rem;
-        }
+      .runnerItem > span:first-child {
+        padding-right: 1rem;
       }
     }
     
@@ -33,7 +40,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       left: 0;
       width: 100%;
       height: 100%;
-      padding: $padding-vertical-mobile $padding-horizontal-mobile;
+      padding: $padding-vertical $padding-horizontal;
       transform-origin: center;
 
       .floatingSloganInnerContainer {
@@ -44,31 +51,31 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
         .floatingSlogan {
           position: absolute;
           color: $primary-color-bg;
-          text-shadow: 1px 1px 0 $secondary-color,
-            -1px -1px 0 $secondary-color,  
-            1px -1px 0 $secondary-color,
-            -1px 1px 0 $secondary-color;
+          text-shadow: 2px 2px 0 $secondary-color,
+            -2px -2px 0 $secondary-color,  
+            2px -2px 0 $secondary-color,
+            -2px 2px 0 $secondary-color;
           white-space: nowrap;
           text-align: start;
-          font-weight: 400;
+          font-weight: 600;
     
           &.left {
             left: 0;
-            font-size: calc($grid-row-height-mobile / 2);
-            line-height: calc($grid-row-height-mobile / 2);
+            font-size: calc(2 * $grid-row-height);
+            line-height: calc(2 * $grid-row-height);
             padding-left: 0.5rem;
 
-            &.top { top: calc($grid-row-height-mobile / 2); }
-            &.bottom { bottom: $grid-row-height-mobile; }
+            &.top { top: 0; }
+            &.bottom { bottom: 0; }
           }
 
           &.right {
-            left: calc($grid-column-width-mobile * 7);
-            bottom: calc($grid-row-height-mobile * 5);
-            font-size: calc($grid-column-width-mobile / 2);
-            line-height: calc($grid-column-width-mobile / 2);
+            left: calc($grid-column-width * 7);
+            bottom: $grid-row-height;
+            font-size: calc($grid-column-width * 0.5);
+            line-height: calc($grid-column-width * 0.5);
             transform-origin: left bottom;
-            transform: translateX(calc(0px - ($grid-column-width-mobile * 0.0625))) rotate(270deg);
+            transform: translate(calc(0px - ($grid-column-width * 0.25)), -0.5rem) rotate(270deg);
           }
         }
       }
@@ -106,22 +113,18 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       height: 100%;
       width: 100%;
       display: grid;
-      grid-template-rows: repeat($main-view-row-cnt-mobile, minmax(0, 1fr));
+      grid-template-rows: repeat($main-view-row-cnt, minmax(0, 1fr));
       overflow: hidden;
-
-      &.standalone {
-        border: 2px solid $secondary-color;
-      }
     
       .slogan {
-        line-height: $main-view-row-height-mobile;
-        font-size: $main-view-row-height-mobile;
+        line-height: $main-view-row-height;
+        font-size: $main-view-row-height;
         color: $primary-color-bg;
-        text-shadow: 1px 1px 0 $secondary-color,
-          -1px -1px 0 $secondary-color,  
-          1px -1px 0 $secondary-color,
-          -1px 1px 0 $secondary-color;
-        font-weight: 600;
+        text-shadow: 2px 2px 0 $secondary-color,
+          -2px -2px 0 $secondary-color,  
+          2px -2px 0 $secondary-color,
+          -2px 2px 0 $secondary-color;
+        font-weight: 900;
 
         &.elevated {
           position: relative;
@@ -131,42 +134,49 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
 
       .imgWrapper {
         position: absolute;
-        width: 85%;
+        width: 45%;
+        transform: translate(-50%, -50%);
 
         img {
           width: 100%;
           height: auto;
         }
         
-        &.groupB {
-          top: 2.5%;
-        }
-
-        &.groupA {
-          top: 17.5%;
+        &.groupA, &.groupC {
           z-index: 2;
-        }
-
-        &.groupC {
-          top: 32.5%;
-          z-index: 3;
+          transform: translate(0, -50%);
         }
       }
   
       .topRow {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+  
+        span {
+          padding-left: 1rem;
+        }
+  
+        img {
+          height: calc($main-view-row-height / 2);
+          width: auto;
+          padding-top: 4px;
+          padding-right: 2px;
+        }
       }
   
       .bottomRow {
-        grid-row-start: 8;
-        text-align: center;
+        grid-row-start: 4;
+        text-align: right;
+
+        span {
+          padding-right: 1rem;
+        }
       }
   
       .bodyRow {
         z-index: 4;
         background-color: $primary-color-bg;
-        grid-row: 9 / 12;
+        grid-row-start: 5;
         border-top: $secondary-color 2px solid;
         padding: 0 1rem;
         text-align: left;
