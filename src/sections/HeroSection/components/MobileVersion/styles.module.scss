@@ -167,9 +167,10 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       }
   
       .bodyRow {
+        min-height: 4 * $main-view-row-height-mobile;
         z-index: 4;
         background-color: $primary-color-bg;
-        grid-row: 9 / 12;
+        grid-row: 9 / 13;
         border-top: $secondary-color 2px solid;
         padding: 0 1rem;
         text-align: left;
