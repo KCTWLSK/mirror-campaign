@@ -67,7 +67,7 @@ const SignupSection = () => {
       <div
         className="instruction"
         style={{
-          transform: `translateY(${locale === 'zh-HK' ? '-27.5%' : '-15%'})`,
+          transform: `translateY(${locale === 'zh-HK' ? '-30%' : '-20%'})`,
         }}
       >
         <h1>{t('signup.header')}</h1>
