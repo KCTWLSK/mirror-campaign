@@ -47,7 +47,6 @@ const FormView = ({ onSubmit }) => {
           </div>
         </div>
       </div>
-      <SectionBanner type={CAMPAIGN_GIVEAWAY} />
     </div>
   );
 };

@@ -36,8 +36,6 @@ const IntroSection = () => {
           <Image src={animeBoxset} alt="box display" />
         </motion.div>
       </div>
-      {isPreferPortraitMode
-        ? <SectionBanner type={CAMPAIGN_GIVEAWAY} /> : null}
     </Section>
   );
 };
