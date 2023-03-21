@@ -16,6 +16,8 @@
   :global {
     .boxContainer {
       flex: 1;
+      max-height: 40vh;
+      max-height: 40dvh;
       position: relative;
       width: 100%;
 
@@ -53,7 +55,8 @@
 
               img {
                 width: 100%;
-                max-width: 288px;
+                max-width: 40vh;
+                max-width: 40dvh;
                 height: auto;
               }
             }

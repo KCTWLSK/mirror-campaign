@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 
 import { SECTION_GIVEAWAY, CAMPAIGN_GIVEAWAY } from "@/data/constants";
 import { Section, SectionBanner } from "@/components";
@@ -119,6 +119,7 @@ const GivewaySection = () => {
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const ref = useRef();
 
   const handleNavigationClick = (el) => {
     el.classList.add('clicked')
@@ -126,14 +127,19 @@ const GivewaySection = () => {
   };
 
   const renderBoxsetContent = () => (
-    <div className="box showcase">
+    <div className="box showcase"
+      onMouseEnter={() => ref.current.autoplay.stop()}
+      onMouseLeave={() => ref.current.autoplay.start()}
+    >
       <Swiper
         className="showcaseContent"
         slidesPerView={1}
-        modules={[Navigation]}
+        modules={[Autoplay, Navigation]}
+        autoplay={{ delay: SWIPER_FLIP_DELAY, disableOnInteraction: false }}
         speed={SWIPER_FLIP_SPEED}
         loop
         navigation
+        onInit={(swiper) => ref.current = swiper}
         onNavigationPrev={({ navigation: { prevEl } }) => handleNavigationClick(prevEl)}
         onNavigationNext={({ navigation: { nextEl } }) => handleNavigationClick(nextEl)}
         onSlideChange={({ realIndex }) => setActiveIndex(realIndex)}
@@ -147,26 +153,26 @@ const GivewaySection = () => {
     </div>
   );
 
-  const renderBoxsetDetail = () => (
-    <div className="detailContainer">
-      <h1>{MIRROR[activeIndex]}</h1>
-      <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
-      <div className="prizeList">
-        <div className="prizeContainer">
-          <div className="prize">First prize</div>
-          <div>Signed framed polaroid packaged in signed KICKS CREW x MIRROR packaging.</div>
-        </div>
-        <div className="prizeContainer">
-          <div className="prize">Second prize</div>
-          <div>Mirror member memorabilla crew card & tag pack.</div>
-        </div>
-        <div className="prizeContainer">
-          <div className="prize">Third prize</div>
-          <div>Signed hoodie.</div>
+  const renderBoxsetDetail = () => {
+    const renderPrizeItem = (rank) => (
+      <div className="prizeContainer">
+        <div className="prize">{t(`details.prize${rank}.label`)}</div>
+        <div className="content">{t(`details.prize${rank}.content`)}</div>
+      </div>
+    );
+
+    return (
+      <div className="box detailContainer">
+        <h1>{MIRROR[activeIndex]}</h1>
+        <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
+        <div className="prizeList">
+          {renderPrizeItem(1)}
+          {renderPrizeItem(2)}
+          {renderPrizeItem(3)}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <Section

@@ -11,9 +11,18 @@ const download = async (url, filename) => {
     text: title,
   };
 
+  const downloadViaTempElement = () => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
+
   try {
-    if (navigator.canShare?.(data))
+    if (navigator.canShare?.(data)) {
       await navigator.share(data);
+      return;
+    }
     
     if (window.showSaveFilePicker) {
       const handle = await showSaveFilePicker({
@@ -32,14 +41,10 @@ const download = async (url, filename) => {
         await writable.write(blob);
         await writable.close();
       }
-    } else {
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      link.click();
-    }
+    } else downloadViaTempElement();
   } catch (e) {
     console.error('download error: ', e);
+    downloadViaTempElement();
   }
 };
 

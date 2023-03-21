@@ -1,5 +1,7 @@
+import { useRef, useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 
@@ -25,8 +27,6 @@ import imgBoxsetIAN from "@/../public/assets/boxset_IAN.jpg";
 import imgBoxsetEDAN from "@/../public/assets/boxset_EDAN.jpg";
 import imgBoxsetTIGER from "@/../public/assets/boxset_TIGER.jpg";
 import imgBoxsetJEREMY from "@/../public/assets/boxset_JEREMY.jpg";
-import animeBoxset from "@/../public/assets/giveaway_box.gif";
-import { useRef, useState } from "react";
 
 const boxsets = {
   LOKMAN: (
@@ -121,6 +121,7 @@ const SWIPER_FLIP_SPEED = 1000;
 const GivewaySection = () => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
   const { publicRuntimeConfig: { MIRROR } } = getConfig();
+  const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
 
   const ref = useRef();
 
@@ -159,26 +160,26 @@ const GivewaySection = () => {
     </div>
   );
 
-  const renderBoxsetDetail = () => (
-    <div className="box detailContainer">
-      <h1>{MIRROR[activeIndex]}</h1>
-      <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
-      <div className="prizeList">
-        <div className="prizeContainer">
-          <div className="prize">First prize</div>
-          <div className="content">Signed framed polaroid packaged in signed KICKS CREW x MIRROR packaging.</div>
-        </div>
-        <div className="prizeContainer">
-          <div className="prize">Second prize</div>
-          <div className="content">Mirror member memorabilla crew card & tag pack.</div>
-        </div>
-        <div className="prizeContainer">
-          <div className="prize">Third prize</div>
-          <div className="content">Signed hoodie.</div>
+  const renderBoxsetDetail = () => {
+    const renderPrizeItem = (rank) => (
+      <div className="prizeContainer">
+        <div className="prize">{t(`details.prize${rank}.label`)}</div>
+        <div className="content">{t(`details.prize${rank}.content`)}</div>
+      </div>
+    );
+
+    return (
+      <div className="box detailContainer">
+        <h1>{MIRROR[activeIndex]}</h1>
+        <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
+        <div className="prizeList">
+          {renderPrizeItem(1)}
+          {renderPrizeItem(2)}
+          {renderPrizeItem(3)}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return isPreferPortraitMode
     ? <MobileVersion /> : (

@@ -1,27 +1,17 @@
 import getConfig from "next/config";
 import { useTranslation } from "next-i18next";
-import Input from "@mui/material/Input";
 
 import { useIsPreferPortraitMode } from "@/context/device";
 import { CAMPAIGN_GIVEAWAY } from "@/data/constants";
-import { Button, SectionBanner } from "@/components";
 
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 
 const FormView = ({ onSubmit }) => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
-  const { publicRuntimeConfig: { poptinDataId } } = getConfig();
+  const { publicRuntimeConfig: { poptinDataId_zhHK, poptinDataId_en } } = getConfig();
+  const { locale } = useRouter();
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
-
-  const renderFormField = (name) => (
-    <div className="field">
-      <label>{t(`form.field.${name}.label`)}</label>
-      <Input
-        placeholder={t(`form.field.${name}.label`)}
-        variant="outlined"
-      />
-    </div>
-  );
 
   return (
     <div className={styles.formView}>
@@ -34,18 +24,10 @@ const FormView = ({ onSubmit }) => {
             </div>
           )}
           <div className="form">
-            {/* <div className="poptin-embedded" data-id={poptinDataId} /> */}
-            <div className="formFieldsContainer">
-              <div className="row">
-                {renderFormField('name')}
-                {renderFormField('phone')}
-              </div>
-              {renderFormField('email')}
-              {renderFormField('instagram')}
-            </div>
-            <Button fullWidth  onClick={onSubmit}>
-              {t('form.CTA')}
-            </Button>
+            <div id="submit-trigger" onClick={onSubmit} />
+            {locale === 'en'
+              ? <div className="poptin-embedded" data-id={poptinDataId_en} />
+              : <div className="poptin-embedded" data-id={poptinDataId_zhHK} />}
           </div>
         </div>
       </div>
