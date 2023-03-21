@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { motion } from "framer-motion";
+import { motion, transform, useAnimation, useAnimationControls } from "framer-motion";
 
 import { useIsPreferPortraitMode } from "@/context/device";
-// import { useScrollProgress } from "@/context/scroll";
+import { useScrollProgress } from "@/context/scroll";
 import { SECTION_HERO, TRANS_DELAY_INIT, TRANS_DURATION, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
 import { Section, Runner } from "@/components";
-import MobileVersion from "./components/MobileVersion";
+import MobileVersion from "./mobile";
 
 import styles from "./styles.module.scss";
 
@@ -24,8 +24,16 @@ const HeroSection = () => {
   const { t } = useTranslation('common');
 
   const ref = useRef();
-  // const { status, progress } = useScrollProgress(ref.current);
+  const { fullProgress } = useScrollProgress(ref.current);
 
+  const scale = transform([0, 0.5, 1], [0.25, 1, 0.25])(fullProgress);
+  // const [scope, animate] = useAnimation();
+
+  // useEffect(() => {
+  //   animate(scope.current, { scale });
+  // }, [scale]);
+
+  const [isMounted, setIsMounted] = useState(false);
   const [isInMainView, setIsInMainView] = useState(false);
 
   const renderFloatingSlogan = () => (
@@ -78,16 +86,16 @@ const HeroSection = () => {
   const renderMirrorGroups = () => {
     const animeDef = [
       [
-        { left: '-2.5%', top: '60%' },
-        { left: 0, top: '57.5%' },
+        { left: '-2.5%', top: '75%' },
+        { left: 0, top: '70%' },
       ],
       [
-        { left: '50%', top: '35%' },
-        { left: '47.5%', top: '40%' },
+        { left: '50%', top: '45%' },
+        { left: '47.5%', top: '50%' },
       ],
       [
-        { right: '2.5%', top: '60%' },
-        { right: 0, top: '57.5%' },
+        { right: '2.5%', top: '75%' },
+        { right: 0, top: '70%' },
       ],
     ];
 
@@ -163,44 +171,52 @@ const HeroSection = () => {
     </div>
   );
 
-  const renderGrid = () => (
-    <div className="gridContainer">
-      <motion.div
-        className="grid"
-        transformTemplate={({ scale }) => `translate(-50%, -50%) scale(${scale})`}
-        variants={{
-          [VAR_OFF_SCREEN]: { scale: 0.25 },
-          [VAR_ON_SCREEN]: {
-            scale: 1,
-            transition: {
-              duration: TRANS_DURATION,
-              delay: TRANS_DELAY_INIT,
-              ease: 'easeOut',
-            },
-          },
-        }}
-        onAnimationComplete={() => setIsInMainView(true)}
-      >
-        {new Array(7).fill(0).map((_, rowInd) =>
-          new Array(7).fill(0).map((_, colInd) => {
-            const classNames = [];
+  const renderGrid = () => {
+    const inAnimationDef = {
+      scale: 1,
+      transition: {
+        duration: TRANS_DURATION,
+        delay: TRANS_DELAY_INIT,
+        ease: 'easeOut',
+      },
+    };
 
-            if (rowInd === 3) classNames.push('expandedRow');
-            if (colInd === 3) classNames.push('expandedCol');
+    return (
+      <div className="gridContainer">
+        <motion.div
+          className="grid"
+          transformTemplate={({ scale }) => `translate(-50%, -50%) scale(${scale})`}
+          variants={{
+            [VAR_OFF_SCREEN]: { scale: 0.25 },
+            [VAR_ON_SCREEN]: inAnimationDef,
+          }}
+          onAnimationComplete={(def) => {
+            if (def !== inAnimationDef) return;
+            // setIsMounted(true);
+          }}
+          // ref={scope}
+        >
+          {new Array(7).fill(0).map((_, rowInd) =>
+            new Array(7).fill(0).map((_, colInd) => {
+              const classNames = [];
 
-            return (
-              <div
-                key={`grid_cell_${rowInd}_${colInd}`}
-                className={classNames.join(' ')}
-              >
-                {rowInd === 3 && colInd === 3 ? renderMainView() : null}
-              </div>
-            );
-          })
-        )}
-      </motion.div>
-    </div>
-  );
+              if (rowInd === 3) classNames.push('expandedRow');
+              if (colInd === 3) classNames.push('expandedCol');
+
+              return (
+                <div
+                  key={`grid_cell_${rowInd}_${colInd}`}
+                  className={classNames.join(' ')}
+                >
+                  {rowInd === 3 && colInd === 3 ? renderMainView() : null}
+                </div>
+              );
+            })
+          )}
+        </motion.div>
+      </div>
+    );
+  };
 
   return isPreferPortraitMode
     ? <MobileVersion />

@@ -14,7 +14,8 @@ const download = async (url, filename) => {
   try {
     if (navigator.canShare?.(data))
       await navigator.share(data);
-    else if (window.showSaveFilePicker) {
+    
+    if (window.showSaveFilePicker) {
       const handle = await showSaveFilePicker({
         suggestedName: filename,
         types: [

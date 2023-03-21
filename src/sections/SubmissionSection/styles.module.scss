@@ -16,25 +16,13 @@ $submission-label-size: min(30dvw, 30dvh);
       background-color: $primary-color-bg;
       z-index: 10;
       display: flex;
+      justify-content: center;
+      align-items: center;
 
-      &.first {
-        justify-content: flex-end;
-  
-        .bgImgWrapper {
-          width: 50%;
-          height: 100%;
-  
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-
-      &.second {
-        justify-content: center;
-        align-items: center;
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
 
         .textContainer {
           height: 100%;
@@ -42,27 +30,27 @@ $submission-label-size: min(30dvw, 30dvh);
           flex-direction: column;
           justify-content: center;
           align-items: center;
-
+  
           .textWrapper {
             height: fit-content;
             overflow-y: hidden;
             display: flex;
             text-align: center;
-
+  
             &.top {
               align-items: flex-end;
             }
-
+  
             &.bottom {
               align-items: flex-start;
-
+  
               div {
                 margin-top: 2.5%;
               }
             }
-
+  
             div {
-              font-family: 'Bebas Neue', 'Inter', cursive, sans-serif;
+              font-family: Bebas Neue, Unifont, Inter, sans-serif;
               font-size: $submission-label-size;
               line-height: $submission-label-size;
               font-weight: 500;
@@ -70,7 +58,6 @@ $submission-label-size: min(30dvw, 30dvh);
               -webkit-text-stroke: 4px $secondary-color;
             }
           }
-
         }
       }
     }

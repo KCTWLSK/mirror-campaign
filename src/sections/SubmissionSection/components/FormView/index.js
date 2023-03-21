@@ -9,6 +9,7 @@ import { Button, SectionBanner } from "@/components";
 import styles from "./styles.module.scss";
 
 const FormView = ({ onSubmit }) => {
+  const isPreferPortraitMode = useIsPreferPortraitMode();
   const { publicRuntimeConfig: { poptinDataId } } = getConfig();
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
 
@@ -26,10 +27,12 @@ const FormView = ({ onSubmit }) => {
     <div className={styles.formView}>
       <div className="container">
         <div className="innerContainer">
-          <div className="content">
-            <h1>{t('intro.header')}</h1>
-            <div className="description">{t('intro.description')}</div>
-          </div>
+          {isPreferPortraitMode ? null : (
+            <div className="content">
+              <h1>{t('intro.header')}</h1>
+              <div className="description">{t('intro.description')}</div>
+            </div>
+          )}
           <div className="form">
             {/* <div className="poptin-embedded" data-id={poptinDataId} /> */}
             <div className="formFieldsContainer">
@@ -39,7 +42,6 @@ const FormView = ({ onSubmit }) => {
               </div>
               {renderFormField('email')}
               {renderFormField('instagram')}
-              {renderFormField('survey')}
             </div>
             <Button fullWidth  onClick={onSubmit}>
               {t('form.CTA')}

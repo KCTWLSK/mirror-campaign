@@ -4,22 +4,34 @@ const Document = () => (
   <Html lang="en">
     <Head>
       <link
-        rel="preload"
-        href="/fonts/Inter-VariableFont_slnt,wght.ttf"
+        href="/fonts/GnuUnifontFull-Pm9P.woff2"
         as="font"
-        type="font/ttf"
+        type="font/woff2"
+        rel="preload"
       />
       <link
-        rel="preload"
-        href="/fonts/BebasNeue-Regular.ttf"
+        href="/fonts/Inter-VariableFont_slnt,wght.woff2"
         as="font"
-        type="font/ttf"
+        type="font/woff2"
+        rel="preload"
       />
       <link
-        rel="preload"
-        href="/fonts/digital-7.regular.ttf"
+        href="/fonts/BebasNeue-Regular.woff2"
         as="font"
-        type="font/ttf"
+        type="font/woff2"
+        rel="preload"
+      />
+      <link
+        href="/fonts/DIGI.woff2"
+        as="font"
+        type="font/woff2"
+        rel="preload"
+      />
+      <link
+        href="/fonts/DIGIB.woff2"
+        as="font"
+        type="font/woff2"
+        rel="preload"
       />
     </Head>
     <body>

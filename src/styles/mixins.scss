@@ -32,3 +32,23 @@
     }
   }
 }
+
+@mixin swiperNavigation {
+  .swiper-button-prev, .swiper-button-next {
+    color: $primary-color-bg;
+    opacity: 0.6;
+    transform: scale(0.6);
+    -webkit-text-stroke: 1px $primary-color;
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1);
+      transition: transform 0.25s ease-out;
+
+      &.clicked {
+        transform: scale(0.6);
+        transition: transform 0.1s ease-out;
+      }
+    }
+  }
+}

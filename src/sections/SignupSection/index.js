@@ -10,13 +10,13 @@ import {
   CAMPAIGN_GIVEAWAY,
 } from "@/data/constants";
 import { Section, SectionBanner, Button } from "@/components";
+import MobileVersion from "./mobile";
 
 import styles from "./styles.module.scss";
 
 import igDemoImg from "@/../public/assets/ig_demo.png";
 import igDemoBgImg from "@/../public/assets/ig_demo_bg.png";
 import groupImg from "@/../public/assets/mirror_group_cascaded.png";
-import MobileVersion from "./components/MobileVersion";
 
 const TRANS_DURATION = 0.5;
 const TRANS_DELAY_LONG = 0.75;

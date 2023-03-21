@@ -1,6 +1,13 @@
 import { createContext, useRef, useState, useContext, useEffect } from "react";
 
-import { STATUS_OFF_SCREEN, STATUS_ENTERING, STATUS_LEAVING, STATUS_BACKWARD_ENTERING, STATUS_BACKWARD_LEAVING } from "@/data/constants";
+import {
+  STATUS_OFF_SCREEN,
+  STATUS_ENTERING,
+  STATUS_LEAVING,
+  STATUS_ENTERING_BACKWARD,
+  STATUS_LEAVING_BACKWARD,
+  STATUS_OFF_SCREEN_AFTER,
+} from "@/data/constants";
 
 export const ScrollContext = createContext({});
 const { Provider } = ScrollContext;
@@ -41,29 +48,31 @@ export const useScrollProgress = (target) => {
     switch (status) {
       default:
       case STATUS_OFF_SCREEN:
+      case STATUS_OFF_SCREEN_AFTER:
         newStatus =
-          newProgress === 0 ? STATUS_OFF_SCREEN
-            : top < 0 ? STATUS_BACKWARD_ENTERING
+          newProgress === 0 ? status
+            : top < 0 ? STATUS_ENTERING_BACKWARD
               : STATUS_ENTERING;
         break;
       case STATUS_ENTERING:
         newStatus =
           newProgress > progress ? STATUS_ENTERING
-            : top < 0 ? STATUS_LEAVING : STATUS_BACKWARD_LEAVING;
+            : top < 0 ? STATUS_LEAVING : STATUS_LEAVING_BACKWARD;
         break;
       case STATUS_LEAVING:
-        newProgress === 1
-        newStatus = newProgress > progress
-          ? STATUS_BACKWARD_ENTERING : STATUS_LEAVING;
-        break;
-      case STATUS_BACKWARD_ENTERING:
         newStatus =
-        newProgress > progress ? STATUS_BACKWARD_ENTERING
-          : top < 0 ? STATUS_LEAVING : STATUS_BACKWARD_LEAVING;
+          newProgress === 0 ? STATUS_OFF_SCREEN_AFTER
+            : newProgress > progress
+              ? STATUS_ENTERING_BACKWARD : STATUS_LEAVING;
+        break;
+      case STATUS_ENTERING_BACKWARD:
+        newStatus =
+        newProgress > progress ? STATUS_ENTERING_BACKWARD
+          : top < 0 ? STATUS_LEAVING : STATUS_LEAVING_BACKWARD;
       break;
-      case STATUS_BACKWARD_LEAVING:
+      case STATUS_LEAVING_BACKWARD:
         newStatus = newProgress > progress
-          ? STATUS_ENTERING : STATUS_BACKWARD_LEAVING;
+          ? STATUS_ENTERING : STATUS_LEAVING_BACKWARD;
         break;
     }
 
@@ -72,7 +81,7 @@ export const useScrollProgress = (target) => {
   }, [target, scrollPos]);
 
   useEffect(() => {
-    if (progress || ![STATUS_LEAVING, STATUS_BACKWARD_LEAVING].includes(status)) return;
+    if (progress || ![STATUS_LEAVING, STATUS_LEAVING_BACKWARD].includes(status)) return;
     setStatus(STATUS_OFF_SCREEN);
     setProgress(0);
   }, [status, progress]);
@@ -80,8 +89,13 @@ export const useScrollProgress = (target) => {
   return {
     status,
     progress:
-      status === STATUS_LEAVING || status === STATUS_BACKWARD_LEAVING
+      [STATUS_OFF_SCREEN_AFTER, STATUS_LEAVING, STATUS_LEAVING_BACKWARD].includes(status)
         ? 1 - progress : progress,
+    fullProgress:
+      status === STATUS_OFF_SCREEN ? 0
+        : status === STATUS_OFF_SCREEN_AFTER ? 1
+          : [STATUS_ENTERING, STATUS_LEAVING_BACKWARD].includes(status)
+            ? progress / 2 : 0.5 + (1 - progress) / 2,
   };
 };
 

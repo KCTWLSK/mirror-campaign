@@ -6,14 +6,14 @@ import ScrollProvider from "@/context/scroll";
 import {
   LandingSection,
   HeroSection,
-  IntroSection,
-  TransitionSection,
   GivewaySection,
+  PromptSection,
   SignupSection,
   SubmissionSection,
   BehindTheScenesSection,
 } from "@/sections";
 import { Footer } from "@/components";
+import { useRouter } from "next/router";
 
 export const getStaticProps = async ({ locale }) => {
   const { publicRuntimeConfig: { localeGroups } } = getConfig();
@@ -26,6 +26,8 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 const Home = () => {
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -34,16 +36,21 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ScrollProvider>
+      <main
+        style={locale === 'en' ? { fontFamily: 'Inter, sans-serif' } : null}
+      >
         <LandingSection />
         <HeroSection />
-        <IntroSection />
         <GivewaySection />
+        <PromptSection />
         <SignupSection />
         <SubmissionSection />
         <BehindTheScenesSection />
         <Footer />
-      </ScrollProvider>
+      </main>
+      {/* <ScrollProvider>
+
+      </ScrollProvider> */}
     </>
   )
 };

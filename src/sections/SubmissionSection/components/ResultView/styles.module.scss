@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .resultView {
   --wallpaper-height: 67.5vh;
@@ -53,6 +54,8 @@
             width: auto;
             border: 2px solid $primary-color-bg;
           }
+
+          @include swiperNavigation;
         }
       }
     }
@@ -80,6 +83,10 @@
           h1, h3 {
             font-size: 1.25rem;
           }
+        }
+
+        .wallpaperPicker {
+          width: 100%;
         }
       }
     }

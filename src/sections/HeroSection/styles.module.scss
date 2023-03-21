@@ -31,6 +31,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
 
       .runnerItem > span:first-child {
         padding-right: 1rem;
+        font-weight: bold;
       }
     }
     
@@ -42,6 +43,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       height: 100%;
       padding: $padding-vertical $padding-horizontal;
       transform-origin: center;
+      font-family: Inter, sans-sarif;
 
       .floatingSloganInnerContainer {
         position: relative;
@@ -118,6 +120,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
     
       .slogan {
         line-height: $main-view-row-height;
+        font-family: Inter, sans-sarif;
         font-size: $main-view-row-height;
         color: $primary-color-bg;
         text-shadow: 2px 2px 0 $secondary-color,

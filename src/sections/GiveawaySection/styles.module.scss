@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .giveawaySection {
   :global {
@@ -25,60 +26,70 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: visible;
+        margin: 0.75rem;
+        width: calc(100% - 1.5rem);
+        height: calc(100% - 1.5rem);
 
-        &.showcase {
-          margin: 0.75rem;
-          width: calc(100% - 1.5rem);
-          height: calc(100% - 1.5rem);
+        .showcaseContent {
+          width: 100%;
+          height: 100%;
 
-          .showcaseContent {
+          .swiper-wrapper {
             width: 100%;
             height: 100%;
 
-            .swiper-wrapper {
-              width: 100%;
-              height: 100%;
+            .swiper-slide {
+              border: 2px solid $secondary-color;
+              display: flex;
+              justify-content: center;
+              align-items: center;
 
-              .swiper-slide {
-                border: 2px solid $secondary-color;
+              img {
+                height: 100%;
+                width: auto;
 
-                img {
-                  height: 100%;
-                  width: auto;
+                @media (max-aspect-ratio: 1/1) {
+                  width: 100%;
+                  height: auto;
                 }
               }
             }
           }
+
+          @include swiperNavigation;
         }
+      }
+    }
 
-        &.display {
-          width: 100%;
-          height: 100%;
+    .detailContainer {
+      padding-left: $padding-horizontal / 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-          img {
-            height: 100%;
-            width: auto;
+      h1 {
+        margin: 0.5rem 0;
+      }
+
+      .subtitle {
+        margin-bottom: 0.75rem;
+      }
+      
+      .prizeList {
+        .prizeContainer {
+          margin-bottom: 0.75rem;
+
+          .prize {
+            width: fit-content;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 900;
+            border-bottom: 1px solid $secondary-color;
           }
 
-          .grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-columns: 1fr 1fr 1fr;
-            z-index: -1;
-
-            > div {
-              border: 1px solid $secondary-color;
-
-              &:nth-child(1), &:nth-child(2), &:nth-child(3) { border-top: none; }
-              &:nth-child(7), &:nth-child(8), &:nth-child(9) { border-bottom: none; }
-              &:nth-child(1), &:nth-child(4), &:nth-child(7) { border-left: none; }
-              &:nth-child(3), &:nth-child(6), &:nth-child(9) { border-right: none; }
-            }
+          .content {
+            text-align: start;
           }
         }
       }

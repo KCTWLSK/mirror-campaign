@@ -1,29 +1,36 @@
 @import "./variables.scss";
 
 @font-face {
+  font-family: 'Unifont';
+  src: url('/fonts/GnuUnifontFull-Pm9P.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Inter';
-  src: local('Inter') url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  src: url('/fonts/Inter-VariableFont_slnt,wght.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bebas Neue';
-  src: local('Bebas Neue') url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  src: url('/fonts/BebasNeue-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'digital-7';
-  src: local('digital-7') url('/fonts/digital-7.regular.ttf') format('truetype');
+  src: url('/fonts/DS-DIGI.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'digital-7';
-  src: url('/fonts/DS-DIGIT.TTF') format('truetype');
+  src: url('/fonts/DS-DIGIB.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
 }
@@ -36,7 +43,7 @@
 
 body {
   background-color: $primary-color-bg;
-  font-family: 'Inter', Sans-Serif;
+  font-family: Unifont, sans-serif;
   font-size: 16px;
   text-align: center;
   color: $primary-color;

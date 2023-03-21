@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, EffectCreative } from "swiper";
+import SwiperCore, { Autoplay, EffectCreative, Navigation } from "swiper";
 
 import { CAMPAIGN_GIVEAWAY } from "@/data/constants";
 import download from "@/utils/download";
@@ -117,7 +117,7 @@ const TRANS_DURATION = 0.75;
 const SWIPER_FLIP_SPEED = 1500;
 const SWIPER_FLIP_DELAY = 1500;
 
-SwiperCore.use([Autoplay, EffectCreative]);
+// SwiperCore.use([Autoplay, EffectCreative]);
 
 const ResultView = ({ duration, delay }) => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
@@ -143,42 +143,65 @@ const ResultView = ({ duration, delay }) => {
     />
   );
 
-  const renderWallpaperPicker = () => (
-    <div
-      className="wallpaperPickerContainer"
-      onMouseEnter={() => ref.current.autoplay.stop()}
-      onMouseLeave={() => ref.current.autoplay.start()}
-    >
-      <Swiper
-        className="wallpaperPicker"
-        grabCursor
-        slidesPerView={isPreferPortraitMode ? 1 : 3}
-        centeredSlides
-        speed={SWIPER_FLIP_SPEED}
-        loop
-        autoplay={{ delay: SWIPER_FLIP_DELAY, disableOnInteraction: false }}
-        effect="creative"
-        creativeEffect={{
-          prev: {
-            translate: ['calc(0vh - var(--wallpaper-height) * 0.53)', 0, -200],
-          },
-          next: {
-            translate: ['calc(var(--wallpaper-height) * 0.53)', 0, -200],
-          },
-        }}
-        onInit={(swiper) => ref.current = swiper}
+  const handleNavigationClick = (el) => {
+    el.classList.add('clicked')
+    setTimeout(() => el.classList.remove('clicked'), 100);
+  }
+
+  const renderWallpaperPicker = () => {
+    const modules = [Navigation, EffectCreative];
+    if (!isPreferPortraitMode || 1)
+      modules.push(Autoplay);
+    
+    const props = isPreferPortraitMode && 0
+      ? {} : {
+        autoplay: {
+          delay: SWIPER_FLIP_DELAY,
+          disableOnInteraction: false,
+        },
+      };
+
+    return (
+      <div
+        className="wallpaperPickerContainer"
+        onMouseEnter={() => ref.current.autoplay?.stop()}
+        onMouseLeave={() => ref.current.autoplay?.start()}
       >
-        {MIRROR.map((name) => (
-          <SwiperSlide
-            key={`mirror_slide_${name}`}
-            onClick={() => download(`assets/wallpaper_${name}.jpg`, `wallpaper_${name}.jpg`)}
-          >
-            {wallpapers[name]}
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
-  );
+        <Swiper
+          className="wallpaperPicker"
+          grabCursor
+          slidesPerView={isPreferPortraitMode ? 'auto' : 3}
+          centeredSlides
+          speed={SWIPER_FLIP_SPEED}
+          modules={modules}
+          loop
+          navigation
+          onNavigationPrev={({ navigation: { prevEl } }) => handleNavigationClick(prevEl)}
+          onNavigationNext={({ navigation: { nextEl } }) => handleNavigationClick(nextEl)}
+          effect="creative"
+          creativeEffect={{
+            prev: {
+              translate: ['calc(0vh - var(--wallpaper-height) * 0.53)', 0, -200],
+            },
+            next: {
+              translate: ['calc(var(--wallpaper-height) * 0.53)', 0, -200],
+            },
+          }}
+          onInit={(swiper) => ref.current = swiper}
+          {...props}
+        >
+          {MIRROR.map((name) => (
+            <SwiperSlide
+              key={`mirror_slide_${name}`}
+              onClick={() => download(`assets/wallpaper_${name}.jpg`, `wallpaper_${name}.jpg`)}
+            >
+              {wallpapers[name]}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  };
 
   return (
     <motion.div

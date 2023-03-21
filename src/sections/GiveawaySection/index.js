@@ -1,13 +1,16 @@
 import getConfig from "next/config";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 
 import { useIsPreferPortraitMode } from "@/context/device";
 import { SECTION_GIVEAWAY, CAMPAIGN_GIVEAWAY } from "@/data/constants";
-import { Section, SectionBanner, SectionLayout } from "@/components";
+import { Section, SectionLayout } from "@/components";
 import ShowcaseBox from "./components/ShowcaseBox";
+import MobileVersion from "./mobile";
 
+import "swiper/scss";
+import "swiper/scss/navigation";
 import styles from "./styles.module.scss";
 
 import imgBoxsetLOKMAN from "@/../public/assets/boxset_LOKMAN.jpg";
@@ -23,6 +26,7 @@ import imgBoxsetEDAN from "@/../public/assets/boxset_EDAN.jpg";
 import imgBoxsetTIGER from "@/../public/assets/boxset_TIGER.jpg";
 import imgBoxsetJEREMY from "@/../public/assets/boxset_JEREMY.jpg";
 import animeBoxset from "@/../public/assets/giveaway_box.gif";
+import { useRef, useState } from "react";
 
 const boxsets = {
   LOKMAN: (
@@ -112,22 +116,39 @@ const boxsets = {
 }
 
 const SWIPER_FLIP_DELAY = 1000;
-const SWIPER_FLIP_SPEED = 1500;
+const SWIPER_FLIP_SPEED = 1000;
 
 const GivewaySection = () => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
   const { publicRuntimeConfig: { MIRROR } } = getConfig();
 
+  const ref = useRef();
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleNavigationClick = (el) => {
+    el.classList.add('clicked')
+    setTimeout(() => el.classList.remove('clicked'), 100);
+  }
+
   const renderBoxsetContent = () => (
-    <div className="box showcase">
+    <div
+      className="box showcase"
+      onMouseEnter={() => ref.current.autoplay.stop()}
+      onMouseLeave={() => ref.current.autoplay.start()}
+    >
       <Swiper
         className="showcaseContent"
         slidesPerView={1}
-        modules={[Autoplay]}
+        modules={[Autoplay, Navigation]}
         autoplay={{ delay: SWIPER_FLIP_DELAY, disableOnInteraction: false }}
         speed={SWIPER_FLIP_SPEED}
         loop
-        grabCursor
+        navigation
+        onInit={(swiper) => ref.current = swiper}
+        onNavigationPrev={({ navigation: { prevEl } }) => handleNavigationClick(prevEl)}
+        onNavigationNext={({ navigation: { nextEl } }) => handleNavigationClick(nextEl)}
+        onSlideChange={({ realIndex }) => setActiveIndex(realIndex)}
       >
         {MIRROR.map((name) => (
           <SwiperSlide key={`mirror_slide_${name}`}>
@@ -138,37 +159,41 @@ const GivewaySection = () => {
     </div>
   );
 
-  const renderBoxDisplay = () => (
-    <div className="box display">
-      <div className="grid">
-        <div /><div /><div />
-        <div /><div /><div />
-        <div /><div /><div />
+  const renderBoxsetDetail = () => (
+    <div className="box detailContainer">
+      <h1>{MIRROR[activeIndex]}</h1>
+      <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
+      <div className="prizeList">
+        <div className="prizeContainer">
+          <div className="prize">First prize</div>
+          <div className="content">Signed framed polaroid packaged in signed KICKS CREW x MIRROR packaging.</div>
+        </div>
+        <div className="prizeContainer">
+          <div className="prize">Second prize</div>
+          <div className="content">Mirror member memorabilla crew card & tag pack.</div>
+        </div>
+        <div className="prizeContainer">
+          <div className="prize">Third prize</div>
+          <div className="content">Signed hoodie.</div>
+        </div>
       </div>
-      <Image src={animeBoxset} alt="giveaway box" />
     </div>
   );
 
-  return (
-    <Section
-      id={SECTION_GIVEAWAY}
-      className={styles.giveawaySection}
-      {...(isPreferPortraitMode ? {
-        viewport: { once: true, amount: (5 / 6) * 0.8 },
-      } : {})}
-    >
-      {isPreferPortraitMode
-        ? <SectionBanner type={CAMPAIGN_GIVEAWAY} top /> : null}
-      <SectionLayout type={CAMPAIGN_GIVEAWAY}>
-        <ShowcaseBox>
-          {renderBoxsetContent()}
-        </ShowcaseBox>
-        <ShowcaseBox>
-          {renderBoxDisplay()}
-        </ShowcaseBox>
-      </SectionLayout>
-    </Section>
-  );
+  return isPreferPortraitMode
+    ? <MobileVersion /> : (
+      <Section
+        id={SECTION_GIVEAWAY}
+        className={styles.giveawaySection}
+      >
+        <SectionLayout type={CAMPAIGN_GIVEAWAY}>
+          <ShowcaseBox>
+            {renderBoxsetContent()}
+          </ShowcaseBox>
+          {renderBoxsetDetail()}
+        </SectionLayout>
+      </Section>
+    );
 };
 
 export default GivewaySection;

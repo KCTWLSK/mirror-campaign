@@ -1,0 +1,185 @@
+@import "@/styles/variables.scss";
+
+$grid-row-cnt: 8;
+$grid-col-cnt: 8;
+$grid-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
+$grid-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
+$grid-column-width-mobile: calc((100vw - 2 * $padding-horizontal-mobile) / $grid-col-cnt);
+$grid-column-width-mobile: calc((100dvw - 2 * $padding-horizontal-mobile) / $grid-col-cnt);
+
+$main-view-row-cnt-mobile: 12;
+$main-view-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
+$main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
+
+.heroSection {
+  :global {
+    .runnerWrapper {
+      position: absolute;
+      width: calc(100% - 2 * $padding-horizontal-mobile);
+
+      &.top { top: calc($padding-vertical-mobile - 1.5rem); }
+      &.bottom { bottom: calc($padding-vertical-mobile - 1.5rem); }
+
+      @media (min-width: 720px) {
+        &.top { top: calc($padding-vertical-mobile - 2.25rem); }
+        &.bottom { bottom: calc($padding-vertical-mobile - 2.25rem); }
+      }
+      
+      .runnerItem > span:first-child {
+        padding-right: 0.5rem;
+        font-weight: bold;
+      }
+    }
+    
+    .floatingSloganContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: $padding-vertical-mobile $padding-horizontal-mobile;
+      transform-origin: center;
+      font-family: Inter, sans-sarif;
+
+      .floatingSloganInnerContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .floatingSlogan {
+          position: absolute;
+          color: $primary-color-bg;
+          text-shadow: 1px 1px 0 $secondary-color,
+            -1px -1px 0 $secondary-color,  
+            1px -1px 0 $secondary-color,
+            -1px 1px 0 $secondary-color;
+          white-space: nowrap;
+          text-align: start;
+          font-weight: 400;
+    
+          &.left {
+            left: 0;
+            font-size: calc($grid-row-height-mobile / 2);
+            line-height: calc($grid-row-height-mobile / 2);
+            padding-left: 0.5rem;
+
+            &.top { top: calc($grid-row-height-mobile / 2); }
+            &.bottom { bottom: $grid-row-height-mobile; }
+          }
+
+          &.right {
+            left: calc($grid-column-width-mobile * 7);
+            bottom: calc($grid-row-height-mobile * 5);
+            font-size: calc($grid-column-width-mobile / 2);
+            line-height: calc($grid-column-width-mobile / 2);
+            transform-origin: left bottom;
+            transform: translateX(calc(0px - ($grid-column-width-mobile * 0.0625))) rotate(270deg);
+          }
+        }
+      }
+    }
+
+    .gridContainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+
+      .grid {
+        position: absolute;
+        width: 400%;
+        height: 400%;
+        top: 50%;
+        left: 50%;
+        display: grid;
+        grid-template-rows: repeat($grid-row-cnt, minmax(0, 1fr));
+        grid-template-columns: repeat($grid-col-cnt, minmax(0, 1fr));
+        border: 2px solid $secondary-color;
+  
+        > div {
+          border: 2px solid $secondary-color;
+
+          &.expandedCol { grid-column: 4 / 6; }
+          &.expandedRow { grid-row: 4 / 6; }
+        }
+      }
+    }
+    
+    .mainView {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: grid;
+      grid-template-rows: repeat($main-view-row-cnt-mobile, minmax(0, 1fr));
+      overflow: hidden;
+
+      &.standalone {
+        border: 2px solid $secondary-color;
+      }
+    
+      .slogan {
+        line-height: $main-view-row-height-mobile;
+        font-family: Inter, sans-sarif;
+        font-size: $main-view-row-height-mobile;
+        color: $primary-color-bg;
+        text-shadow: 1px 1px 0 $secondary-color,
+          -1px -1px 0 $secondary-color,  
+          1px -1px 0 $secondary-color,
+          -1px 1px 0 $secondary-color;
+        font-weight: 600;
+
+        &.elevated {
+          position: relative;
+          z-index: 3;
+        }
+      }
+
+      .imgWrapper {
+        position: absolute;
+        width: 85%;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+        
+        &.groupB {
+          top: 2.5%;
+        }
+
+        &.groupA {
+          top: 17.5%;
+          z-index: 2;
+        }
+
+        &.groupC {
+          top: 32.5%;
+          z-index: 3;
+        }
+      }
+  
+      .topRow {
+        display: flex;
+        justify-content: center;
+      }
+  
+      .bottomRow {
+        grid-row-start: 8;
+        text-align: center;
+      }
+  
+      .bodyRow {
+        min-height: 4 * $main-view-row-height-mobile;
+        z-index: 4;
+        background-color: $primary-color-bg;
+        grid-row: 9 / 13;
+        border-top: $secondary-color 2px solid;
+        padding: 0 1rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

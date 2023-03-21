@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
-import { useIsPreferPortraitMode } from "@/context/device";
 import { CAMPAIGN_GIVEAWAY, SECTION_SUBMISSION, TRANS_DELAY_INIT } from "@/data/constants";
 import Section from "@/components/Section";
 import { FormView, ResultView } from "./components";
 
 import styles from "./styles.module.scss";
+import { SectionBanner } from "@/components";
+import { useIsPreferPortraitMode } from "@/context/device";
 
 const TRANS_DURATION = 1;
 const TRANS_DELAY_LONG = 1.75;
@@ -34,41 +35,48 @@ const SubmissionSection = () => {
 
     return (
       <motion.div
-        className="transAnime second"
+        className="transAnime"
         animate={mainAnimationDef}
         onAnimationComplete={(def) => {
           if (def !== mainAnimationDef) return;
           setCurrentPhase(PHASE_FINAL);
         }}
       >
-        <div className="textContainer">
-          <div className="textWrapper top">
-            <motion.div
-              transformTemplate={transformTemplate}
-              initial={{ y: '150%' }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: TRANS_DURATION,
-                delay: TRANS_DELAY_INIT,
-              }}
-            >
-              {t('submission.label.top')}
-            </motion.div>
+        <motion.div
+          className="container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: TRANS_DELAY_INIT }}
+        >
+          <div className="textContainer">
+            <div className="textWrapper top">
+              <motion.div
+                transformTemplate={transformTemplate}
+                initial={{ y: '150%' }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: TRANS_DURATION,
+                  delay: TRANS_DELAY_INIT,
+                }}
+              >
+                {t('submission.label.top')}
+              </motion.div>
+            </div>
+            <div className="textWrapper bottom">
+              <motion.div
+                transformTemplate={transformTemplate}
+                initial={{ y: '-150%' }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: TRANS_DURATION,
+                  delay: TRANS_DELAY_INIT,
+                }}
+              >
+                {t('submission.label.bottom')}
+              </motion.div>
+            </div>
           </div>
-          <div className="textWrapper bottom">
-            <motion.div
-              transformTemplate={transformTemplate}
-              initial={{ y: '-150%' }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: TRANS_DURATION,
-                delay: TRANS_DELAY_INIT,
-              }}
-            >
-              {t('submission.label.bottom')}
-            </motion.div>
-          </div>
-        </div>
+        </motion.div>
       </motion.div>
     );
   };
@@ -89,6 +97,7 @@ const SubmissionSection = () => {
             />
           </>
         )}
+      {currentPhase === PHASE_INIT ? <SectionBanner type={CAMPAIGN_GIVEAWAY} /> : null}
     </Section>
   );
 };

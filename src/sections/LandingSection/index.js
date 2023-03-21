@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { SECTION_LANDING } from "@/data/constants";
+import { SECTION_HERO, SECTION_LANDING } from "@/data/constants";
 import { Section } from "@/components";
 
 import styles from "./styles.module.scss";
@@ -15,7 +15,7 @@ const LandingSection = () => {
     const isSelected = locale === localeValue;
 
     return (
-      <Link href="/" locale={localeValue}>
+      <Link href={`#${SECTION_HERO}`} locale={localeValue}>
         <motion.button
           className={`localeButton${isSelected ? ' selected' : ''}`}
           animate={isSelected ? {} : {
@@ -34,7 +34,6 @@ const LandingSection = () => {
               duration: 1.5,
             },
           }}
-          disabled={isSelected}
         >
           {label}
         </motion.button>
@@ -75,8 +74,10 @@ const LandingSection = () => {
           {renderLocaleButton('EN', 'en')}
           {renderLocaleButton('中文', 'zh-HK')}
         </div>
-        {renderArrow(0)}
-        {renderArrow(1)}
+        {/* <Link href={`#${SECTION_HERO}`}>
+          {renderArrow(0)}
+          {renderArrow(1)}
+        </Link> */}
       </div>
     </Section>
   );

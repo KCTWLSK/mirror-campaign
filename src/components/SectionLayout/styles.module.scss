@@ -9,15 +9,20 @@
   :global {
     .titleRow {
       flex-basis: 25%;
+      max-height: 25%;
       display: flex;
       justify-content: space-between;
-  
+
       * {
-        width: calc(50% - 0.5rem);
         text-align: start;
       }
 
+      h1 {
+        width: calc(50% + $padding-horizontal / 2 - 0.5rem);
+      }
+
       .detail {
+        width: calc(50% - $padding-horizontal / 2 - 0.5rem);
         padding-top: 1rem;
       }
     }
@@ -71,7 +76,7 @@
           justify-content: space-evenly;
 
           > div {
-            flex-basis: calc(50% - $padding-vertical-mobile * 0.5);
+            // flex-basis: calc(50% - $padding-vertical-mobile * 0.5);
             width: 100%;
           }
         }
