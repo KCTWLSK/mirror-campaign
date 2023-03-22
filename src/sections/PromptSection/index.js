@@ -8,8 +8,6 @@ import { Section, SectionBanner, Button } from "@/components";
 
 import styles from "./styles.module.scss";
 
-import animeBoxset from "@/../public/assets/giveaway_box.gif";
-
 const PromptSection = () => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
@@ -33,7 +31,12 @@ const PromptSection = () => {
       </div>
       <div className="block display">
         <motion.div className="imgWrapper">
-          <Image src={animeBoxset} alt="box display" />
+          <Image
+            src="https://storage.googleapis.com/socialwall/giveaway_box.gif"
+            alt="box display"
+            width={480}
+            height={480}
+          />
         </motion.div>
       </div>
       {isPreferPortraitMode ? null : <SectionBanner type={CAMPAIGN_GIVEAWAY} />}
