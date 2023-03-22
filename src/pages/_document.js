@@ -22,13 +22,13 @@ const Document = () => (
         rel="preload"
       />
       <link
-        href="/fonts/DIGI.woff2"
+        href="/fonts/DS-DIGI.woff2"
         as="font"
         type="font/woff2"
         rel="preload"
       />
       <link
-        href="/fonts/DIGIB.woff2"
+        href="/fonts/DS-DIGIB.woff2"
         as="font"
         type="font/woff2"
         rel="preload"

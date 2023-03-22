@@ -50,9 +50,9 @@ const HeroSection = () => {
       className="floatingSloganContainer"
     >
       <div className="floatingSloganInnerContainer">
-        <div className="floatingSlogan left top">{t('partnership.slogan1')}</div>
-        <div className="floatingSlogan left bottom">{t('partnership.slogan2')}</div>
-        <div className="floatingSlogan right">{t('partnership.slogan3')}</div>
+        <div className="floatingSlogan left top">{t('hero.slogan1')}</div>
+        <div className="floatingSlogan left bottom">{t('hero.slogan2')}</div>
+        <div className="floatingSlogan right">{t('hero.slogan3')}</div>
       </div>
     </motion.div>
   );
@@ -77,7 +77,7 @@ const HeroSection = () => {
       >
         <>
           <span>{t('runner.header')}</span>
-          <span>{t('partnership.runner.body')}</span>
+          <span>{t('hero.runner.body')}</span>
         </>
       </Runner>
     </motion.div>
@@ -158,16 +158,16 @@ const HeroSection = () => {
       {renderMirrorGroups()}
       <div className="topRow">
         <span className="slogan">
-          {`${t('partnership.slogan1')} ${t('partnership.slogan2')}`}
+          {`${t('hero.slogan1')} ${t('hero.slogan2')}`}
         </span>
         <Image src={logoCoBrand} alt="KICKS CREW x MIRROR" placeholder="blur" />
       </div>
       <div className="bottomRow">
         <span className="slogan elevated">
-          {t('partnership.slogan3')}
+          {t('hero.slogan3')}
         </span>
       </div>
-      <div className="bodyRow">{t('partnership.body')}</div>
+      <div className="bodyRow">{t('hero.body')}</div>
     </div>
   );
 

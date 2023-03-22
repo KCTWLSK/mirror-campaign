@@ -19,8 +19,8 @@ const FormView = ({ onSubmit }) => {
         <div className="innerContainer">
           {isPreferPortraitMode ? null : (
             <div className="content">
-              <h1>{t('intro.header')}</h1>
-              <div className="description">{t('intro.description')}</div>
+              <h1>{t('prompt.header')}</h1>
+              <div className="description">{t('prompt.description')}</div>
             </div>
           )}
           <div className="form">

@@ -1,0 +1,89 @@
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
+
+.resultView {
+  --wallpaper-height: 57.5vh;
+  --wallpaper-height: 57.5dvh;
+
+  width: 100%;
+  height: 100%;
+  padding: 0 $padding-horizontal-mobile;
+  background: $secondary-color;
+
+  @media (min-width: 720px) {
+    padding-top: $padding-vertical-mobile;
+  }
+
+  :global {
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: flex-end;
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: $primary-color-bg;
+        text-align: start;
+  
+        h1, h3 {
+          font-size: 1.25rem;
+
+          @media (min-width: 720px) {
+            font-size: 2.5rem;
+          }
+        }
+  
+        > div {
+          flex-basis: 50%;
+        }
+      }
+
+      .divider {
+        margin: 1rem 0;
+        width: 15%;
+        height: 2px;
+        min-height: 2px;
+        background-color: $primary-color-bg;
+
+        @media (max-height: 568px) {
+          margin: 0.5rem 0;
+        }
+      }
+
+      .wallpaperPickerContainer {
+        width: 100%;
+  
+        .wallpaperPicker {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+  
+          .swiper-wrapper {
+            width: 100%;
+            height: 100%;
+            transform: none;
+
+            .swiper-slide {
+              width: auto;
+              margin: 0 auto;
+              
+              img {
+                height: var(--wallpaper-height);
+                width: auto;
+                border: 2px solid $primary-color-bg;
+            }
+          }
+        }
+
+          @include swiperNavigation;
+        }
+      }
+    }
+  }
+}

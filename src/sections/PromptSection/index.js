@@ -3,7 +3,7 @@ import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
 import { useIsPreferPortraitMode } from "@/context/device";
-import { CAMPAIGN_GIVEAWAY, SECTION_PROMPT } from "@/data/constants";
+import { CAMPAIGN_GIVEAWAY, SECTION_PROMPT, SECTION_SIGNUP } from "@/data/constants";
 import { Section, SectionBanner, Button } from "@/components";
 
 import styles from "./styles.module.scss";
@@ -23,12 +23,12 @@ const PromptSection = () => {
         ? <SectionBanner type={CAMPAIGN_GIVEAWAY} top /> : null}
       <div className="block content">
         <div className="contentBody">
-          <h1>{t('intro.header')}</h1>
-          <div className="detail">{t('intro.description')}</div>
+          <h1>{t('prompt.header')}</h1>
+          <div className="detail">{t('prompt.description')}</div>
         </div>
         <div className="footer">
-          <div className="period">{t('intro.date')}</div>
-          <Button>{t('intro.CTA')}</Button>
+          <div className="period">{t('prompt.date')}</div>
+          <Button href={`#${SECTION_SIGNUP}`}>{t('prompt.CTA')}</Button>
         </div>
       </div>
       <div className="block display">

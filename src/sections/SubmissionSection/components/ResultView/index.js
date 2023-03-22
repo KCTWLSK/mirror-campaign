@@ -4,12 +4,16 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, EffectCreative, Navigation } from "swiper";
+import { Autoplay, EffectCreative, Navigation } from "swiper";
 
+import { useIsPreferPortraitMode } from "@/context/device";
 import { CAMPAIGN_GIVEAWAY } from "@/data/constants";
 import download from "@/utils/download";
+import MobileVersion from "./mobile";
 
 import "swiper/scss";
+import "swiper/scss/autoplay";
+import "swiper/scss/navigation";
 import styles from "./styles.module.scss";
 
 import imgWallpaperLOKMAN from "@/../public/assets/wallpaper_LOKMAN.jpg";
@@ -24,7 +28,6 @@ import imgWallpaperIAN from "@/../public/assets/wallpaper_IAN.jpg";
 import imgWallpaperEDAN from "@/../public/assets/wallpaper_EDAN.jpg";
 import imgWallpaperTIGER from "@/../public/assets/wallpaper_TIGER.jpg";
 import imgWallpaperJEREMY from "@/../public/assets/wallpaper_JEREMY.jpg";
-import { useIsPreferPortraitMode } from "@/context/device";
 
 const wallpapers = {
   LOKMAN: (
@@ -111,13 +114,11 @@ const wallpapers = {
       placeholder="blur"
     />
   ),
-}
+};
 
 const TRANS_DURATION = 0.75;
 const SWIPER_FLIP_SPEED = 1500;
 const SWIPER_FLIP_DELAY = 1500;
-
-// SwiperCore.use([Autoplay, EffectCreative]);
 
 const ResultView = ({ duration, delay }) => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
@@ -126,10 +127,7 @@ const ResultView = ({ duration, delay }) => {
 
   const ref = useRef();
 
-  const renderDivider = () =>
-    isPreferPortraitMode ? (
-      <div className="divider" />
-    ) : (
+  const renderDivider = () => (
     <motion.div
       className="divider"
       initial={{ width: 0 }}
@@ -149,17 +147,7 @@ const ResultView = ({ duration, delay }) => {
   }
 
   const renderWallpaperPicker = () => {
-    const modules = [Navigation, EffectCreative];
-    if (!isPreferPortraitMode || 1)
-      modules.push(Autoplay);
-    
-    const props = isPreferPortraitMode && 0
-      ? {} : {
-        autoplay: {
-          delay: SWIPER_FLIP_DELAY,
-          disableOnInteraction: false,
-        },
-      };
+    const modules = [Navigation, Autoplay, EffectCreative];
 
     return (
       <div
@@ -170,7 +158,7 @@ const ResultView = ({ duration, delay }) => {
         <Swiper
           className="wallpaperPicker"
           grabCursor
-          slidesPerView={isPreferPortraitMode ? 'auto' : 3}
+          slidesPerView={3}
           centeredSlides
           speed={SWIPER_FLIP_SPEED}
           modules={modules}
@@ -178,17 +166,20 @@ const ResultView = ({ duration, delay }) => {
           navigation
           onNavigationPrev={({ navigation: { prevEl } }) => handleNavigationClick(prevEl)}
           onNavigationNext={({ navigation: { nextEl } }) => handleNavigationClick(nextEl)}
+          autoplay={{
+            delay: SWIPER_FLIP_DELAY,
+            disableOnInteraction: false,
+          }}
           effect="creative"
           creativeEffect={{
             prev: {
-              translate: ['calc(0vh - var(--wallpaper-height) * 0.53)', 0, -200],
+              translate: ['calc(0vh - var(--wallpaper-height) * 0.5)', 0, -200],
             },
             next: {
-              translate: ['calc(var(--wallpaper-height) * 0.53)', 0, -200],
+              translate: ['calc(var(--wallpaper-height) * 0.5)', 0, -200],
             },
           }}
           onInit={(swiper) => ref.current = swiper}
-          {...props}
         >
           {MIRROR.map((name) => (
             <SwiperSlide
@@ -203,7 +194,7 @@ const ResultView = ({ duration, delay }) => {
     );
   };
 
-  return (
+  return isPreferPortraitMode ? <MobileVersion /> : (
     <motion.div
       className={styles.resultView}
       initial={{ x: '100%' }}
@@ -222,7 +213,6 @@ const ResultView = ({ duration, delay }) => {
         </div>
         {renderDivider()}
         {renderWallpaperPicker()}
-        {isPreferPortraitMode ? renderDivider() : null}
       </div>
     </motion.div>
   );

@@ -24,6 +24,10 @@
       .runnerItem > span:first-of-type {
         font-weight: bold;
         padding-right: 1rem;
+
+        @media (max-aspect-ratio: 1/1) {
+          padding-right: 0.5rem;
+        }
       }
     }
   }

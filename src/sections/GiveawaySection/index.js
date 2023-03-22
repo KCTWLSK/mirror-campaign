@@ -130,7 +130,7 @@ const GivewaySection = () => {
   const handleNavigationClick = (el) => {
     el.classList.add('clicked')
     setTimeout(() => el.classList.remove('clicked'), 100);
-  }
+  };
 
   const renderBoxsetContent = () => (
     <div
@@ -168,10 +168,12 @@ const GivewaySection = () => {
       </div>
     );
 
+    const name = MIRROR[activeIndex];
+
     return (
       <div className="box detailContainer">
-        <h1>{MIRROR[activeIndex]}</h1>
-        <div className="subtitle">2018 THE FIRST MIRROR LIVE CONCERT</div>
+        <h1>{name}</h1>
+        <div className="subtitle">{t(`details.mirror.${name}.bio`)}</div>
         <div className="prizeList">
           {renderPrizeItem(1)}
           {renderPrizeItem(2)}

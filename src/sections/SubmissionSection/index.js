@@ -8,7 +8,6 @@ import { FormView, ResultView } from "./components";
 
 import styles from "./styles.module.scss";
 import { SectionBanner } from "@/components";
-import { useIsPreferPortraitMode } from "@/context/device";
 
 const TRANS_DURATION = 1;
 const TRANS_DELAY_LONG = 1.75;
@@ -18,7 +17,6 @@ const PHASE_SUBMITTED = 'PHASE_SUBMITTED';
 const PHASE_FINAL = 'PHASE_FINAL';
 
 const SubmissionSection = () => {
-  const isPreferPortraitMode = useIsPreferPortraitMode();
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
 
   const [currentPhase, setCurrentPhase] = useState(PHASE_INIT);

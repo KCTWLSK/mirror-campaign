@@ -67,9 +67,10 @@
     :global {
       .block {
         width: 100%;
-        height: 47.5%;
+        height: unset;
 
         &.content {
+          flex: 1;
           justify-content: space-between;
 
           .contentBody {
@@ -90,6 +91,11 @@
           .footer .period {
             width: 100%;
 
+            @media (max-height: 568px) {
+              line-height: 1rem;
+              margin: 0.5rem 0;
+            }
+
             @media (min-width: 720px) {
               line-height: 4rem;
               margin: 2rem 0;
@@ -97,9 +103,12 @@
           }
         }
 
-        &.display img {
-          height: 100%;
-          width: auto;
+        &.display {
+          min-height: 0;
+          img {
+            height: 100%;
+            width: auto;
+          }
         }
       }
     } 

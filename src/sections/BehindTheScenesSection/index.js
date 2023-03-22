@@ -48,12 +48,22 @@ const BehindTheScenesSection = () => {
           },
         }}
       >
-        <iframe
+        <div className="videoContainer">
+          <video
+            className="btsVideo"
+            autoPlay muted loop playsInline preload="none"
+          >
+            <source src="https://storage.googleapis.com/socialwall/20230321_kickscrew_v3.mov" type="video/mp4" />
+          </video>
+          <div className="cover" />
+        </div>
+
+        {/* <iframe
           src={`https://www.youtube.com/embed/${videoId}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           title={title}
-        />
+        /> */}
       </motion.div>
     </motion.div>
   );

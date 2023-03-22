@@ -13,7 +13,7 @@ const LandingSection = () => {
 
   const renderLocaleButton = (label, localeValue) => {
     const isSelected = locale === localeValue;
-
+    
     return (
       <Link href={`#${SECTION_HERO}`} locale={localeValue}>
         <motion.button
@@ -41,23 +41,6 @@ const LandingSection = () => {
     );
   };
 
-  const renderArrow = (index) => (
-    <motion.div
-      className="arrow"
-      style={{ bottom: `${(2 - index) * 7.5}px` }}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: [1, 0.67, 0.25, 0] }}
-      transition={{
-        duration: 2,
-        delay: index * 0.33,
-        ease: 'easeIn',
-        repeat: Infinity,
-      }}
-    >
-      <KeyboardArrowDownIcon />
-    </motion.div>
-  );
-
   return (
     <Section
       id={SECTION_LANDING}
@@ -67,17 +50,13 @@ const LandingSection = () => {
         className="bgLogoVideo"
         autoPlay muted loop playsInline
       >
-        <source src="assets/LOGO SPIN FInal.mp4" type="video/mp4" />
+        <source src="https://storage.googleapis.com/socialwall/LOGO_SPIN_FInal.mp4" type="video/mp4" />
       </video>
       <div className="foreground">
         <div className="localeSelectorContainer">
           {renderLocaleButton('EN', 'en')}
           {renderLocaleButton('中文', 'zh-HK')}
         </div>
-        {/* <Link href={`#${SECTION_HERO}`}>
-          {renderArrow(0)}
-          {renderArrow(1)}
-        </Link> */}
       </div>
     </Section>
   );

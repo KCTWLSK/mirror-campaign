@@ -15,8 +15,9 @@ import MobileVersion from "./mobile";
 import styles from "./styles.module.scss";
 
 import igDemoImg from "@/../public/assets/ig_demo.png";
-import igDemoBgImg from "@/../public/assets/ig_demo_bg.png";
-import groupImg from "@/../public/assets/mirror_group_cascaded.png";
+import kvEDAN from "@/../public/assets/KV_EDAN.jpg";
+import kvIAN from "@/../public/assets/KV_IAN.jpg";
+import kvKEUNGTO from "@/../public/assets/KV_KEUNGTO.jpg";
 
 const TRANS_DURATION = 0.5;
 const TRANS_DELAY_LONG = 0.75;
@@ -26,36 +27,19 @@ const SignupSection = () => {
   const { t } = useTranslation(CAMPAIGN_GIVEAWAY);
 
   const renderBackgroundContent = () => (
-    <>
-      <motion.div
-        className="curtain"
-        variants={{
-          [VAR_OFF_SCREEN]: { height: 0 },
-          [VAR_ON_SCREEN]: {
-            height: '100%',
-            transition: {
-              duration: TRANS_DURATION,
-              delay: TRANS_DELAY_INIT,
-            },
+    <motion.div
+      className="curtain"
+      variants={{
+        [VAR_OFF_SCREEN]: { height: 0 },
+        [VAR_ON_SCREEN]: {
+          height: '100%',
+          transition: {
+            duration: TRANS_DURATION,
+            delay: TRANS_DELAY_INIT,
           },
-        }}
-      />
-      <motion.div
-        className="blurryBgWrapper"
-        variants={{
-          [VAR_OFF_SCREEN]: { opacity: 0 },
-          [VAR_ON_SCREEN]: {
-            opacity: 1,
-            transition: {
-              duration: TRANS_DURATION,
-              delay: TRANS_DELAY_LONG,
-            },
-          }
-        }}
-      >
-        <Image src={igDemoBgImg} alt="instagram demo view bg" placeholder="blur" />
-      </motion.div>
-    </>
+        },
+      }}
+    />
   );
 
   const renderInstructionBlock = () => {
@@ -130,7 +114,9 @@ const SignupSection = () => {
       className="block prompt"
     >
       <div className="imgWrapper">
-        <Image src={groupImg} alt="MIRROR group" placeholder="blur" />
+        <Image src={kvKEUNGTO} className="first" alt="MIRROR kv" placeholder="blur" />
+        <Image src={kvIAN}  className="second" alt="MIRROR kv" placeholder="blur" />
+        <Image src={kvEDAN} className="third" alt="MIRROR kv" placeholder="blur" />
       </div>
       <div className="bottomRow">
         <div>{t('signup.prompt')}</div>

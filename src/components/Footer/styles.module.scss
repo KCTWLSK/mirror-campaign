@@ -1,166 +1,272 @@
 @import "@/styles/variables.scss";
 
 .footer {
-  height: 75vh;
-  height: 75dvh;
+  height: 100vh;
+  height: 100dvh;
   padding: $padding-vertical $padding-horizontal;
+  padding-bottom: $padding-horizontal-mobile;
+  scroll-snap-align: start;
   background-color: $primary-color-bg;
   color: $primary-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  scroll-snap-align: end;
-
-  :global {
-    .row {
-      width: 100%;
-
-      &.top {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: start;
-
-        .imgWrapper {
-          margin: 0.25rem 0;
-        }
-
-        h3 {
-          margin-bottom: 0.25rem;
-        }
-      }
-
-      &.bottom {
-        flex-basis: 20%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-    
-        .searchBarContainer {
-          flex-basis: 33%;
-          display: flex;
-          flex-direction: column;
-          text-align: start;
-    
-          .MuiTextField-root {
-            margin-top: 0.5rem;
-  
-            .MuiInputBase-root {
-              height: 2rem;
-              color: $primary-color;
-              display: flex;
-    
-              a {
-                display: flex;
-                align-self: center;
-              }
-    
-              fieldset {
-                border-width: 2px;
-                border-radius: 0;
-                border-color: $primary-color;
-              }
-
-              &.Mui-focused fieldset {
-                border-color: $primary-color;
-              }
-            }
-          }
-        }
-  
-        .snsItemsContainer {
-          width: 33%;
-          height: 2rem;
-          display: flex;
-          justify-content: flex-end;
-
-          :not(:last-child) {
-            margin-right: 2.5%;
-          }
-
-          a {
-            height: 100%;
-            aspect-ratio: 1/1;
-
-            img {
-              width: 100%;
-              height: 100%;
-            }
-          }
-        }
-      }
-    }
-
-    .divider {
-      margin: 1rem 0;
-      width: 100%;
-      height: 2px;
-      min-height: 2px;
-      background-color: $secondary-color;
-    }
-  }
 
   @media (max-aspect-ratio: 1/1) {
-    height: 75vh;
-    height: 75dvh;
     padding: $padding-vertical-mobile $padding-horizontal-mobile;
+  }
 
-    :global {
+  :global {
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
       .row {
+        width: 100%;
+  
         &.top {
-          flex: 1;
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
 
-          .imgWrapper {
-            margin: 1rem 0;
+          @media (max-aspect-ratio: 1/1) {
+            height: 55%;
           }
+  
+          .logoContainer {
+            width: 100%;
+            flex-basis: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
 
-          h3 {
-            margin-bottom: 1rem;
+            @media (max-aspect-ratio: 1/1) {
+              flex-basis: 33%;
+              flex-direction: column-reverse;
+              align-items: center;
+            }
+  
+            .imgWrapper {
+              margin: 0.25rem 0;
+            }
+  
+            h2 {
+              margin-top: -0.5rem;
+            }
+          }
+  
+          .TAndCContainer {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: start;
           }
         }
-
-        &.bottom {
-          flex-basis: 33%;
-          flex-direction: column-reverse;
-          justify-content: space-between;
   
-          .searchBarContainer {
-            width: 100%;
+        &.middle {
+          height: 40%;
+          display: flex;
 
-            @media (min-width: 720px) {
-              .MuiTextField-root {
-                margin-top: 1.5rem;
+          @media (max-aspect-ratio: 1/1) {
+            flex-direction: column;
+            align-items: center;
+            height: 30%;
+          }
 
-                .MuiInputBase-root {
-                  height: 3rem;
+          .block {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
+            @media (max-aspect-ratio: 1/1) {
+              width: 100%;
+            }
+
+            .button {
+              width: 100%;
+              height: 2rem;
+              margin: 0.5rem 0;
+              line-height: 2rem;
+              font-family: inherit;
+              font-size: 1rem;
+              font-weight: 600;
+              box-sizing: border-box;
+              border: 2px solid $secondary-color;
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              @media (max-aspect-ratio: 1/1) {
+                height: 25%;
+                margin: 2% 0;
+                line-height: 150%;
+                font-family: inherit;
+                font-size: 100%;
+
+                @media (max-height: 568px) {
+                  height: 22.5%;
+                  margin: 1.5% 0;
+                  line-height: 125%;
+                }
+
+                @media (min-height: 720px) {
+                  height: 30%;
+                  line-height: 200%; 
+                }
+              }
+  
+              &.copyCoupon {
+                position: relative;
+                color: $primary-color-bg;
+                background-color: $secondary-color;
+  
+                &.clicked {
+                  color: $primary-color;
+                  background-color: transparent;
+                }
+  
+                .imageWrapper {
+                  position: absolute;
+                  top: 0;
+                  right: 0.5rem;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+  
                   img {
-                    height: 2rem;
-                    width: 2rem;
+                    height: 80%;
+                    width: auto;
+                  }
+                }
+              }
+            }
+  
+            .searchBarContainer {
+              width: 100%;
+              margin-bottom: 1rem;
+              display: flex;
+              flex-direction: column;
+        
+              .MuiTextField-root {
+                margin-top: 0.5rem;
+      
+                .MuiInputBase-root {
+                  height: 2rem;
+                  color: $primary-color;
+                  display: flex;
+        
+                  a {
+                    display: flex;
+                    align-self: center;
+                  }
+        
+                  fieldset {
+                    border-width: 2px;
+                    border-radius: 0;
+                    border-color: $primary-color;
+                  }
+    
+                  &.Mui-focused fieldset {
+                    border-color: $primary-color;
+                  }
+                }
+              }
+            }
+  
+            .imgWrapper {
+              margin: 2.5rem;
+              flex: 1;
+              min-height: 0;
+              z-index: 1;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              @media (max-aspect-ratio: 1/1) {
+                margin: 1rem;
+                margin: 0.25rem;
+                align-items: flex-start;
+
+                @media (max-height: 568px) {
+                  margin: 0.25rem;
+                }
+              }
+  
+              img {
+                width: 100%;
+                height: auto;
+
+                @media (max-aspect-ratio: 1/1) {
+                  height: 100%;
+                  width: auto;
+
+                  @media (max-width: 720px) {
+                    height: 60%;
                   }
                 }
               }
             }
           }
+        }
+  
+        &.bottom {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          display: flex;
+          flex-direction: column;
+
+          .divider {
+            width: 100%;
+            height: 2px;
+            margin-bottom: 1rem;
+            background-color: $secondary-color;
+          }
 
           .snsItemsContainer {
+            width: 33%;
+            height: 2rem;
+            align-self: flex-end;
+            display: flex;
+            justify-content: flex-end;
+
             :not(:last-child) {
-              margin-right: 7.5%;
+              margin-right: 2.5%;
+            }
+  
+            a {
+              height: 100%;
+              aspect-ratio: 1/1;
+  
+              img {
+                width: 100%;
+                height: 100%;
+              }
             }
 
-            @media (min-width: 720px) {
-              height: 3rem;
-
+            @media (max-aspect-ratio: 1/1) {
               :not(:last-child) {
-                margin-right: 5%;
+                margin-right: 7.5%;
+              }
+              
+              @media (min-width: 720px) {
+                height: 3rem;
+  
+                :not(:last-child) {
+                  margin-right: 5%;
+                }
               }
             }
           }
         }
-      }
-
-      .divider {
-        margin: $padding-vertical-mobile 0;
       }
     }
   }

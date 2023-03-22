@@ -15,22 +15,7 @@
 
       .curtain {
         width: 50%;
-        background-color: $primary-color;
-      }
-
-      .blurryBgWrapper {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        background-color: $secondary-color;
       }
     }
 
@@ -111,10 +96,15 @@
             display: flex;
             align-items: center;
             flex: 1;
+            transform: translateX(10%);
 
             img {
-              width: 100%;
+              width: 40%;
               height: auto;
+
+              &.first { transform: translate(-25%, -33%) rotate(-10deg); }
+              &.second { transform: translate(-50%); }
+              &.third { transform: translate(-75%, 33%) rotate(10deg); }
             }
           }
 
