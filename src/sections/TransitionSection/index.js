@@ -8,7 +8,6 @@ import { Section } from "@/components";
 
 import styles from "./styles.module.scss";
 
-import animeBoxset from "@/../public/assets/giveaway_box.gif";
 import { useScrollProgress } from "@/context/scroll";
 
 const TransitionSection = () => {
