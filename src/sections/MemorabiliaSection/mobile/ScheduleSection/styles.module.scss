@@ -94,10 +94,10 @@
       }
 
       .period {
-        margin: 0.75rem 0;
+        margin: 0.5rem 0;
 
-        @media (max-height: 568px) {
-          margin: 0.5rem 0;
+        @media (min-width: 720px) {
+          margin: 0.75rem 0;
         }
       }
 
@@ -110,9 +110,9 @@
         .prompt {
           margin-bottom: 2rem;
 
-          @media (max-height: 568px) {
+          // @media (max-height: 568px) {
             margin-bottom: 1rem;
-          }
+          // }
 
           @media (min-width: 720px) {
             margin-bottom: 3rem;
@@ -142,10 +142,10 @@
           }
 
           &.shop {
-            margin-top: 1rem;
+            margin: 0;
 
-            @media (max-height: 568px) {
-              margin: 0;
+            @media (min-width: 720px) {
+              margin-top: 1rem;
             }
           }
         }
