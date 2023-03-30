@@ -26,9 +26,9 @@ const HeroSection = () => {
   const ref = useRef();
   const { fullProgress } = useScrollProgress(ref.current);
 
-  const y = transform([0, 0.5, 1], ['-30%', '0%', '30%'])(fullProgress);
+  const y = transform([0, 1], ['-20%', '20%'])(fullProgress);
   const heroImgShiftFactorPercent = transform([0, 0.5, 1], [-2.5, 0, 2.5])(fullProgress);
-
+  
   const renderFloatingSlogan = () => (
     <motion.div
       variants={{
