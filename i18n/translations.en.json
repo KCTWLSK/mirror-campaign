@@ -1,0 +1,72 @@
+{
+  "i18n": {
+    "runner": {
+      "header": "KICKS CREW x MIRROR",
+      "body": "FIND YOUR CODE"
+    },
+    "hero": {
+      "slogan1": "WE",
+      "slogan2": "ALL ARE",
+      "slogan3": "ONE CREW",
+      "runner": {
+        "body": "WE ALL ARE——ONE CREW"
+      },
+      "body": "At KICKS CREW, we believe that the CREW is what defines us. Being the hottest CREW in town, MIRROR embodies the CREW when all members dazzle together. The KICKS CREW x MIRROR Collaboration is available globally; offering a variety of MIRROR CREW memorabilia for all the fans. Come and JOIN THE CREW and electrify the MIRROR CREW."
+    },
+    "memorabilia": {
+      "header": "MEMORABILIA CREW CARD & TAG PACK",
+      "subtitle": "KICKS CREW x MIRROR INSTAGRAM BOXSET GIVEAWAY",
+      "body": "The KICKS CREW x MIRROR collaboration features 12 sets of memorabilia CREW card & tag packs showcasing each MIRROR member. Featuring 3 MIRROR CREW members each week, fans will have the chance to win and collect their favorite MIRROR CREW member.",
+      "schedule": {
+        "week1": {
+          "label": "WEEK 1",
+          "period": "17-23/4",
+          "member": "Lokman, Anson Lo, Alton"
+        },
+        "week2": {
+          "label": "WEEK 2",
+          "period": "24-30/4",
+          "member": "AK, Keung To, Stanley"
+        },
+        "week3": {
+          "label": "WEEK 3",
+          "period": "1-7/5",
+          "member": "Frankie, Jer, Ian"
+        },
+        "week4": {
+          "label": "WEEK 4",
+          "period": "8-14/5",
+          "member": "Edan, Tiger, Jeremy"
+        },
+        "active": "PROCESSING",
+        "prompt": "FIND YOUR CODE",
+        "goToShop": "Shopping Now"
+      }
+    },
+    "behindTheScenes": {
+      "header": "BEHIND THE SCENES WITH KICKS CREW x MIRROR",
+      "description": "The most memorable moments happen behind the scenes!"
+    },
+    "footer": {
+      "header": "WE ALL ARE ONE CREW",
+      "TermsAndConditions": {
+        "subtitle": " (Details)",
+        "header": "TERMS AND CONDITIONS",
+        "description": " • The giveaway period will commence on 24th Mar 2023 in Hong Kong only.\n  • All images & photos are for reference only.\n • Quantities are limited, while supplies last.\n • KICKS CREW reserves the right to change the terms and conditions, suspend or terminate the activity at any time without prior notice."
+      },
+      "search": {
+        "label": "FIND YOUR PAIR"
+      },
+      "app": {
+        "label": "Download the CREW APP for more"
+      },
+      "coupon": {
+        "label": "COPY CODE & GO TO CHECKOUT",
+        "copied": "CODE COPIED!"
+      },
+      "gotoApp": {
+        "label": "FIND YOUR PAIR ON APP"
+      }
+    }
+  }
+}

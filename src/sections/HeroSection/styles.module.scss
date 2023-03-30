@@ -1,33 +1,19 @@
-@import "@/styles/variables.scss";
-
-$grid-row-cnt: 8;
-$grid-col-cnt: 8;
-$grid-row-height: calc((100vh - 2 * $padding-vertical) / $grid-row-cnt);
-$grid-row-height: calc((100dvh - 2 * $padding-vertical) / $grid-row-cnt);
-$grid-column-width: calc((100vw - 2 * $padding-horizontal) / $grid-col-cnt);
-$grid-column-width: calc((100dvw - 2 * $padding-horizontal) / $grid-col-cnt);
-
-$main-view-row-cnt: 5;
-$main-view-row-height: calc((100vh - 2 * $padding-vertical) / $main-view-row-cnt);
-$main-view-row-height: calc((100dvh - 2 * $padding-vertical) / $main-view-row-cnt);
-
-$grid-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
-$grid-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $grid-row-cnt);
-$grid-column-width-mobile: calc((100vw - 2 * $padding-horizontal-mobile) / $grid-col-cnt);
-$grid-column-width-mobile: calc((100dvw - 2 * $padding-horizontal-mobile) / $grid-col-cnt);
-
-$main-view-row-cnt-mobile: 12;
-$main-view-row-height-mobile: calc((100vh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
-$main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $main-view-row-cnt-mobile * 0.8);
-
 .heroSection {
+  --grid-row-cnt: 8;
+  --grid-col-cnt: 8;
+  --grid-row-height-fallback: calc((100vh - 2 * 10vh) / var(--grid-row-cnt));
+  --grid-column-width-fallback: calc((100vw - 2 * 10vh) / var(--grid-col-cnt));
+  
+  --main-view-row-cnt: 5;
+  --main-view-row-height-fallback: calc((100vh - 2 * 10vh) / var(--main-view-row-cnt));
+
   :global {
     .runnerWrapper {
       position: absolute;
-      width: calc(100% - 2 * $padding-horizontal);
+      width: calc(100% - 2 * 10vh);
 
-      &.top { top: calc($padding-vertical - 2rem); }
-      &.bottom { bottom: calc($padding-vertical - 2rem); }
+      &.top { top: calc(10vh - 2rem); }
+      &.bottom { bottom: calc(10vh - 2rem); }
 
       .runnerItem > span:first-child {
         padding-right: 1rem;
@@ -41,7 +27,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       left: 0;
       width: 100%;
       height: 100%;
-      padding: $padding-vertical $padding-horizontal;
+      padding: 10vh 10vh;
       transform-origin: center;
       font-family: Inter, sans-sarif;
 
@@ -52,19 +38,19 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
 
         .floatingSlogan {
           position: absolute;
-          color: $primary-color-bg;
-          text-shadow: 2px 2px 0 $secondary-color,
-            -2px -2px 0 $secondary-color,  
-            2px -2px 0 $secondary-color,
-            -2px 2px 0 $secondary-color;
+          color: var(--primary-color-bg);
+          text-shadow: 2px 2px 0 var(--secondary-color),
+            -2px -2px 0 var(--secondary-color),  
+            2px -2px 0 var(--secondary-color),
+            -2px 2px 0 var(--secondary-color);
           white-space: nowrap;
           text-align: start;
           font-weight: 600;
     
           &.left {
             left: 0;
-            font-size: calc(2 * $grid-row-height);
-            line-height: calc(2 * $grid-row-height);
+            font-size: calc(2 * var(--grid-row-height-fallback));
+            line-height: calc(2 * var(--grid-row-height-fallback));
             padding-left: 0.5rem;
 
             &.top { top: 0; }
@@ -72,12 +58,12 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
           }
 
           &.right {
-            left: calc($grid-column-width * 7);
-            bottom: $grid-row-height;
-            font-size: calc($grid-column-width * 0.5);
-            line-height: calc($grid-column-width * 0.5);
+            left: calc(var(--grid-column-width-fallback) * 7);
+            bottom: var(--grid-row-height-fallback);
+            font-size: calc(var(--grid-column-width-fallback) * 0.5);
+            line-height: calc(var(--grid-column-width-fallback) * 0.5);
             transform-origin: left bottom;
-            transform: translate(calc(0px - ($grid-column-width * 0.25)), -0.5rem) rotate(270deg);
+            transform: translate(calc(0px - (var(--grid-column-width-fallback) * 0.25)), -0.5rem) rotate(270deg);
           }
         }
       }
@@ -97,15 +83,17 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
         top: 50%;
         left: 50%;
         display: grid;
-        grid-template-rows: repeat($grid-row-cnt, minmax(0, 1fr));
-        grid-template-columns: repeat($grid-col-cnt, minmax(0, 1fr));
-        border: 2px solid $secondary-color;
+        grid-template-rows: repeat(var(--grid-row-cnt), minmax(0, 1fr));
+        grid-template-columns: repeat(var(--grid-col-cnt), minmax(0, 1fr));
+        border: 2px solid var(--secondary-color);
+        background-color: var(--primary-color-bg);
   
         > div {
-          border: 2px solid $secondary-color;
+          border: 2px solid var(--secondary-color);
 
           &.expandedCol { grid-column: 4 / 6; }
           &.expandedRow { grid-row: 4 / 6; }
+          &.expandedCol.expandedRow { overflow-y: hidden; }
         }
       }
     }
@@ -115,18 +103,18 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
       height: 100%;
       width: 100%;
       display: grid;
-      grid-template-rows: repeat($main-view-row-cnt, minmax(0, 1fr));
+      grid-template-rows: repeat(var(--main-view-row-cnt), minmax(0, 1fr));
       overflow: hidden;
     
       .slogan {
-        line-height: $main-view-row-height;
+        line-height: var(--main-view-row-height-fallback);
         font-family: Inter, sans-sarif;
-        font-size: $main-view-row-height;
-        color: $primary-color-bg;
-        text-shadow: 2px 2px 0 $secondary-color,
-          -2px -2px 0 $secondary-color,  
-          2px -2px 0 $secondary-color,
-          -2px 2px 0 $secondary-color;
+        font-size: var(--main-view-row-height-fallback);
+        color: var(--primary-color-bg);
+        text-shadow: 2px 2px 0 var(--secondary-color),
+          -2px -2px 0 var(--secondary-color),  
+          2px -2px 0 var(--secondary-color),
+          -2px 2px 0 var(--secondary-color);
         font-weight: 900;
 
         &.elevated {
@@ -160,7 +148,7 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
         }
   
         img {
-          height: calc($main-view-row-height / 2);
+          height: calc(var(--main-view-row-height-fallback) / 2);
           width: auto;
           padding-top: 4px;
           padding-right: 2px;
@@ -178,9 +166,9 @@ $main-view-row-height-mobile: calc((100dvh - 2 * $padding-vertical-mobile) / $ma
   
       .bodyRow {
         z-index: 4;
-        background-color: $primary-color-bg;
+        background-color: var(--primary-color-bg);
         grid-row-start: 5;
-        border-top: $secondary-color 2px solid;
+        border-top: var(--secondary-color) 2px solid;
         padding: 0 1rem;
         text-align: left;
         display: flex;

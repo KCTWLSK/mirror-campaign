@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "NODE_ENV=production next build && next export"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -19,7 +20,7 @@
     "framer-motion": "^9.0.4",
     "i18next": "^22.4.10",
     "next": "13.1.6",
-    "next-i18next": "^13.1.5",
+    "next-export-i18n": "^2.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "^12.1.5",

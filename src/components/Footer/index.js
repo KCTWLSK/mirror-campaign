@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 import { UAParser } from "ua-parser-js";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
+import Link from "next/link";
 
 import { useIsPreferPortraitMode } from "@/context/device";
 import { copyTextToClipboard } from "@/utils/helpers";
@@ -37,7 +38,7 @@ const Footer = () => {
       kicksCrewAppUrl,
     },
   } = getConfig();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const [keyword, setKeyword] = useState('');
   const [copied, setCopied] = useState();
@@ -106,15 +107,15 @@ const Footer = () => {
   }
 
   const handleCodeClick = ({ target }) => {
-    copyTextToClipboard(couponCode);
     setCopied(true);
+    copyTextToClipboard(couponCode);
 
     target.classList.add('clicked');
     setTimeout(() => target.classList.remove('clicked'), 100);
   };
 
   return (
-    <footer className={styles.footer}>
+    <div className={styles.footer}>
       <div className="container">
         <div className="row top">
           <div className="logoContainer">
@@ -124,10 +125,14 @@ const Footer = () => {
             </div>
           </div>
           <div className="TAndCContainer">
-            <h3>{t('footer.TermsAndConditions.header')}</h3>
+            <h3>
+              {t('footer.TermsAndConditions.header')}
+              <Link target="_blank" href="https://www.kickscrew.com/blogs/news/mirror-crew">
+                {t('footer.TermsAndConditions.subtitle')}
+              </Link>
+            </h3>
             <div>{t('footer.TermsAndConditions.description')}</div>
           </div>
-
         </div>
         <div className="row middle">
           <div className="block">
@@ -137,16 +142,12 @@ const Footer = () => {
               onClick={handleCodeClick}
               ref={ref}
             >
-              {copied
-                ? t('footer.coupon.copied')
-                : (
-                  <>
-                    <div>{couponCode}</div>
-                    <div className="imageWrapper">
-                      <Image src={iconCopy} alt="copy" />
-                    </div>
-                  </>
-                )}
+              <div>{copied ? t('footer.coupon.copied') : couponCode}</div>
+              {copied ? null : (
+                <div className="imageWrapper">
+                  <Image src={iconCopy} alt="copy" />
+                </div>
+              )}
             </button>
             {isPreferPortraitMode ? (
               <a
@@ -161,19 +162,17 @@ const Footer = () => {
           </div>
           <div className="block">
             <div>{t('footer.app.label')}</div>
-            <a
-              className="imgWrapper"
-              href={kicksCrewAppUrl}
-            >
-              <Image
-                src={
-                  isPreferPortraitMode
-                    ? isIOS ? appStoreLogo : googlePlayLogo
-                    : ImgQRCode
-                }
-                alt="download KICKS CREW app"
-              />
-            </a>
+              <div className="appIconWrapper">
+                <Image
+                  src={
+                    isPreferPortraitMode
+                      ? isIOS ? appStoreLogo : googlePlayLogo
+                      : ImgQRCode
+                  }
+                  onClick={() => window.open(kicksCrewAppUrl, '_blank')}
+                  alt="download KICKS CREW app"
+                />
+              </div>
           </div>
         </div>
         <div className="row bottom">
@@ -181,7 +180,7 @@ const Footer = () => {
           {renderSNSItems()}
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 import { motion, transform } from "framer-motion";
 
 import { useScrollProgress } from "@/context/scroll";
@@ -17,10 +17,15 @@ const TRANS_DURATION_FAST = 1.25;
 const TRANS_DELAY_LONG = TRANS_DELAY_INIT + TRANS_DURATION - 1;
 
 const HeroSection = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
-  const [isInMainView, setIsInMainView] = useState(false);
+  const ref = useRef();
+  const { fullProgress } = useScrollProgress(ref.current);
 
+  const y = transform([0, 0.5, 1], ['-30%', '0%', '30%'])(fullProgress);
+  const opacity = transform([0, 0.5, 1], [0, 1, 0])(fullProgress);
+  const heroImgShiftFactorPercent = transform([0, 0.5, 1], [-5, 0, 5])(fullProgress);
+  
   const renderFloatingSlogan = () => (
     <motion.div
       variants={{
@@ -101,32 +106,35 @@ const HeroSection = () => {
           className="imgWrapper groupB"
           variants={variants}
           custom={0}
-          // style={{ right: topRight, opacity }}
+          style={{ x: `${heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupB} alt="MIRROR group B" placeholder="blur" />
+          <Image src={imgMirrorGroupB} alt="MIRROR group B" placeholder="blur" priority />
         </motion.div>
         <motion.div
           className="imgWrapper groupA"
           variants={variants}
           custom={1}
-          // style={{ left, opacity }}
+          style={{ x: `${-heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupA} alt="MIRROR group A" placeholder="blur" />
+          <Image src={imgMirrorGroupA} alt="MIRROR group A" placeholder="blur" priority />
         </motion.div>
         <motion.div
           className="imgWrapper groupC"
           variants={variants}
           custom={2}
-          // style={{ right: bottomRight, opacity }}
+          style={{ x: `${heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupC} alt="MIRROR group C" placeholder="blur" />
+          <Image src={imgMirrorGroupC} alt="MIRROR group C" placeholder="blur" priority />
         </motion.div>
       </>
     );
   };
 
   const renderMainView = () => (
-    <div className="mainView">
+    <motion.div
+      className="mainView"
+      style={{ y, opacity }}
+    >
       {renderMirrorGroups()}
       <div className="topRow">
         <span className="slogan">
@@ -139,7 +147,7 @@ const HeroSection = () => {
         </span>
       </div>
       <div className="bodyRow">{t('hero.body')}</div>
-    </div>
+    </motion.div>
   );
 
   const renderGrid = () => (
@@ -158,7 +166,6 @@ const HeroSection = () => {
             },
           },
         }}
-        onAnimationComplete={() => setIsInMainView(true)}
       >
         {new Array(7).fill(0).map((_, rowInd) =>
           new Array(7).fill(0).map((_, colInd) => {
@@ -185,9 +192,10 @@ const HeroSection = () => {
     <Section
       id={SECTION_HERO}
       className={styles.heroSection}
+      ref={ref}
     >
       {renderRunner('top')}
-      {isInMainView ? null : renderFloatingSlogan()}
+      {renderFloatingSlogan()}
       {renderGrid()}
       {renderRunner('bottom')}
     </Section>

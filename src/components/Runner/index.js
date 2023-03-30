@@ -50,7 +50,9 @@ const Runner = ({ children, classNames, duration, direction = 'left' }) => {
             className="measurerWrapper"
             ref={measurerRef}
           >
-            {children}
+            <span className="runnerItem">
+              {children}
+            </span>
           </span>
         )}
       </motion.p>

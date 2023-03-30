@@ -1,5 +1,5 @@
 import getConfig from "next/config";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 import { motion } from "framer-motion";
 
 import { SECTION_BEHIND_THE_SCENES, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
@@ -14,7 +14,7 @@ const TRANS_DELAY_LONG = 0.75;
 
 const BehindTheScenesSection = () => {
   const { publicRuntimeConfig: { videoId } } = getConfig();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   const title = t('behindTheScenes.header');
   
   const renderEmbeddedVideo = () => (
@@ -48,22 +48,12 @@ const BehindTheScenesSection = () => {
           },
         }}
       >
-        <div className="videoContainer">
-          <video
-            className="btsVideo"
-            autoPlay muted loop playsInline preload="none"
-          >
-            <source src="https://storage.googleapis.com/socialwall/20230321_kickscrew_v3.mov" type="video/mp4" />
-          </video>
-          <div className="cover" />
-        </div>
-
-        {/* <iframe
+        <iframe
           src={`https://www.youtube.com/embed/${videoId}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           title={title}
-        /> */}
+        />
       </motion.div>
     </motion.div>
   );

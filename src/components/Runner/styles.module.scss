@@ -1,8 +1,6 @@
-@import "@/styles/variables.scss";
-
 .runner {
   width: 100%;
-  color: primary-color;
+  color: var(--primary-color);
   font-family: digital-7, Inter, Sans-Serif;
   font-weight: 400;
 
@@ -21,6 +19,10 @@
 
         .measurerWrapper {
           visibility: hidden;
+
+          .runnerItem {
+            flex: none;
+          }
         }
 
         .runnerItem {

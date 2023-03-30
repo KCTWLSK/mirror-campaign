@@ -1,5 +1,3 @@
-@import "@/styles/variables.scss";
-
 .sectionLayout {
   width: 100%;
   height: 100%;
@@ -8,29 +6,23 @@
 
   :global {
     .titleRow {
-      flex-basis: 25%;
-      max-height: 25%;
+      flex-basis: 20%;
+      max-height: 20%;
+      width: 100%;
       display: flex;
       justify-content: space-between;
 
       * {
+        width: 50%;
         text-align: start;
-      }
-
-      h1 {
-        width: calc(50% + $padding-horizontal / 2 - 0.5rem);
-      }
-
-      .detail {
-        width: calc(50% - $padding-horizontal / 2 - 0.5rem);
-        padding-top: 1rem;
       }
     }
   
     .contentRow {
-      flex-basis: 75%;
-      max-height: 75%;
+      flex-basis: 80%;
+      max-height: 80%;
       display: flex;
+      justify-content: space-between;
       align-items: flex-end;
       flex-wrap: wrap;
 
@@ -40,19 +32,11 @@
         overflow: hidden;
 
         &:first-child {
-          width: 30%;
+          width: calc(35% - 1rem);
         }
 
         &:nth-child(2) {
-          width: 70%;
-        }
-      }
-
-      &.even {
-        justify-content: space-between;
-
-        > div {
-          width: calc(50% - 0.5rem);
+          width: calc(65% - 1rem);
         }
       }
     }
@@ -63,9 +47,7 @@
         flex-direction: column;
         justify-content: space-evenly;
 
-        * {
-          width: 100%;
-        }
+        * { width: 100%; }
       }
 
       .contentRow {
@@ -75,10 +57,7 @@
         &.even {
           justify-content: space-evenly;
 
-          > div {
-            // flex-basis: calc(50% - $padding-vertical-mobile * 0.5);
-            width: 100%;
-          }
+          > div { width: 100%; }
         }
       }
     }

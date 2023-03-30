@@ -1,32 +1,17 @@
-import getConfig from "next/config";
 import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useSelectedLanguage } from "next-export-i18n";
 
-import ScrollProvider from "@/context/scroll";
 import {
   LandingSection,
   HeroSection,
-  GivewaySection,
-  PromptSection,
-  SignupSection,
-  SubmissionSection,
   BehindTheScenesSection,
+  MemorabiliaSection,
 } from "@/sections";
 import { Footer } from "@/components";
-import { useRouter } from "next/router";
-
-export const getStaticProps = async ({ locale }) => {
-  const { publicRuntimeConfig: { localeGroups } } = getConfig();
-
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, localeGroups)),
-    },
-  };
-};
+import ScrollProvider from "@/context/scroll";
 
 const Home = () => {
-  const { locale } = useRouter();
+  const { lang } = useSelectedLanguage();
 
   return (
     <>
@@ -36,23 +21,24 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main
-        style={locale === 'en' ? { fontFamily: 'Inter, sans-serif' } : null}
+      <ScrollProvider
+        // style={lang === 'en' ? { fontFamily: 'Inter, sans-serif' } : null}
       >
+        <h1 style={{ display: 'none' }}>KICKS CREW x MIRROR 2023</h1>
         <LandingSection />
         <HeroSection />
-        <GivewaySection />
-        <PromptSection />
-        <SignupSection />
-        <SubmissionSection />
+        <MemorabiliaSection />
         <BehindTheScenesSection />
         <Footer />
-      </main>
-      {/* <ScrollProvider>
-
-      </ScrollProvider> */}
+      </ScrollProvider>
     </>
   )
+};
+
+// must have for exporting static html
+Home.getInitialProps = async (ctx) => {
+  const localVal = ctx.query['lang'] ? ctx.defaultLocale : 'zh-HK'
+  return { locale: localVal }
 };
 
 export default Home;

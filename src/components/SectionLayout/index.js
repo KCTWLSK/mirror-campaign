@@ -1,18 +1,19 @@
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 
-import styles from "./styles.module.scss";
 import SectionBanner from "../SectionBanner";
 
+import styles from "./styles.module.scss";
+
 const SectionLayout = ({ children, type }) => {
-  const { t } = useTranslation([type, 'common']);
+  const { t } = useTranslation();
 
   return (
     <div className={styles.sectionLayout}>
       <div className="titleRow">
-        <h1>{t('details.header')}</h1>
-        <div className="detail">{t('details.body')}</div>
+        <h1>{t('memorabilia.header')}</h1>
+        <div className="detail">{t('memorabilia.body')}</div>
       </div>
-      <div className={`contentRow${type === 'code' ? '' : ' even'}`}>
+      <div className="contentRow">
         {children}
       </div>
       <SectionBanner type={type} />

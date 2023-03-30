@@ -1,0 +1,72 @@
+{
+  "i18n": {
+    "runner": {
+      "header": "KICKS CREW x MIRROR",
+      "body": "FIND YOUR CODE"
+    },
+    "hero": {
+      "slogan1": "WE",
+      "slogan2": "ALL ARE",
+      "slogan3": "ONE CREW",
+      "runner": {
+        "body": "WE ALL ARE ONE CREW"
+      },
+      "body": "KICKS CREW 深信 CREW（團隊）至關重要。每位 MIRROR 成員一起匯集成 CREW，發光發亮，正體現 KICKS CREW 的理念。KICKS CREW x MIRROR 最新 CREW 聯名企劃即日起全球發佈，更為鏡粉們準備了不同鏡 CREW 紀念品。一起來 JOIN THE CREW，一同凝聚更強大的鏡 CREW ！"
+    },
+    "memorabilia": {
+      "header": "MEMORABILIA CREW CARD & TAG PACK",
+      "subtitle": "KICKS CREW x MIRROR INSTAGRAM BOXSET GIVEAWAY",
+      "body": "The KICKS CREW x MIRROR collaboration features 12 sets of memorabilia CREW card & tag packs showcasing each MIRROR member. Featuring 3 MIRROR CREW members each week, fans will have the chance to win and collect their favorite MIRROR CREW member.",
+      "schedule": {
+        "week1": {
+          "label": "WEEK 1",
+          "period": "17-23/4",
+          "member": "Lokman, Anson Lo, Alton"
+        },
+        "week2": {
+          "label": "WEEK 2",
+          "period": "24-30/4",
+          "member": "AK, Keung To, Stanley"
+        },
+        "week3": {
+          "label": "WEEK 3",
+          "period": "1-7/5",
+          "member": "Frankie, Jer, Ian"
+        },
+        "week4": {
+          "label": "WEEK 4",
+          "period": "8-14/5",
+          "member": "Edan, Tiger, Jeremy"
+        },
+        "active": "PROCESSING",
+        "prompt": "FIND YOUR CODE",
+        "goToShop": "Shopping Now"
+      }
+    },
+    "behindTheScenes": {
+      "header": "KICKS CREW x MIRROR 幕後花絮",
+      "description": "最難忘的時刻總發生在幕後！"
+    },
+    "footer": {
+      "header": "WE ALL ARE ONE CREW",
+      "TermsAndConditions": {
+        "subtitle": "（詳情）",
+        "header": "條款和細則",
+        "description": " • 活動由 2023 年 3 月 24 日起開始，只限香港地區\n • 所有圖片只供參考\n • 數量有限，送完即止\n • KICKS CREW 保留隨時更改條款及細則、暫停或終止活動的權利，恕不另行通知"
+      },
+      "search": {
+        "label": "FIND YOUR PAIR"
+      },
+      "app": {
+        "label": "Download the CREW APP for more"
+      },
+      "coupon":{
+        "label": "立即複製，首單立折",
+        "copied": "CODE COPIED!"
+      },
+      "gotoApp":{
+        "label": "FIND YOUR PAIR ON APP"
+      }
+    }
+  }
+}

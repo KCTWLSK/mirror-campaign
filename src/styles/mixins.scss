@@ -1,10 +1,10 @@
 @mixin metallic {
-  -webkit-box-shadow: inset 0px 0px 4px 0px $secondary-color,
-    0px 0px 0.5em 0px $secondary-color;
-  -moz-box-shadow: inset 0px 0px 4px 0px $secondary-color,
-    0px 0px 0.5em 0px $secondary-color;
-  box-shadow: inset 0px 0px 4px 0px $secondary-color,
-    0px 0px 4px 0px $secondary-color;
+  -webkit-box-shadow: inset 0px 0px 4px 0px var(--secondary-color),
+    0px 0px 0.5em 0px var(--secondary-color);
+  -moz-box-shadow: inset 0px 0px 4px 0px var(--secondary-color),
+    0px 0px 0.5em 0px var(--secondary-color);
+  box-shadow: inset 0px 0px 4px 0px var(--secondary-color),
+    0px 0px 4px 0px var(--secondary-color);
 
   &:after {
     display: inline-block;
@@ -16,14 +16,14 @@
     right: 0;
     opacity: 0;
     z-index: -1;
-    background-color: $secondary-color;
+    background-color: var(--secondary-color);
     border-radius: 50%;
-    box-shadow: 0 0 4px 0.4px $secondary-color;
+    box-shadow: 0 0 4px 0.4px var(--secondary-color);
     transition: opacity 300ms linear;
   }
 
   &:hover {
-    color: $secondary-color-bg;
+    color: var(--secondary-color-bg);
     text-shadow: none;
 
     &:not(.selected):after {
@@ -35,10 +35,10 @@
 
 @mixin swiperNavigation {
   .swiper-button-prev, .swiper-button-next {
-    color: $primary-color-bg;
+    color: var(--primary-color-bg);
     opacity: 0.6;
     transform: scale(0.6);
-    -webkit-text-stroke: 1px $primary-color;
+    -webkit-text-stroke: 1px var(--primary-color);
 
     &:hover {
       opacity: 1;

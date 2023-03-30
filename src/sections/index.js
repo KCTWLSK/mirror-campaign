@@ -1,8 +1,4 @@
 export { default as LandingSection }  from "./LandingSection";
 export { default as HeroSection } from "./HeroSection";
-export { default as PromptSection } from "./PromptSection";
-export { default as TransitionSection } from "./TransitionSection";
-export { default as GivewaySection } from "./GiveawaySection";
-export { default as SignupSection } from "./SignupSection";
-export { default as SubmissionSection } from "./SubmissionSection";
+export { default as MemorabiliaSection } from "./MemorabiliaSection";
 export { default as BehindTheScenesSection } from "./BehindTheScenesSection";

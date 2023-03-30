@@ -1,12 +1,12 @@
 import { Fragment } from "react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-export-i18n";
 
 import { Runner } from "@/components";
 
 import styles from "./styles.module.scss";
 
 const SectionBanner = ({ type, top }) => {
-  const { t } = useTranslation([type, 'common']);
+  const { t } = useTranslation();
 
   return (
     <div className={top ? styles.topSectionBanner : styles.sectionBanner}>
@@ -15,7 +15,7 @@ const SectionBanner = ({ type, top }) => {
         direction={top || type === 'code' ? 'left' : 'right'}
       >
         <>
-          <span>{t('runner.header', { ns: 'common' })}</span>
+          <span>{t('runner.header')}</span>
           <span>{t('runner.body')}</span>
         </>
       </Runner>

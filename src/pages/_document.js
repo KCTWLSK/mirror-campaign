@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document = () => (
   <Html lang="en">
@@ -33,8 +33,11 @@ const Document = () => (
         type="font/woff2"
         rel="preload"
       />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer></script>
     </Head>
     <body>
+      {/* <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NZ4RMS"
+height="0" width="0" style={{ display:'none', visibility: 'hidden' }}></iframe></noscript> */}
       <Main />
       <NextScript />
     </body>

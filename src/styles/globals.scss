@@ -1,5 +1,3 @@
-@import "./variables.scss";
-
 @font-face {
   font-family: 'Unifont';
   src: url('/fonts/GnuUnifontFull-Pm9P.woff2') format('woff2');
@@ -35,6 +33,15 @@
   font-style: normal;
 }
 
+html {
+  --primary-color: #FFF;
+  --primary-color-bg: #000;
+  --secondary-color: #BCC6CC;
+  --secondary-color-bg: #101010;
+  --specific-color: #464646;
+  --specific-color-bg: #BABABA;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -42,32 +49,43 @@
 }
 
 body {
-  background-color: $primary-color-bg;
+  background-color: var(--primary-color-bg);
   font-family: Unifont, sans-serif;
+  font-size: 15px;
   font-size: 16px;
   text-align: center;
-  color: $primary-color;
+  color: var(--primary-color);
   white-space: pre-line;
   user-select: none;
   overflow-x: hidden;
 }
 
+#__next {
+  position: absolute;
+  top: 0;
+}
+
 main {
   position: relative;
   width: 100vw;
-  width: 100dvw;
   height: 100vh;
-  height: 100dvh;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   scroll-behavior: smooth;
+
+  @media (max-aspect-ratio: 1/1) {
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+  }
 }
 
 section {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: $padding-vertical $padding-horizontal;
+  padding: 10vh 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,6 +127,11 @@ a {
   }
 
   section {
-    padding: $padding-vertical-mobile $padding-horizontal-mobile;
+    padding: 5vh 1.5rem;
+
+    @media (max-aspect-ratio: 1/1) {
+      padding: 5vh 1.5rem;
+      padding: 5dvh 1.5rem;
+    }
   }
 }

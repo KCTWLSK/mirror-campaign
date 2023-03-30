@@ -23,7 +23,7 @@ const download = async (url, filename) => {
       await navigator.share(data);
       return;
     }
-    
+
     if (window.showSaveFilePicker) {
       const handle = await showSaveFilePicker({
         suggestedName: filename,
@@ -41,8 +41,11 @@ const download = async (url, filename) => {
         await writable.write(blob);
         await writable.close();
       }
+      // TODO else branch handling not writable
     } else downloadViaTempElement();
   } catch (e) {
+    // AbortError really meant the user canceled the download
+    if (e.name == "AbortError") return;
     console.error('download error: ', e);
     downloadViaTempElement();
   }
