@@ -88,12 +88,10 @@ const LandingSection = () => {
           alt="KC x MIRROR"
           priority
         />
-        <Image
+        <img
           className="bgLogo spin"
           src="https://storage.googleapis.com/socialwall/LOGO%20SPIN%20FInal_1080x1920.gif"
           alt="KC x MIRROR"
-          width={1080}
-          height={1920}
         />
       </motion.div>
       <motion.div

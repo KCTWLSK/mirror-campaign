@@ -66,7 +66,6 @@ const BehindTheScenesSection = () => {
     >
       <div className="titleRow">
         <h1>{title}</h1>
-        <div>{t('behindTheScenes.description')}</div>
       </div>
       {renderEmbeddedVideo()}
     </Section>
