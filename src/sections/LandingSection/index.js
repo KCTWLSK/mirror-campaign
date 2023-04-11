@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSelectedLanguage } from "next-export-i18n";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
@@ -18,9 +18,9 @@ const LandingSection = () => {
   const { fullProgress } = useScrollProgress(ref.current);
   const { lang } = useSelectedLanguage();
 
-  const y = transform([0.5, 1], ['0%', '20%'])(fullProgress);
-  const opacity = transform([0.5, 1], [1, 0])(fullProgress);
-  const buttonOpacity = transform([0.5, 0.6], [1, 0])(fullProgress);
+  const y = `${fullProgress <= 0.5 ? 0 : (fullProgress - 0.5) * 40}%`;
+  const opacity = fullProgress <= 0.5 ? 1 : (2 - 2 * fullProgress);
+  const buttonOpacity = fullProgress <= 0.5 ? 1 : fullProgress >= 0.6 ? 0 : 1 - (fullProgress - 0.5) / 0.1;
 
   const renderLocaleButton = (label, localeValue) => {
     const isSelected = lang === localeValue;

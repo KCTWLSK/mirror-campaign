@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-export-i18n";
-import { motion, transform, useAnimation, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useIsPreferPortraitMode } from "@/context/device";
 import { useScrollProgress } from "@/context/scroll";
@@ -26,8 +26,8 @@ const HeroSection = () => {
   const ref = useRef();
   const { fullProgress } = useScrollProgress(ref.current);
 
-  const y = transform([0, 1], ['-20%', '20%'])(fullProgress);
-  const heroImgShiftFactorPercent = transform([0, 0.5, 1], [-2.5, 0, 2.5])(fullProgress);
+  const y = `${-20 + fullProgress * 40}%`;
+  const heroImgShiftFactorPercent = fullProgress >= 0.5 ? (fullProgress - 0.5) * 5 : (-2.5 + fullProgress * 5);
   
   const renderFloatingSlogan = () => (
     <motion.div

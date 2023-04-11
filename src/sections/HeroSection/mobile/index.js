@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-export-i18n";
-import { motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useScrollProgress } from "@/context/scroll";
 import { SECTION_HERO, TRANS_DELAY_INIT, TRANS_DURATION, VAR_OFF_SCREEN, VAR_ON_SCREEN } from "@/data/constants";
@@ -22,9 +22,9 @@ const HeroSection = () => {
   const ref = useRef();
   const { fullProgress } = useScrollProgress(ref.current);
 
-  const y = transform([0, 1], ['-20%', '20%'])(fullProgress);
-  const opacity = transform([0, 0.5, 1], [0, 1, 0])(fullProgress);
-  const heroImgShiftFactorPercent = transform([0, 1], [-5, 5])(fullProgress);
+  const y = `${-20 + fullProgress * 40}%`;
+  const opacity = fullProgress >= 0.5 ? 2 - (fullProgress * 2) : fullProgress * 2;
+  const heroImgShiftFactorPercent = -5 + fullProgress * 10;
 
   const renderFloatingSlogan = () => (
     <motion.div
