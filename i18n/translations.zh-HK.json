@@ -14,58 +14,48 @@
       "body": "KICKS CREW 深信 CREW（團隊）至關重要。每位 MIRROR 成員一起匯集成 CREW，發光發亮，正體現 KICKS CREW 的理念。KICKS CREW x MIRROR 最新 CREW 聯名企劃即日起全球發佈，更為鏡粉們準備了不同鏡 CREW 紀念品。一起來 JOIN THE CREW，一同凝聚更強大的鏡 CREW ！"
     },
     "memorabilia": {
-      "header": "MEMORABILIA CREW CARD & TAG PACK",
-      "subtitle": "KICKS CREW x MIRROR INSTAGRAM BOXSET GIVEAWAY",
-      "body": "The KICKS CREW x MIRROR collaboration features 12 sets of memorabilia CREW card & tag packs showcasing each MIRROR member. Featuring 3 MIRROR CREW members each week, fans will have the chance to win and collect their favorite MIRROR CREW member.",
+      "header": "KICKS CREW x MIRROR 限定 | MIRROR CREW 限量珍藏",
+      "body": "由 2023年4月17日 至 2023年5月14日，活動期間將每星期發佈 3 名 MIRROR CREW 成員，指定日期內於 KICKS CREW 購物單筆滿 HKD 499，輸入指定 CREW CODE 即有機會贏取指定 MIRROR 卡和珍藏限量版編號團隊紀念扣 “CREW TAG” (每位 MIRROR 成員的 CREW CODE 限定 500 名使用，先到先得)。持續關注我們的活動並獲取您最喜歡的 MIRROR 成員限量珍藏吧！",
       "schedule": {
         "week1": {
           "label": "WEEK 1",
-          "period": "17-23/4",
-          "member": "Lokman, Anson Lo, Alton"
+          "period": "4月17日 10:00 - 4月23日 23:59"
         },
         "week2": {
           "label": "WEEK 2",
-          "period": "24-30/4",
-          "member": "AK, Keung To, Stanley"
+          "period": "4月24日 10:00 - 4月30日 23:59"
         },
         "week3": {
           "label": "WEEK 3",
-          "period": "1-7/5",
-          "member": "Frankie, Jer, Ian"
+          "period": "5月1日 10:00 - 5月7日 23:59"
         },
         "week4": {
           "label": "WEEK 4",
-          "period": "8-14/5",
-          "member": "Edan, Tiger, Jeremy"
+          "period": "5月8日 10:00 - 5月14日 23:59"
         },
-        "active": "PROCESSING",
-        "prompt": "FIND YOUR CODE",
-        "goToShop": "Shopping Now"
+        "prompt": "複製成員的活動碼（每個成員限量500組）",
+        "promptToShop": "立即開始選購你心儀的球鞋服飾！",
+        "goToShop": "立即購物"
       }
     },
     "behindTheScenes": {
-      "header": "KICKS CREW x MIRROR 幕後花絮",
-      "description": "最難忘的時刻總發生在幕後！"
+      "header": "KICKS CREW x MIRROR 幕後花絮"
     },
     "footer": {
       "header": "WE ALL ARE ONE CREW",
       "TermsAndConditions": {
         "subtitle": "（詳情）",
         "header": "條款和細則",
-        "description": " • 活動由 2023 年 3 月 24 日起開始，只限香港地區\n • 所有圖片只供參考\n • 數量有限，送完即止\n • KICKS CREW 保留隨時更改條款及細則、暫停或終止活動的權利，恕不另行通知"
+        "description": " • 活動由 2023 年 4 月 17 日起開始，只限香港地區\n • 所有圖片只供參考\n • 數量有限，送完即止\n • KICKS CREW 保留隨時更改條款及細則、暫停或終止活動的權利，恕不另行通知"
       },
       "search": {
-        "label": "FIND YOUR PAIR"
+        "label": "找出你愛的球鞋"
       },
       "app": {
-        "label": "Download the CREW APP for more"
-      },
-      "coupon":{
-        "label": "立即複製，首單立折",
-        "copied": "CODE COPIED!"
+        "label": "獲得最佳的球鞋購物體驗，立即下載KICKS CREW APP"
       },
       "gotoApp":{
-        "label": "FIND YOUR PAIR ON APP"
+        "label": "立即開始選購你心儀的球鞋服飾！"
       }
     }
   }

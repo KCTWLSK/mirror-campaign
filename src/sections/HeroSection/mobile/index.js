@@ -108,7 +108,12 @@ const HeroSection = () => {
           custom={0}
           style={{ x: `${heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupB} alt="MIRROR group B" placeholder="blur" priority />
+          <Image
+            src={imgMirrorGroupB}
+            alt="MIRROR group B"
+            placeholder="blur"
+            priority
+          />
         </motion.div>
         <motion.div
           className="imgWrapper groupA"
@@ -116,7 +121,12 @@ const HeroSection = () => {
           custom={1}
           style={{ x: `${-heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupA} alt="MIRROR group A" placeholder="blur" priority />
+          <Image
+            src={imgMirrorGroupA}
+            alt="MIRROR group A"
+            placeholder="blur"
+            priority
+          />
         </motion.div>
         <motion.div
           className="imgWrapper groupC"
@@ -124,7 +134,12 @@ const HeroSection = () => {
           custom={2}
           style={{ x: `${heroImgShiftFactorPercent}%` }}
         >
-          <Image src={imgMirrorGroupC} alt="MIRROR group C" placeholder="blur" priority />
+          <Image
+            src={imgMirrorGroupC}
+            alt="MIRROR group C"
+            placeholder="blur"
+            priority
+          />
         </motion.div>
       </>
     );

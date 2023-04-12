@@ -9,29 +9,25 @@
 
       .scheduleItem {
         --label-height: 1.25rem;
-  
+
+        font-size: 1rem;
+        line-height: 1rem;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin-bottom: 0.5rem;
-  
-        &.expired {
-          color: var(--secondary-color);
-  
+        color: var(--secondary-color);
+
+        &.active {
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+          color: var(--primary-color);
+
           .labelContainer .labelWrapper {
-            color: var(--secondary-color);
-            background-color: var(--specific-color);
+            font-size: 1rem;
+            background-color: var(--secondary-color);
           }
-        }
-  
-        &:not(.active) .labelContainer .labelWrapper::after {
-          content: '';
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 0 calc(var(--label-height) / 1.732) var(--label-height) 0;
-          border-color: transparent  var(--primary-color-bg) transparent transparent;
         }
   
         .labelContainer {
@@ -43,43 +39,22 @@
             width: 30%;
             height: 100%;
             color: var(--primary-color-bg);
-            background-color: var(--secondary-color);  
+            background-color: var(--specific-color);
             display: flex;
             align-items: center;
+
+            &::after {
+              content: '';
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 0 calc(var(--label-height) / 1.732) var(--label-height) 0;
+              border-color: transparent  var(--primary-color-bg) transparent transparent;
+            }
 
             .label {
               display: inline-block;
               width: 100%;
-            }
-          }
-
-          .activeLabel {
-            position: absolute;
-            top: 0;
-            left: calc(30% - var(--label-height) / 1.732);
-            width: 50%;
-            height: 100%;
-            color: var(--primary-color-bg);
-            background-color: var(--secondary-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-    
-            &::before {
-              align-self: flex-start;
-              display: inline-block;
-              content: '';
-              width: 5px;
-              min-width: 5px;
-              height: 150%;
-              background-color: var(--primary-color-bg);
-              transform: rotate(-30deg);
-              transform-origin: left top;
-              margin-right: var(--label-height);
-            }
-
-            &::after {
-              content: '';
             }
           }
         }
@@ -96,34 +71,32 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .carouselContainer {
+      .imgWrapper {
+        width: 100%;
         height: 60%;
         display: flex;
-        justify-content: center;
-  
-        .carousel {
-          width: calc(100% - 2 * var(--slide-gap));
-          height: 100%;
-  
-          .swiper-wrapper {
-            width: 100%;
-            height: 100%;
-            transition-timing-function: linear;
-    
-            .swiper-slide {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: fit-content;
-              height: 100%;
-    
-              img {
-                height: 100%;
-                width: auto;
-              }
-            }
-          }
+        align-items: center;
+        
+        img {
+          width: 100%;
+          height: auto;
         }
+      }
+
+      .cardContainer {
+        height: 60%;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+          height: 100%;
+          width: auto;
+          max-width: 33%;
+        }
+      }
+
+      .featuredImg {
+        width: 100%;
       }
   
       .actionBlock {
@@ -133,7 +106,22 @@
         align-items: center;
   
         .prompt {
-          margin: 1rem 0;
+          align-self: flex-start;
+          height: 1.5rem;
+          line-height: 1.5rem;
+          margin: 0.5rem 0;
+          display: flex;
+          align-items: center;
+
+          a {
+            height: 100%;
+            margin-left: 0.5rem;
+
+            img {
+              height: 83.33%;
+              aspect-ratio: 1/1;
+            }
+          }
         }
   
         .codeRow {
@@ -160,7 +148,6 @@
   
           &.shop {
             width: 100%;
-            margin: 1rem 0;
           }
         }
       }

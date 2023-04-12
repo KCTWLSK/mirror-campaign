@@ -52,6 +52,18 @@
   
             .imgWrapper {
               margin: 0.25rem 0;
+
+              @media (max-aspect-ratio: 1/1) {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                  height: 90%;
+                  width: auto;
+                }
+              }
             }
   
             h2 {
@@ -112,46 +124,13 @@
               align-items: center;
 
               @media (max-aspect-ratio: 1/1) {
-                height: 25%;
                 margin: 2% 0;
                 line-height: 150%;
                 font-family: inherit;
                 font-size: 100%;
 
-                @media (max-height: 568px) {
-                  height: 22.5%;
-                  margin: 1.5% 0;
-                  line-height: 125%;
-                }
-
-                @media (min-height: 720px) {
-                  height: 30%;
-                  line-height: 200%; 
-                }
-              }
-  
-              &.copyCoupon {
-                position: relative;
-                color: var(--primary-color-bg);
-                background-color: var(--secondary-color);
-  
-                &.clicked {
-                  color: var(--primary-color);
-                  background-color: transparent;
-                }
-  
-                .imageWrapper {
-                  position: absolute;
-                  top: 0;
-                  right: 0.5rem;
-                  height: 100%;
-                  display: flex;
-                  align-items: center;
-  
-                  img {
-                    height: 80%;
-                    width: auto;
-                  }
+                @media (min-width: 720px) {
+                  height: 4rem;
                 }
               }
             }

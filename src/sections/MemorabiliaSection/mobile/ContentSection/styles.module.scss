@@ -8,15 +8,19 @@
   text-align: start;
 
   :global {
-    h1, .subtitle, .carouselContainer, .body {
+    h1, .carouselContainer, .body {
       width: 100%;
     }
 
-    .subtitle {
-      margin: 0.5rem;
+    .cardContainer {
+      height: 60%;
+      display: flex;
+      justify-content: space-between;
 
-      @media (min-width: 720px) {
-        margin: 1.25rem;
+      img {
+        height: 100%;
+        width: auto;
+        max-width: 33%;
       }
     }
 

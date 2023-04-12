@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import getConfig from "next/config";
 import { useTranslation } from "next-export-i18n";
 
@@ -7,28 +8,21 @@ import { Section, SectionBanner } from "@/components";
 
 import styles from "./styles.module.scss";
 
-const ScheduleSection = () => {
-  const { publicRuntimeConfig: { CODE, kicksCrewUrl } } = getConfig();
+import iconQuestionMark from "@/../public/assets/question_mark.png";
+
+const ScheduleSection = ({ activeWeek }) => {
+  const { publicRuntimeConfig: { featured, kicksCrewUrl } } = getConfig();
   const { t } = useTranslation();
 
-  const [activeIndex, setActiveIndex] = useState();
-  const [selectedName, setSelectedName] = useState();
+  const [selectedCode, setSelectedCode] = useState();
 
-  useEffect(() => {
-    const d = new Date();
-
-    setActiveIndex(2
-      // d >= Date.parse('17 April 2023 00:00:00 GMT+8') && d <= Date.parse('23 April 2023 23:59:59 GMT+8') ? 1
-      //   : d >= Date.parse('24 April 2023 00:00:00 GMT+8') && d <= Date.parse('30 April 2023 23:59:59 GMT+8') ? 2
-      //   : d >= Date.parse('1 May 2023 00:00:00 GMT+8') && d <= Date.parse('7 May 2023 23:59:59 GMT+8') ? 3
-      //   : d >= Date.parse('8 May 2023 00:00:00 GMT+8') && d <= Date.parse('14 May 2023 23:59:59 GMT+8') ? 4 : Infinity
-    );
-  }, []);
-
-  const handleCodeClick = (name) => ({ target }) => {
-    if (selectedName === name) {
+  const handleCodeClick = (code) => ({ target }) => {
+    if (selectedCode === code) {
       target.classList.remove('selected');
-      setTimeout(() => target.classList.add('selected'), 100);
+      setTimeout(() => target.classList.add('selected'), 50);
+      setTimeout(() => target.classList.remove('selected'), 100);
+      setTimeout(() => target.classList.add('selected'), 150);
+
       return;
     }
 
@@ -36,35 +30,45 @@ const ScheduleSection = () => {
     setTimeout(() => target.classList.remove('selected'), 50);
     setTimeout(() => target.classList.add('selected'), 150);
 
-    copyTextToClipboard(CODE[name]);
-    setSelectedName(name);
+    copyTextToClipboard(code);
+    setSelectedCode(code);
   };
 
-  const renderScheduleItem = (index) => (
-    <div className={`scheduleItem${index < activeIndex ? ' expired' : index === activeIndex ? ' active' : ''}`}>
+  const renderScheduleItem = (week) => (
+    <div className={`scheduleItem${week === activeWeek ? ' active' : ''}`}>
       <div className="labelContainer">
-        <span className="label">{t(`memorabilia.schedule.week${index}.label`)}</span>
-        {index === activeIndex ? <span className="activeLabel">{t('memorabilia.schedule.active')}</span> : null}
+        <span className="label">{t(`memorabilia.schedule.week${week}.label`)}</span>
       </div>
-      <div className="period">{t(`memorabilia.schedule.week${index}.period`)}</div>
-      {index === activeIndex
+      <div className="period">{t(`memorabilia.schedule.week${week}.period`)}</div>
+      {week === activeWeek
         ? renderActionBlock()
-        : <div>{t(`memorabilia.schedule.week${index}.member`)}</div>}
+        : <div>{featured[week - 1].map(([name]) => name).join(' / ')}</div>}
     </div>
   );
 
   const renderActionBlock = () => (
     <div className="actionBlock">
-      <div className="prompt">{t('memorabilia.schedule.prompt')}</div>
-      {t(`memorabilia.schedule.week${activeIndex}.member`)
-        .split(', ').map((name) => (
+      <div className="prompt">
+        <span>{t('memorabilia.schedule.prompt')}</span>
+        <a
+          href={kicksCrewUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={iconQuestionMark} alt="rules" />
+        </a>
+      </div>
+      {activeWeek !== -1
+        ? featured[activeWeek - 1].map(([name, code]) => (
           <div
-            className={`button${name === selectedName ? ' selected' : ''}`}
-            onClick={handleCodeClick(name)}
+            className={`button${code === selectedCode ? ' selected' : ''}`}
+            onClick={handleCodeClick(code)}
             key={name}
           >
-            {name === selectedName ? `${name} x CODE COPIED!` : name}
+            {name}
           </div>
+        )) : Array.from({ length: 3}, (_, index) => (
+          <div className="button" key={index}>COMING SOON</div>
         ))}
       <a
         className="button shop"

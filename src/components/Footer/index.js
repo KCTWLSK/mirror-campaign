@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
 import { useTranslation } from "next-export-i18n";
@@ -8,7 +8,6 @@ import TextField from "@mui/material/TextField";
 import Link from "next/link";
 
 import { useIsPreferPortraitMode } from "@/context/device";
-import { copyTextToClipboard } from "@/utils/helpers";
 
 import styles from "./styles.module.scss";
 
@@ -16,7 +15,6 @@ import logo from "@/../public/assets/logo_kc_x_mirror.png";
 import instagramIcon from "@/../public/assets/icon_instagram.png";
 import facebookIcon from "@/../public/assets/icon_facebook.png";
 import linkedinIcon from "@/../public/assets/icon_linkedin.png";
-import iconCopy from "@/../public/assets/icon_copy.png";
 import appStoreLogo from "@/../public/assets/ios_app_store.png";
 import googlePlayLogo from "@/../public/assets/google_play.png";
 import searchIcon from "@/../public/assets/icon_search.png";
@@ -41,15 +39,6 @@ const Footer = () => {
   const { t } = useTranslation();
 
   const [keyword, setKeyword] = useState('');
-  const [copied, setCopied] = useState();
-
-  const ref = useRef();
-
-  useEffect(() => {
-    const button = ref.current;
-    button.classList.add('clicked');
-    setTimeout(() => button.classList.remove('clicked'), 100);
-  }, [copied]);
 
   const renderSearchBar = () => (
     <div className="searchBarContainer">
@@ -106,14 +95,6 @@ const Footer = () => {
     );
   }
 
-  const handleCodeClick = ({ target }) => {
-    setCopied(true);
-    copyTextToClipboard(couponCode);
-
-    target.classList.add('clicked');
-    setTimeout(() => target.classList.remove('clicked'), 100);
-  };
-
   return (
     <div className={styles.footer}>
       <div className="container">
@@ -136,22 +117,9 @@ const Footer = () => {
         </div>
         <div className="row middle">
           <div className="block">
-            <div>{t('footer.coupon.label')}</div>
-            <button
-              className="button copyCoupon"
-              onClick={handleCodeClick}
-              ref={ref}
-            >
-              <div>{copied ? t('footer.coupon.copied') : couponCode}</div>
-              {copied ? null : (
-                <div className="imageWrapper">
-                  <Image src={iconCopy} alt="copy" />
-                </div>
-              )}
-            </button>
             {isPreferPortraitMode ? (
               <a
-                className="button gotoApp"
+                className="button"
                 href={kicksCrewAppUrl}
                 target="_blank"
                 rel="noreferrer"

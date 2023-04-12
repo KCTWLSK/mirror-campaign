@@ -20,39 +20,15 @@
       flex-direction: column;
       align-items: flex-start;
       margin-bottom: 1rem;
-
-      &.expired {
-        color: var(--secondary-color);
-
-        .labelContainer {
-          color: var(--secondary-color);
-          background-color: var(--specific-color);
-        }
-      }
+      color: var(--secondary-color);
 
       &.active {
+        color: var(--primary-color);
+
         .labelContainer {
-          justify-content: space-between;
-          width: 100%;
-          z-index: -1;
-
-          .label {
-            width: calc(30% - 1rem);
-
-            @media (min-width: 720px) {
-              width: calc(40% - 1rem);
-            }
-          }
+          color: var(--primary-color-bg);
+          background-color: var(--secondary-color);
         }
-      }
-
-      &:not(.active) .labelContainer::after {
-        content: '';
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 calc(var(--label-height) / 1.732) var(--label-height) 0;
-        border-color: transparent  var(--primary-color-bg) transparent transparent;
       }
 
       .labelContainer {
@@ -61,35 +37,24 @@
         width: 30%;
         height: var(--label-height);
         color: var(--primary-color-bg);
-        background-color: var(--secondary-color);
+        background-color: var(--specific-color);
 
         @media (min-width: 720px) {
           width: 40%;
+        }
+
+        &::after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 calc(var(--label-height) / 1.732) var(--label-height) 0;
+          border-color: transparent  var(--primary-color-bg) transparent transparent;
         }
   
         .label {
           display: inline-block;
           width: 100%;
-        }
-
-        .activeLabel {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 40%;
-          height: 100%;
-  
-          &::before {
-            align-self: flex-start;
-            display: inline-block;
-            content: '';
-            width: 6px;
-            height: 150%;
-            background-color: var(--primary-color-bg);
-            transform: rotate(-30deg);
-            transform-origin: left top;
-            margin-right: var(--label-height);
-          }
         }
       }
 
@@ -108,14 +73,24 @@
         align-items: center;
 
         .prompt {
-          margin-bottom: 2rem;
-
-          // @media (max-height: 568px) {
-            margin-bottom: 1rem;
-          // }
+          height: 1.5rem;
+          line-height: 1.5rem;
+          margin: 0.5rem 0;
+          display: flex;
+          align-items: center;
 
           @media (min-width: 720px) {
             margin-bottom: 3rem;
+          }
+
+          a {
+            height: 100%;
+            margin-left: 0.5rem;
+
+            img {
+              height: 83.33%;
+              aspect-ratio: 1/1;
+            }
           }
         }
 

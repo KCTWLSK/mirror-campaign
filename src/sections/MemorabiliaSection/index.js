@@ -1,145 +1,43 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import getConfig from "next/config";
 import { useTranslation } from "next-export-i18n";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
 
+import MobileVersion from "./mobile";
 import { useIsPreferPortraitMode } from "@/context/device";
 import { Section, SectionLayout } from "@/components";
-import { copyTextToClipboard } from "@/utils/helpers";
-import MobileVersion from "./mobile";
+import { copyTextToClipboard, getActiveWeek } from "@/utils/helpers";
 
-import "swiper/scss";
-import "swiper/scss/autoplay";
 import styles from "./styles.module.scss";
 
-import imgCardLOKMAN from "@/../public/assets/mirrorcards_front_LOKMAN.png";
-import imgCardANSONLO from "@/../public/assets/mirrorcards_front_ANSONLO.png";
-import imgCardALTON from "@/../public/assets/mirrorcards_front_ALTON.png";
-import imgCardSTANLEY from "@/../public/assets/mirrorcards_front_STANLEY.png";
-import imgCardKEUNGTO from "@/../public/assets/mirrorcards_front_KEUNGTO.png";
-import imgCardAK from "@/../public/assets/mirrorcards_front_AK.png";
-import imgCardFRANKIE from "@/../public/assets/mirrorcards_front_FRANKIE.png";
-import imgCardJER from "@/../public/assets/mirrorcards_front_JER.png";
-import imgCardIAN from "@/../public/assets/mirrorcards_front_IAN.png";
-import imgCardEDAN from "@/../public/assets/mirrorcards_front_EDAN.png";
-import imgCardTIGER from "@/../public/assets/mirrorcards_front_TIGER.png";
-import imgCardJEREMY from "@/../public/assets/mirrorcards_front_JEREMY.png";
+import imgFeaturedGroupWeek1 from "@/../public/assets/week01.jpg";
+import imgFeaturedGroupWeek2 from "@/../public/assets/week02.jpg";
+import imgFeaturedGroupWeek3 from "@/../public/assets/week03.jpg";
+import imgFeaturedGroupWeek4 from "@/../public/assets/week04.jpg";
+import iconQuestionMark from "@/../public/assets/question_mark.png";
 
-const SWIPER_FLIP_SPEED = 3000;
-const SWIPER_FLIP_DELAY = 0;
-
-const cards = {
-  LOKMAN: (
-    <Image
-      src={imgCardLOKMAN}
-      alt="MIRROR_card_LOKMAN"
-      placeholder="blur"
-    />
-  ),
-  ANSONLO: (
-    <Image
-      src={imgCardANSONLO}
-      alt="MIRROR_card_ANSONLO"
-      placeholder="blur"
-    />
-  ),
-  ALTON: (
-    <Image
-      src={imgCardALTON}
-      alt="MIRROR_card_ALTON"
-      placeholder="blur"
-    />
-  ),
-  STANLEY: (
-    <Image
-      src={imgCardSTANLEY}
-      alt="MIRROR_card_STANLEY"
-      placeholder="blur"
-    />
-  ),
-  KEUNGTO: (
-    <Image
-      src={imgCardKEUNGTO}
-      alt="MIRROR_card_KEUNGTO"
-      placeholder="blur"
-    />
-  ),
-  AK: (
-    <Image
-      src={imgCardAK}
-      alt="MIRROR_card_AK"
-      placeholder="blur"
-    />
-  ),
-  FRANKIE: (
-    <Image
-      src={imgCardFRANKIE}
-      alt="MIRROR_card_FRANKIE"
-      placeholder="blur"
-    />
-  ),
-  JER: (
-    <Image
-      src={imgCardJER}
-      alt="MIRROR_card_JER"
-      placeholder="blur"
-    />
-  ),
-  IAN: (
-    <Image
-      src={imgCardIAN}
-      alt="MIRROR_card_IAN"
-      placeholder="blur"
-    />
-  ),
-  EDAN: (
-    <Image
-      src={imgCardEDAN}
-      alt="MIRROR_card_EDAN"
-      placeholder="blur"
-    />
-  ),
-  TIGER: (
-    <Image
-      src={imgCardTIGER}
-      alt="MIRROR_card_TIGER"
-      placeholder="blur"
-    />
-  ),
-  JEREMY: (
-    <Image
-      src={imgCardJEREMY}
-      alt="MIRROR_card_JEREMY"
-      placeholder="blur"
-    />
-  ),
-};
+const imgFeaturedGroupWeek = [
+  imgFeaturedGroupWeek1,
+  imgFeaturedGroupWeek2,
+  imgFeaturedGroupWeek3,
+  imgFeaturedGroupWeek4,
+];
 
 const MemorabiliaSection = () => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
-  const { publicRuntimeConfig: { MIRROR, CODE, kicksCrewUrl } } = getConfig();
+  const { publicRuntimeConfig: { featured, faqUrl, kicksCrewUrl } } = getConfig();
   const { t } = useTranslation();
 
-  const [activeIndex, setActiveIndex] = useState();
-  const [selectedName, setSelectedName] = useState();
+  const [selectedCode, setSelectedCode] = useState();
 
-  useEffect(() => {
-    const d = new Date();
+  const activeWeek = getActiveWeek();
 
-    setActiveIndex(2
-      // d >= Date.parse('17 April 2023 00:00:00 GMT+8') && d <= Date.parse('23 April 2023 23:59:59 GMT+8') ? 1
-      //   : d >= Date.parse('24 April 2023 00:00:00 GMT+8') && d <= Date.parse('30 April 2023 23:59:59 GMT+8') ? 2
-      //   : d >= Date.parse('1 May 2023 00:00:00 GMT+8') && d <= Date.parse('7 May 2023 23:59:59 GMT+8') ? 3
-      //   : d >= Date.parse('8 May 2023 00:00:00 GMT+8') && d <= Date.parse('14 May 2023 23:59:59 GMT+8') ? 4 : Infinity
-    );
-  }, []);
-
-  const handleCodeClick = (name) => ({ target }) => {
-    if (selectedName === name) {
+  const handleCodeClick = (code) => ({ target }) => {
+    if (selectedCode === code) {
       target.classList.remove('selected');
-      setTimeout(() => target.classList.add('selected'), 100);
+      setTimeout(() => target.classList.add('selected'), 50);
+      setTimeout(() => target.classList.remove('selected'), 100);
+      setTimeout(() => target.classList.add('selected'), 150);
       return;
     }
 
@@ -147,70 +45,50 @@ const MemorabiliaSection = () => {
     setTimeout(() => target.classList.remove('selected'), 50);
     setTimeout(() => target.classList.add('selected'), 150);
 
-    copyTextToClipboard(CODE[name]);
-    setSelectedName(name);
+    copyTextToClipboard(code);
+    setSelectedCode(code);
   };
 
-  const renderScheduleItem = (index) => (
-    <div className={`scheduleItem${index < activeIndex ? ' expired' : index === activeIndex ? ' active' : ''}`}>
+  const renderScheduleItem = (week) => (
+    <div className={`scheduleItem${week === activeWeek ? ' active' : ''}`}>
       <div className="labelContainer">
         <div className="labelWrapper">
-          <span className="label">{t(`memorabilia.schedule.week${index}.label`)}</span>
+          <span className="label">{t(`memorabilia.schedule.week${week}.label`)}</span>
         </div>
-        {index === activeIndex ? <span className="activeLabel">{t('memorabilia.schedule.active')}</span> : null}
       </div>
-      <div className="period">{t(`memorabilia.schedule.week${index}.period`)}</div>
-      <div>{t(`memorabilia.schedule.week${index}.member`)}</div>
+      <div className="period">{t(`memorabilia.schedule.week${week}.period`)}</div>
+      <div>{featured[week - 1].map(([name]) => name).join(' / ')}</div>
     </div>
   );
 
-  const renderCarousel = () => {
-    const renderSlides = (back) =>
-      MIRROR.map((name) => (
-        <SwiperSlide
-          key={`mirror_slide_${name}_${!!back}`}
-        >
-          {cards[name]}
-        </SwiperSlide>
-      ));
-
-    return (
-      <div className="carouselContainer">
-        <Swiper
-          className="carousel"
-          grabCursor
-          slidesPerView={3}
-          centeredSlides
-          speed={SWIPER_FLIP_SPEED}
-          modules={[Autoplay]}
-          spaceBetween={16}
-          loop
-          autoplay={{
-            delay: SWIPER_FLIP_DELAY,
-            disableOnInteraction: false,
-          }}
-        >
-          {renderSlides()}
-          {renderSlides(true)}
-        </Swiper>
-      </div>
-    );
-  };
-
   const renderActionBlock = () => (
     <div className="actionBlock">
-      <div className="prompt">{t('memorabilia.schedule.prompt')}</div>
+      <div className="prompt">
+        <span>{t('memorabilia.schedule.prompt')}</span>
+        <a
+          href={faqUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={iconQuestionMark} alt="rules" />
+        </a>
+      </div>
       <div className="codeRow">
-        {t(`memorabilia.schedule.week${activeIndex}.member`)
-          .split(', ').map((name) => (
+        {activeWeek !== -1
+          ? featured[activeWeek - 1].map(([name, code]) => (
             <div
-              className={`button${name === selectedName ? ' selected' : ''}`}
-              onClick={handleCodeClick(name)}
+              className={`button${code === selectedCode ? ' selected' : ''}`}
+              onClick={handleCodeClick(code)}
               key={name}
             >
-              {name === selectedName ? `${name} x CODE COPIED!` : name}
+              {name}
             </div>
+          )) : Array.from({ length: 3}, (_, index) => (
+            <div className="button" key={index}>COMING SOON</div>
           ))}
+      </div>
+      <div className="prompt">
+        {t('memorabilia.schedule.promptToShop')}
       </div>
       <a
         className="button shop"
@@ -236,7 +114,13 @@ const MemorabiliaSection = () => {
             {renderScheduleItem(4)}
           </div>
           <div className="actionAreaContainer">
-            {renderCarousel()}
+            <div className="imgWrapper">
+              <Image
+                className="featuredImg"
+                src={imgFeaturedGroupWeek[activeWeek - 1]}
+                alt="featured"
+              />
+            </div>
             {renderActionBlock()}
           </div>
         </SectionLayout>
