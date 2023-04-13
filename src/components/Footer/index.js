@@ -19,7 +19,6 @@ import appStoreLogo from "@/../public/assets/ios_app_store.png";
 import googlePlayLogo from "@/../public/assets/google_play.png";
 import searchIcon from "@/../public/assets/icon_search.png";
 import ImgQRCode from "@/../public/assets/qrcode.png";
-import { tncUrl } from "@/configs";
 
 const Footer = () => {
   const { getOS } = new UAParser();
@@ -29,6 +28,7 @@ const Footer = () => {
 
   const {
     publicRuntimeConfig: {
+      tncUrl,
       mirrorCollectionUrl,
       instagramUrl,
       facebookUrl,
