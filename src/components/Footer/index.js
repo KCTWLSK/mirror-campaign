@@ -1,10 +1,7 @@
-import { useState } from "react";
 import getConfig from "next/config";
 import Image from "next/image";
 import { useTranslation } from "next-export-i18n";
 import { UAParser } from "ua-parser-js";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
 import Link from "next/link";
 
 import { useIsPreferPortraitMode } from "@/context/device";
@@ -37,35 +34,6 @@ const Footer = () => {
     },
   } = getConfig();
   const { t } = useTranslation();
-
-  const [keyword, setKeyword] = useState('');
-
-  const renderSearchBar = () => (
-    <div className="searchBarContainer">
-      <div>{t('footer.search.label')}</div>
-      <TextField
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        onKeyDown={(e) => {
-          if (keyword?.length && e.code === 'Enter')
-            window.open(url, '_blank');
-        }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <a
-                href={`${mirrorCollectionUrl}${keyword ? `/search?q=${keyword}` : ''}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Image src={searchIcon} alt="search" />
-              </a>
-            </InputAdornment>
-          ),
-        }}
-      />
-    </div>
-  );
 
   const renderSNSItems = () => {
     return (
