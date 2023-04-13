@@ -83,7 +83,7 @@ const MemorabiliaSection = () => {
             >
               {name}
             </div>
-          )) : Array.from({ length: 3}, (_, index) => (
+          )) : Array.from({ length: 3 }, (_, index) => (
             <div className="button" key={index}>COMING SOON</div>
           ))}
       </div>
