@@ -19,6 +19,7 @@ import appStoreLogo from "@/../public/assets/ios_app_store.png";
 import googlePlayLogo from "@/../public/assets/google_play.png";
 import searchIcon from "@/../public/assets/icon_search.png";
 import ImgQRCode from "@/../public/assets/qrcode.png";
+import { tncUrl } from "@/configs";
 
 const Footer = () => {
   const { getOS } = new UAParser();
@@ -28,8 +29,7 @@ const Footer = () => {
 
   const {
     publicRuntimeConfig: {
-      couponCode,
-      kicksCrewUrl,
+      mirrorCollectionUrl,
       instagramUrl,
       facebookUrl,
       linkedinUrl,
@@ -54,7 +54,7 @@ const Footer = () => {
           endAdornment: (
             <InputAdornment position="end">
               <a
-                href={`${kicksCrewUrl}${keyword ? `/search?q=${keyword}` : ''}`}
+                href={`${mirrorCollectionUrl}${keyword ? `/search?q=${keyword}` : ''}`}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -108,7 +108,7 @@ const Footer = () => {
           <div className="TAndCContainer">
             <h3>
               {t('footer.TermsAndConditions.header')}
-              <Link target="_blank" href="https://www.kickscrew.com/blogs/news/mirror-crew">
+              <Link target="_blank" href={tncUrl}>
                 {t('footer.TermsAndConditions.subtitle')}
               </Link>
             </h3>
@@ -117,16 +117,16 @@ const Footer = () => {
         </div>
         <div className="row middle">
           <div className="block">
-            {isPreferPortraitMode ? (
-              <a
-                className="button"
-                href={kicksCrewAppUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t('footer.gotoApp.label')}
-              </a>
-            ) : renderSearchBar()}
+            <a
+              className="button"
+              href={isPreferPortraitMode ? kicksCrewAppUrl : mirrorCollectionUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t(isPreferPortraitMode
+                ? 'footer.gotoApp.label'
+                : 'footer.search.label')}
+            </a>
           </div>
           <div className="block">
             <div>{t('footer.app.label')}</div>

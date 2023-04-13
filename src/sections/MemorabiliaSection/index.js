@@ -10,22 +10,38 @@ import { copyTextToClipboard, getActiveWeek } from "@/utils/helpers";
 
 import styles from "./styles.module.scss";
 
-import imgFeaturedGroupWeek1 from "@/../public/assets/week01.jpg";
-import imgFeaturedGroupWeek2 from "@/../public/assets/week02.jpg";
-import imgFeaturedGroupWeek3 from "@/../public/assets/week03.jpg";
-import imgFeaturedGroupWeek4 from "@/../public/assets/week04.jpg";
+import imgMirrorLOKMAN from "@/../public/assets/LOKMAN.png";
+import imgMirrorANSONLO from "@/../public/assets/ANSONLO.png";
+import imgMirrorALTON from "@/../public/assets/ALTON.png";
+import imgMirrorSTANLEY from "@/../public/assets/STANLEY.png";
+import imgMirrorKEUNGTO from "@/../public/assets/KEUNGTO.png";
+import imgMirrorAK from "@/../public/assets/AK.png";
+import imgMirrorFRANKIE from "@/../public/assets/FRANKIE.png";
+import imgMirrorJER from "@/../public/assets/JER.png";
+import imgMirrorIAN from "@/../public/assets/IAN.png";
+import imgMirrorEDAN from "@/../public/assets/EDAN.png";
+import imgMirrorTIGER from "@/../public/assets/TIGER.png";
+import imgMirrorJEREMY from "@/../public/assets/JEREMY.png";
 import iconQuestionMark from "@/../public/assets/question_mark.png";
 
-const imgFeaturedGroupWeek = [
-  imgFeaturedGroupWeek1,
-  imgFeaturedGroupWeek2,
-  imgFeaturedGroupWeek3,
-  imgFeaturedGroupWeek4,
-];
+const imgMirror = {
+  LOKMAN: imgMirrorLOKMAN,
+  'ANSON LO': imgMirrorANSONLO,
+  ALTON: imgMirrorALTON,
+  STANLEY: imgMirrorSTANLEY,
+  'KEUNG TO': imgMirrorKEUNGTO,
+  AK: imgMirrorAK,
+  FRANKIE: imgMirrorFRANKIE,
+  JER: imgMirrorJER,
+  IAN: imgMirrorIAN,
+  EDAN: imgMirrorEDAN,
+  TIGER: imgMirrorTIGER,
+  JEREMY: imgMirrorJEREMY,
+};
 
 const MemorabiliaSection = () => {
   const isPreferPortraitMode = useIsPreferPortraitMode();
-  const { publicRuntimeConfig: { featured, faqUrl, kicksCrewUrl } } = getConfig();
+  const { publicRuntimeConfig: { featured, faqUrl, mirrorCollectionUrl } } = getConfig();
   const { t } = useTranslation();
 
   const [selectedCode, setSelectedCode] = useState();
@@ -81,7 +97,7 @@ const MemorabiliaSection = () => {
               onClick={handleCodeClick(code)}
               key={name}
             >
-              {name}
+              {code === selectedCode ? `"${code}" ${t('memorabilia.schedule.copied')}` : name}
             </div>
           )) : Array.from({ length: 3 }, (_, index) => (
             <div className="button" key={index}>COMING SOON</div>
@@ -92,7 +108,7 @@ const MemorabiliaSection = () => {
       </div>
       <a
         className="button shop"
-        href={kicksCrewUrl}
+        href={mirrorCollectionUrl}
         target="_blank"
         rel="noreferrer"
       >
@@ -115,11 +131,15 @@ const MemorabiliaSection = () => {
           </div>
           <div className="actionAreaContainer">
             <div className="imgWrapper">
-              <Image
-                className="featuredImg"
-                src={imgFeaturedGroupWeek[activeWeek - 1]}
-                alt="featured"
-              />
+              {featured[activeWeek === -1 ? 0 : activeWeek - 1]
+                .map(([name]) => (
+                  <Image
+                    key={name}
+                    src={imgMirror[name]}
+                    alt={`MIRROR_${name}`}
+                    placeholder="blur"
+                  />
+                ))}
             </div>
             {renderActionBlock()}
           </div>

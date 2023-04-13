@@ -8,16 +8,9 @@
     .titleRow {
       width: 100%;
       flex-basis: 20%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
 
-      @media (max-aspect-ratio: 1/1) {
-        align-items: flex-start;
-      }
-
-      > * {
-        flex-basis: calc(50% - 0.5rem);
+      h1 {
+        width: 100%;
         text-align: start;
       }
     }

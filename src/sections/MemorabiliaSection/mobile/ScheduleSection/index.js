@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 import iconQuestionMark from "@/../public/assets/question_mark.png";
 
 const ScheduleSection = ({ activeWeek }) => {
-  const { publicRuntimeConfig: { featured, kicksCrewUrl } } = getConfig();
+  const { publicRuntimeConfig: { featured, mirrorCollectionUrl } } = getConfig();
   const { t } = useTranslation();
 
   const [selectedCode, setSelectedCode] = useState();
@@ -51,7 +51,7 @@ const ScheduleSection = ({ activeWeek }) => {
       <div className="prompt">
         <span>{t('memorabilia.schedule.prompt')}</span>
         <a
-          href={kicksCrewUrl}
+          href={mirrorCollectionUrl}
           target="_blank"
           rel="noreferrer"
         >
@@ -65,14 +65,14 @@ const ScheduleSection = ({ activeWeek }) => {
             onClick={handleCodeClick(code)}
             key={name}
           >
-            {name}
+            {selectedCode === code ? `"${code}" ${t('memorabilia.schedule.copied')}` : name}
           </div>
         )) : Array.from({ length: 3}, (_, index) => (
           <div className="button" key={index}>COMING SOON</div>
         ))}
       <a
         className="button shop"
-        href={kicksCrewUrl}
+        href={mirrorCollectionUrl}
         target="_blank"
         rel="noreferrer"
       >

@@ -78,25 +78,10 @@
         align-items: center;
         
         img {
-          width: 100%;
+          width: 33%;
           height: auto;
+
         }
-      }
-
-      .cardContainer {
-        height: 60%;
-        display: flex;
-        justify-content: space-between;
-
-        img {
-          height: 100%;
-          width: auto;
-          max-width: 33%;
-        }
-      }
-
-      .featuredImg {
-        width: 100%;
       }
   
       .actionBlock {
