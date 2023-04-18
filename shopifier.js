@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { html, js, css } = require('js-beautify');
 
-const processFilesInDir = (beautifier, dirPath, processor, shouldProcess = () => true) => {
+const processFilesInDir = (dirPath, beautifier, processor, shouldProcess = () => true) => {
   const filenames = fs.readdirSync(dirPath);
   filenames.forEach((filename) => {
     if (shouldProcess(filename)) {
@@ -32,8 +32,8 @@ const processFilesInDir = (beautifier, dirPath, processor, shouldProcess = () =>
 
 // *.html
 processFilesInDir(
-  html,
   path.join(__dirname, 'out'),
+  html,
   (data) => {
     const start = data.indexOf('<div id="__next">');
     const end = data.indexOf('</body>');
@@ -49,8 +49,8 @@ processFilesInDir(
 
 // *.js
 processFilesInDir(
-  js,
   path.join(__dirname, 'out/_next/static/chunks'),
+  js,
   (data) => {
     data = data.replaceAll(/\/pages\/mirrorcrew\/_next\/static\/media\/(AK|ALTON|ANSONLO|EDAN|FRANKIE|IAN|JER|JEREMY|KEUNGTO|LOKMAN|STANLEY|TIGER|question_mark)\.[^/.]+\.png/g, "{{ 'mirror-$1.png' | asset_url }}");
     data = data.replaceAll(/\/pages\/mirrorcrew\/_next\/static\/media\/([^/.]+)\.[^/.]+\.(png|jpg|gif|svg)/g, "{{ '$1.$2' | asset_url }}");
@@ -61,8 +61,8 @@ processFilesInDir(
 );
 
 processFilesInDir(
-  js,
   path.join(__dirname, 'out/_next/static/chunks/pages'),
+  js,
   (data, filename) => {
     data = data.replaceAll(/\/pages\/mirrorcrew\/_next\/static\/media\/(AK|ALTON|ANSONLO|EDAN|FRANKIE|IAN|JER|JEREMY|KEUNGTO|LOKMAN|STANLEY|TIGER|question_mark)\.[^/.]+\.png/g, "{{ 'mirror-$1.png' | asset_url }}");
     data = data.replaceAll(/\/pages\/mirrorcrew\/_next\/static\/media\/([^/.]+)\.[^/.]+\.(png|jpg|gif|svg)/g, "{{ '$1.$2' | asset_url }}");
@@ -81,8 +81,8 @@ processFilesInDir(
 
 const buildId = fs.readdirSync(path.join(__dirname, 'out/_next')).filter((names) => names !== 'static')[0];
 processFilesInDir(
-  js,
   path.join(__dirname, `out/_next/static/${buildId}`),
+  js,
   (data) => {
     data = data.replace(/static\/css\/[^/.]+\.css/g, "{{ 'mirror-styles-p2.css' | asset_url }}");
     data = data.replace(/static\/chunks\/([0-9]+)-[^/.]+\.js/g, "{{ 'mirror-$1.js' | asset_url }}");
@@ -96,8 +96,8 @@ processFilesInDir(
 
 // *.css
 processFilesInDir(
-  css,
   path.join(__dirname, 'out/_next/static/css'),
+  css,
   (data) => {
     if (data.indexOf('@font-face') === 0) {
       data = data.replace("Inter-VariableFont_slnt,wght", "Inter-VariableFont_slnt-wght");
