@@ -1,11 +1,6 @@
 module.exports = {
   featured: [
     [
-      ['ALTON', 'ALTONCREW'],
-      ['KEUNG TO', 'KEUNGTOCREW'],
-      ['LOKMAN', 'LOKMANCREW'],
-    ],
-    [
       ['AK', 'AKCREW'],
       ['ANSON LO', 'ANSONLOCREW'],
       ['STANLEY', 'STANLEYCREW'],
@@ -19,6 +14,11 @@ module.exports = {
       ['EDAN', 'EDANCREW'],
       ['JEREMY', 'JEREMYCREW'],
       ['TIGER', 'TIGERCREW'],
+    ],
+    [
+      ['ALTON', 'ALTONCREW'],
+      ['KEUNG TO', 'KEUNGTOCREW'],
+      ['LOKMAN', 'LOKMANCREW'],
     ],
   ],
   runnerDuration: 40,
