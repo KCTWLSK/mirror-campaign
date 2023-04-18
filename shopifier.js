@@ -68,8 +68,6 @@ processFilesInDir(
     data = data.replaceAll(/\/pages\/mirrorcrew\/_next\/static\/media\/([^/.]+)\.[^/.]+\.(png|jpg|gif|svg)/g, "{{ '$1.$2' | asset_url }}");
 
     if (filename.indexOf('index-') === 0) {
-      console.log(data.match(/\"\/\".concat\(localeValue, \"\#\"\).concat\(constants \/\* SECTION_HERO \*\/ .wK\)/g));
-      console.log(data.match(/\"\/\".concat\(lang, \"\#\"\).concat\(constants \/\* SECTION_HERO \*\/ .wK\)/g));
       data = data.replaceAll(/\"\/\".concat\(localeValue, \"\#\"\).concat\(constants \/\* SECTION_HERO \*\/ .wK\)/g, "`\/pages\/mirrorcrew\${e === 'en' ? '-en' : ''}#hero`");
       data = data.replaceAll(/\"\/\".concat\(lang, \"\#\"\).concat\(constants \/\* SECTION_HERO \*\/ .wK\)/g, "`/mirrorcrew${window.location.pathname === '/mirrorcrew-en' ? '-en' : ''}#hero`");
     }
